@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<title>Đăng ký</title>
+<title>Đăng nhập</title>
 <meta charset="UTF-8" />
 <link rel="shortcut icon" href="images/favicon.png" title="Favicon"/>
 <meta name="viewport" content="width=device-width" />
@@ -234,129 +234,51 @@
 			<div id="main-left">
 				<article id="post-206" class="post-206 page type-page status-publish hentry instock">
 					<header class="entry-header">
-						<h1 class="entry-title"><span>Đăng ký tài khoản</span></h1>
+						<h1 class="entry-title"><span>Đăng nhập</span></h1>
 					</header><!-- .entry-header -->
+				</article>
 
 					<!-- Các ô nhập thông tin -->
-					<form method="post" style="float: left">
-						<div style="line-height: 100%"><br></div>
-						<div class="cform name">
-							<input type="text" name="cf_name" id="cf_name" value="" placeholder="Họ tên"/>
-						</div><br><br><br><br>
-						<div class="cform email">
-							<input type="text" name="cf_email" id="cf_email" value="" placeholder="Địa chỉ E-mail" />
-						</div><br><br><br><br>
-						<div class="cform">
-							<input type="text" name="cf_phone" id="cf_phone" value="" placeholder="Số điện thoại" />
-						</div><br><br><br><br>
-						<div class="cform">
-							<input type="password" name="cf_password" id="cf_password" value="" placeholder="Mật khẩu" />
-						</div><br><br><br><br>
-						<div class="cform">
-							<input type="password" name="cf_repassword" id="cf_repassword" value="" placeholder="Xác nhận mật khẩu" />
-						</div><br><br><br><br>
-						<div>
-							<input type="submit" value="Đăng ký" name="sendRegister" id="cf_send" />
-						</div>
-					</form>
-
-					<!-- Phần lựa chọn vai trò (subscriber, writer, editor,..) -->
-					<div id="sidebar" style="float: right; width: 75%">
-
-						<!-- Tabs lựa chọn vai trò -->
-						<div id="tabwidget" class="widget tab-container"> 
-							<ul id="tabnav" class="clearfix"> 
-								<li><h3><a href="register.html#tab1" class="selected"><img src="images/subscriber.png">Độc giả</a></h3></li>
-								<li><h3><a href="register.html#tab2"><img src="images/writter.png" alt="Recent">Phóng viên</a></h3></li>
-								<li><h3><a href="register.html#tab3"><img src="images/editor.png" alt="Comments">Biên tập viên</a></h3></li>
-							</ul> 
-			
-						<div id="tab-content">
-							
-							<!-- Thông tin riêng của độc giả -->
-							<div id="tab1" style="display: block; ">
-								<ul id="itemContainer" class="recent-tab">
-									<li>
-										<img src="images/dummy/name.png" class="thumb"/>
-										<div class="cform">
-											<br><input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Họ và tên chủ thẻ" />
-											<p style="margin-left: 10px; color: red"><b>(*)</b> Vui lòng nhập họ và tên của chủ thẻ</p>
-										</div><br><br>										
-										<div class="clearfix"></div>			
-									</li>
-									<li>
-										<img src="images/dummy/creadit-card.png" class="thumb"/>
-										<div class="cform">
-											<br><input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Số thẻ Tín dụng/Ghi nợ" />
-											<p style="margin-left: 10px; color: red"><b>(*)</b> Vui lòng điền vào mục này</p>
-										</div><br><br>										
-										<div class="clearfix"></div>					
-									</li>
-									<li>
-										<img src="images/dummy/expiration-date.png" class="thumb"/>
-										<div class="cform">
-											<input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Ngày hết hạn" />
-											<input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Tháng hết hạn" />
-											<input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Năm hết hạn" />
-											<p style="margin-left: 10px; color: red"><b>(*)</b> Vui lòng điền vào các mục trên</p>
-										</div><br><br>										
-										<div class="clearfix"></div>				
-									</li>
-									<li>
-										<table width="100%">
-											<tr style="font-size: 15px; font-weight: bold">
-												<td>Ngày đăng ký: <font color="green">01/04/2019</font></td>
-												<td>Ngày hết hạn: <font color="green">08/04/2019</font></td>
-											</tr>
-										</table>
-										<div class="clearfix"></div>				
-									</li>
-									
-								</ul>
-								<div class="holder clearfix"></div>
-							</div><!-- /#tab1 -->
-				
-							<!-- Thông tin riêng của phóng viên -->
-							<div id="tab2" style="display: none;">	
-								<ul id="itemContainer2" class="recent-tab">
-									<li>
-										<img src="images/dummy/writter.png" class="thumb"/><br>
-										Thêm các thông tin riêng dành cho phóng viên nếu cần thiết
-										<div class="clearfix"></div>	
-									</li>
-								</ul>
-								<div class="holder clearfix"></div>
-							</div><!-- /#tab2 --> 
-				
-							<!-- Thông tin riêng của biên tập viên -->
-							<div id="tab3" style="display: none; ">
-								<ul>
-									<li>
-										<img src="images/dummy/editor.jpg" style="margin: 10px; width: 25%; height: 25%"/>
-										<img src="images/dummy/news.png" style="margin: 25px; width: 35%; height: 35%; float:right"/><br>
-										<div class="cform">
-											<select style="margin: 10px; font-weight: bold">
-												<option>Xã hội</option>
-												<option>Xã hội - Thời sự</option>
-												<option>Xã hội - Thế giới</option>
-												<option>Xã hội - Giao thông</option>
-												<option>Văn hóa</option>
-												<option>Văn hóa - Ẩm thực</option>
-												<option>Văn hóa - Nghệ thuật</option>
-												<option>Văn hóa - Du lịch</option>
-												<option>Kinh tế</option>
-											</select>
-											<p style="margin-left: 10px; color: red;"><b>(*)</b> Vui lòng chọn chuyên mục phụ trách</p>
-										</div><br><br>										
-										<div class="clearfix"></div>
-									</li>
-								</ul>
-								<div class="holder clearfix"></div>
-							</div><!-- /#tab2 --> 
-					
-						</div><!-- /#tab-content -->
-					</div><!-- sidebar -->
-				</article>
+					<center>
+						<form method="post">
+							<table>
+								<tr>
+									<td align="left">
+										<div class="cform email">
+											<input type="text" name="cf_email" id="cf_email" value="" placeholder="Địa chỉ E-mail" style="height: 30px" />
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="cform email">
+											<input type="password" name="cf_password" id="cf_password" value="" placeholder="Mật khẩu" style="height: 30px"/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										<div class="cform email">
+											<input type="checkbox" name="cf_remember" id="cf_remember" style="float:left; margin: 3px"/>
+											<label for="cf_remember" style="text-align: left; width: 150px">&nbspGhi nhớ đăng nhập</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+											<a href="#"><img src="images/another-login.png" height="100px" width="200px"><br></a><br>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										<div class="cform email">
+												<input type="submit" value="Đăng nhập" name="sendLogin" id="cf_send" />
+										</div>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</center>
 			</div><!-- #main-left -->
 
 			
