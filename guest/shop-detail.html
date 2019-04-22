@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+
+<!--[if IE 9]>
+<html class="ie ie9" lang="en-US">
+<![endif]-->
+
+<!--[if !(IE 7) | !(IE 8) | !(IE 9)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+
+<head>
+<title>Magazine | Responsive Multipurpose WordPress Theme</title>
+<meta charset="UTF-8" />
+<link rel="shortcut icon" href="images/favicon.png" title="Favicon"/>
+<meta name="viewport" content="width=device-width" />
+
+<link rel='stylesheet' id='magz-style-css'  href='style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='swipemenu-css'  href='css/swipemenu.css' type='text/css' media='all' />
+<link rel='stylesheet' id='bootstrap-css'  href='css/bootstrap.css' type='text/css' media='all' />
+<link rel='stylesheet' id='bootstrap-responsive-css'  href='css/bootstrap-responsive.css' type='text/css' media='all' />
+<link rel='stylesheet' id='simplyscroll-css'  href='css/jquery.simplyscroll.css' type='text/css' media='all' />
+<link rel='stylesheet' id='jPages-css'  href='css/jPages.css' type='text/css' media='all' />
+<link rel='stylesheet' id='rating-css'  href='css/jquery.rating.css' type='text/css' media='all' />
+<link rel='stylesheet' id='ie-styles-css'  href='css/ie.css' type='text/css' media='all' />
+<link rel='stylesheet' id='Roboto-css'  href='../fonts.googleapis.com/css.css' type='text/css' media='all' />
+<link rel='stylesheet' id='pretty-photo-css'  href='css/prettyPhoto.css' type='text/css' media='screen' />
+
+
+<script type='text/javascript' src="js/jquery-1.10.2.min.js"></script>
+<script type='text/javascript' src='js/html5.js'></script>
+<script type='text/javascript' src='js/bootstrap.min.js'></script>
+<script type='text/javascript' src='js/jquery.rating.js'></script>
+<script type='text/javascript' src='js/jquery.idTabs.min.js'></script>
+<script type='text/javascript' src='js/jquery.simplyscroll.js'></script>
+<script type='text/javascript' src='js/fluidvids.min.js'></script>
+<script type='text/javascript' src='js/jPages.js'></script>
+<script type='text/javascript' src='js/jquery.sidr.min.js'></script>
+<script type='text/javascript' src='js/jquery.touchSwipe.min.js'></script>
+<script type='text/javascript' src='js/jquery.swipemenu.init.js'></script>
+<script type='text/javascript' src='js/custom.js'></script>
+<script type='text/javascript' src='js/jquery.prettyPhoto.js'></script>
+<script type='text/javascript' src='js/jquery.spinner.js'></script>
+    
+    <script>
+        jQuery(document).ready(function($) {
+        $(function() {
+          $('#customize-spinner').spinner('changed',function(e, newVal, oldVal){
+            $('#old-val').text(oldVal);
+            $('#new-val').text(newVal);
+          });
+        });
+        });
+    </script>
+
+<script>
+	jQuery(document).ready(function() {
+	    jQuery("a[rel^='prettyPhoto']").prettyPhoto({
+			social_tools : false,
+			show_title : false
+	    });
+	});
+</script>
+
+<!-- END -->
+
+</head>
+
+<body>
+    <div id="page">
+        <header id="header" class="container">
+            <div id="mast-head">
+                <div id="logo">
+                    <a href="index.html" title="Magazine" rel="home"><img src="images/logo.png" alt="Magazine" /></a>
+                </div>
+            </div>
+            <nav class="navbar navbar-inverse clearfix nobot">
+                <a id="responsive-menu-button" href="shop-detail.html#swipe-menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>		
+                </a>	
+                <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+                <div class="nav-collapse" id="swipe-menu-responsive">
+                    <ul class="nav">
+				
+				<li>
+				<span id="close-menu">
+					<a href="shop-detail.html#" class="close-this-menu">Close</a>
+						<script type="text/javascript">
+							jQuery('a.sidr-class-close-this-menu').click(function(){
+								jQuery('div.sidr').css({
+									'right': '-476px'
+								});
+								jQuery('body').css({
+								'right': '0'
+								});							
+							});
+						</script>
+					
+				</span>
+				</li>
+								
+				<li><a href="index.html"><img src="images/home.png" alt="Magazine"></a></li>
+				<li class="dropdown"><a href="index.html">Home</a>
+					<ul class="sub-menu">
+						<li><a href="magazine2.html">Homepage 2</a></li>
+						<li><a href="blog.html">Homepage 3</a></li>
+						<li><a href="shop-page.html">Homepage 4</a></li>
+					</ul>
+				</li>
+				<li><a href="about.html">About</a></li>
+				<li class="dropdown"><a href="shop-detail.html##">Page Templates</a>
+					<ul class="sub-menu">
+                        <li><a href="index.html">Magazine 1</a></li>
+						<li><a href="magazine2.html">Magazine 2</a></li>
+						<li><a href="shop-page.html">Magazine 3</a></li>
+						<li class="dropdown"><a href="shop-detail.html#">Blog Page</a>
+							<ul class="sub-menu">
+								<li><a href="blog.html">Blog</a></li>
+								<li><a href="blog-left.html">Blog Left</a></li>
+								<li><a href="blog-right.html">Blog Right</a></li>
+								<li><a href="single-post.html">Single Blog</a></li>
+							</ul>
+						</li>
+                        <li class="dropdown"><a href="shop-detail.html#">Shop Page</a>
+							<ul class="sub-menu">
+								<li><a href="shop-page.html">Shop</a></li>
+								<li><a href="shop-detail.html">Shop Detail</a></li>
+								<li><a href="cart.html">Cart Page</a></li>
+								<li><a href="checkout.html">Checkout Page</a></li>
+								<li><a href="http://demo.minimalthemes.net/magazine-static/account.html">Account Page</a></li>
+							</ul>
+						</li>
+                        <li><a href="fullwidth.html">Fullwidth</a></li>
+                        <li><a href="features.html">Features</a></li>
+						<li><a href="contact.html">Contact</a></li>
+                        <li><a href="author.html">Author Pages</a></li>
+						<li><a href="404.html">Error 404</a></li>
+						<li><a href="fullwidth.html">Full Width</a></li>
+						<li><a href="gallery-2col.html">Galleries &#8211; 2 Columns</a></li>
+						<li><a href="gallery-3col.html">Galleries &#8211; 3 Columns</a></li>
+						<li><a href="gallery-4col.html">Galleries &#8211; 4 Columns</a></li>
+						<li><a href="sitemap.html">Site Map</a></li>
+					</ul>
+				</li>
+                <li class="dropdown"><a href="shop-detail.html##">Shortcodes</a>
+					<ul class="sub-menu">
+						<li><a href="accordion.html">Accordion</a></li>
+						<li><a href="blockquotes.html">Blockquotes</a></li>
+						<li><a href="button.html">Buttons</a></li>
+						<li><a href="column.html">Columns</a></li>
+						<li><a href="dropcap.html">Dropcaps</a></li>
+						<li><a href="heading.html">Heading</a></li>
+						<li><a href="tabs.html">Tabs</a></li>
+						<li><a href="tables.html">Tables</a></li>
+						<li><a href="warning.html">Warning</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a href="blog.html">Blog</a>
+					<ul class="sub-menu">
+						<li><a href="fashion-news.html">Fashion News</a></li>
+						<li><a href="shop-detail.html#">Game News</a></li>
+						<li><a href="shop-detail.html#">Sport News</a></li>
+						<li class="dropdown"><a href="shop-detail.html#">Technology</a>
+							<ul class="sub-menu">
+								<li><a href="fashion-news.html">Fashion News</a></li>
+								<li><a href="shop-detail.html#">Game News</a></li>
+								<li><a href="shop-detail.html#">Sport News</a></li>
+								<li><a href="shop-detail.html#">Technology</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown"><a href="shop-detail.html#">Shop Page</a>
+                    <ul class="sub-menu">
+                        <li><a href="shop-page.html">Product Page</a></li>
+                        <li><a href="shop-detail.html">Product Detail</a></li>
+                        <li><a href="cart.html">Cart Page</a></li>
+                        <li><a href="checkout.html">checkout</a></li>
+                        <li><a href="order.html">Order Detail</a></li>
+                    </ul>
+                </li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+
+                </div><!--/.nav-collapse -->
+			
+            </nav><!-- /.navbar -->
+        </header><!-- #masthead -->
+        
+        <div id="headline" class="container">
+            <div class="row-fluid">
+                <div class="span3">
+                    <article class="post">
+                        <a href="shop-detail.html#" title="Permalink to Donec consectetuer ligula vulputate sem tristique cursus" rel="bookmark">
+                            <img width="225" height="136" src="../placehold.it/225x136.png" class="thumb" alt="" />
+                        </a>
+                        <div class="entry">
+                            <h3><a href="shop-detail.html#" title="Permalink to Donec consectetuer ligula vulputate sem tristique cursus" rel="bookmark">Donec consectetuer ligula vulputate...</a></h3>
+                            <p>5 months ago </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </article>
+                </div>
+                <div class="span3">
+                    <article class="post">
+                        <a href="shop-detail.html#" title="Permalink to Nam nibh arcu tristique eget pretium vitae libero ac risus" rel="bookmark">
+                            <img width="225" height="136" src="../placehold.it/225x136.png" class="thumb" alt="" />
+                        </a>
+                        <div class="entry">
+                            <h3><a href="shop-detail.html#" title="Permalink to Nam nibh arcu tristique eget pretium vitae libero ac risus" rel="bookmark">Nam nibh arcu tristique eget pretiu...</a></h3>
+                            <p>5 months ago </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </article>
+                </div>
+                <div class="span3">
+                    <article class="post">
+                        <a href="shop-detail.html#" title="Permalink to Aliquam quam lectus pulvinar urna leo dignissim lorem" rel="bookmark">
+                            <img width="225" height="136" src="../placehold.it/225x136.png" class="thumb" alt="" />
+                        </a>
+                        <div class="entry">
+                            <h3><a href="shop-detail.html#" title="Permalink to Aliquam quam lectus pulvinar urna leo dignissim lorem" rel="bookmark">Aliquam quam lectus pulvinar urna l...</a></h3>
+                            <p>6 months ago </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </article>
+                </div>
+                <div class="span3">
+                    <article class="post">
+                        <a href="shop-detail.html#" title="Permalink to Phasellus scelerisque massa molestie iaculis lectus pulvinar" rel="bookmark">
+                            <img width="225" height="136" src="../placehold.it/225x136.png" class="thumb" alt="" />
+                        </a>
+                        <div class="entry">
+                            <h3><a href="shop-detail.html#" title="Permalink to Phasellus scelerisque massa molestie iaculis lectus pulvinar" rel="bookmark">Phasellus scelerisque massa molesti...</a></h3>
+                            <p>6 months ago </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </article>
+                </div>	
+            </div>
+        </div>
+        
+    
+        <div id="intr" class="container">
+            <div class="row-fluid">
+                <div class="brnews span9">
+                    <h3>Breaking News</h3>
+                    <ul id="scroller">
+                        <li><p><a href="shop-detail.html#" title="Permalink to Lectus non rutrum pulvinar urna leo dignissim lorem" rel="bookmark"><span class="title">Lectus non rutrum pu...</span> Nam nibh arcu, tristique eget pretium sed, porta i...</a></p></li>
+                        <li><p><a href="shop-detail.html#" title="Permalink to Suspen disse auctor dapibus neque pulvinar urna leo" rel="bookmark"><span class="title">Suspen disse auctor ...</span> Fusce aliquet non ipsum vitae scelerisque. Nullam ...</a></p></li>
+                        <li><p><a href="shop-detail.html#" title="Permalink to Porta lorem ipsum dolor sit amet, consectetur adipiscing risus" rel="bookmark"><span class="title">Porta lorem ipsum do...</span> Lorem ipsum dolor sit amet, consectetur adipiscing...</a></p></li>
+                    </ul>
+                </div>
+		
+                <div class="search span3">
+                    <div class="offset1">
+                        <form method="get" id="searchform" action="shop-detail.html#">
+                            <p><input type="text" value="Search here..." onfocus="if ( this.value == 'Search here...' ) { this.value = ''; }" onblur="if ( this.value == '' ) { this.value = 'Search here...'; }" name="s" id="s" /><input type="submit" id="searchsubmit" value="Search" /></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="woocommerce">
+            <div id="content" class="container">
+                <div id="main" class="row-fluid">
+                    <div id="main-left" class="span12">
+                        <article id="post-206" class="post-206 page type-page status-publish hentry instock">
+                            <div id="prod-top" class="clearfix">
+                                <div class="prod-shop"><a href="shop-detail.html">Back to shop</a></div>
+                                <div class="prod-next"><a href="shop-detail.html" rel="prev" class="back"></a></div>
+                            </div>
+                            
+                            <div class="post-531 product type-product status-publish has-post-thumbnail hentry sale featured instock">
+                                <span class="onsale">Sale!</span>
+                                <div class="images">
+                                    
+                                    <a href="../placehold.it/770x980.png" title="" rel="prettyPhoto"><img src="../placehold.it/470x625.png" alt="" /></a>
+                                    <div class="thumbnails">
+                                         <a href="../placehold.it/770x980.png" title="" rel="prettyPhoto" class="zoom">
+                                            <img src="../placehold.it/150x150.png" alt="" class="attachment-shop_thumbnail">
+                                        </a>
+                                        <a href="../placehold.it/770x980.png" title="" rel="prettyPhoto" class="zoom">
+                                            <img src="../placehold.it/150x150.png" alt="" class="attachment-shop_thumbnail">
+                                        </a>
+                                        <a href="../placehold.it/770x980.png" title="" rel="prettyPhoto" class="zoom last">
+                                            <img src="../placehold.it/150x150.png" alt="" class="attachment-shop_thumbnail">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="summary entry-summary">
+                                    <h1 itemprop="name" class="product_title entry-title">Aenean rhoncus nisi sit amet</h1>
+                                    <div class="reting">
+                                        <div class="product-rate-detail">
+                                            <div class="ratings">
+                                                <input class="star" type="radio" name="home-top-rating-7" value="1" disabled="disabled"/>
+                                                <input class="star" type="radio" name="home-top-rating-7" value="2" disabled="disabled"/>
+                                                <input class="star" type="radio" name="home-top-rating-7" value="3" disabled="disabled"/>
+                                                <input class="star" type="radio" name="home-top-rating-7" value="4" disabled="disabled"/>
+                                                <input class="star" type="radio" name="home-top-rating-7" value="5" disabled="disabled"/>
+                                            </div>
+                                        </div>
+                                        <span class="star-text"><span itemprop="ratingCount" class="count">0</span> Reviews</span>
+                                        <span class="add_review"><a href="shop-detail.html#review_form" class="inline show_review_form">Write Review</a></span>
+                                    </div>
+                                    <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                                        <p itemprop="price" class="price"><span class="from">From: </span><span class="amount">£95</span></p>
+                                        <meta itemprop="priceCurrency" content="GBP">
+                                        <link itemprop="availability" href="http://schema.org/InStock">
+                                    </div>
+                                    
+                                    <div itemprop="description">
+                                        <div id="stcpDiv">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
+                                            <ul>
+                                                <li>Aenean ultrices libero ornare mi iaculis varius.</li>
+                                                <li>Nullam a turpis sit amet nisl adipiscing blandit.</li>
+                                                <li>Ut tincidunt urna ut felis elementum, a ultricies justo cursus.</li>
+                                                <li>In blandit libero id metus tempus luctus.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <form class="variations_form cart" method="post" enctype="multipart/form-data" data-product_id="531" data-product_variations="">
+                                        <table class="variations" cellspacing="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="label"><label for="pa_colors">Colors</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="value"><select id="pa_colors" name="attribute_pa_colors">
+                                                        <option value="">Choose an option…</option>
+                                                        <option value="blue" class="active">Blue</option><option value="brown" class="active">Brown</option><option value="dark-grey" class="active">Dark Grey</option><option value="red" class="active">Red</option></select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label"><label for="pa_sizes">Sizes</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="value">
+                                                        <select id="pa_sizes" name="attribute_pa_sizes">
+                                                        <option value="">Choose an option…</option>
+                                                        <option value="large" class="active">Large</option>
+                                                        <option value="medium" class="active">Medium</option>
+                                                        <option value="small" class="active">Small</option>
+                                                        </select>
+                                                        <a class="reset_variations" href="shop-detail.html#reset" style="visibility: hidden;">Clear selection</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="">
+                                                        <div class="spin-pos">
+                                                            <div class="spinner" data-trigger="spinner">
+                                                                <a href="javascript:;" class="spin-up" data-spin="up"><div class="val-plus">&nbsp;</div></a>
+                                                                <input type="text" value="1" data-rule="quantity" class="input-val">
+                                                                <a href="javascript:;" class="spin-down" data-spin="down"><div class="val-min"></div></a>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="single_variation_wrap" style="">
+                                            <div class="single_variation"><span class="price"><span class="amount">£100</span></span></div>
+                                           
+                                            <button type="submit" class="btn">Add to cart</button>
+                                           
+                                        </div>
+                                        <div>
+                                            <input type="hidden" name="add-to-cart" value="531">
+                                            <input type="hidden" name="product_id" value="531">
+                                        </div>
+                                    </form>
+                                    <div class="product_meta">
+                                        <span class="posted_in">Category: <a href="http://magazine.themedesigner.in/product-category/dresses/" rel="tag">Dresses</a>.</span>
+                                    </div>
+                                </div><!-- .summary -->
+                                <div class="clearfix"></div>
+                                
+                                <ul id="myTab" class="nav nav-tabs det-prod">
+                                    <li class="active"><a href="shop-detail.html#desc" data-toggle="tab">Descriptions</a></li>
+                                    <li><a href="shop-detail.html#ads" data-toggle="tab">Additional Information</a></li>
+                                    <li><a href="shop-detail.html#rev" data-toggle="tab">Reviews (0)</a></li>
+                                </ul>
+                                
+                                <div id="myTabContent" class="tab-content">
+                                    <div class="tab-pane fade active in" id="desc">
+                                        <h2>Product Description</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                        <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                    </div>
+                                    <div class="tab-pane fade" id="ads">
+                                        <h2>Aditional Information</h2>
+                                        <table class="shop_attributes">
+                                            <tbody>
+                                                <tr class="">
+                                                    <th>Colors</th>
+                                                    <td><p>Blue, Brown, Dark Grey, Red</p></td>
+                                                </tr>
+                                                <tr class="alt">
+                                                    <th>Sizes</th>
+                                                    <td><p>Large, Medium, Small</p></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="rev">
+                                        <div id="comments"><h2>Reviews</h2><p class="noreviews">There are no reviews yet, would you like to <a href="shop-detail.html#review_form" class="inline show_review_form">submit yours</a>?</p></div>
+                                    </div> 
+                                </div>
+                                <div class="clearfix"></div>
+                                
+                                <div class="related products">
+                                    <div class="row-fluid">
+                                    <div class="span9">
+                                    <h2>Related Products</h2>
+                                    <ul class="products">
+                                        <li class="post-525 product type-product status-publish has-post-thumbnail hentry first instock">
+                                            <a href="shop-detail.html">
+                                                <img src="../placehold.it/270x395.png" alt="" class="attachment-shop_thumbnail">
+                                                <h3>Aenean rhoncus nisi sit amet</h3>
+                                                <div class="star-rating" title="Rated 5.00 out of 5"><span style="width:100%"><strong class="rating">5.00</strong> out of 5</span></div>
+                                                <span class="price"><span class="amount">£55</span></span>
+                                            </a>
+                                            <a href="shop-detail.html" rel="nofollow" data-product_id="525" data-product_sku="" class="add_to_cart_button button product_type_simple">Add to cart</a>
+                                            <a class="detil" href="shop-detail.html">Show details</a>
+                                        </li>
+			
+                                        <li class="post-529 product type-product status-publish has-post-thumbnail hentry instock">
+                                            <a href="shop-detail.html#">
+                                                <img src="../placehold.it/270x395.png" alt="" class="attachment-shop_thumbnail">
+                                                <h3>Nanamica Graphic Tee</h3>
+                                                <span class="price"><span class="amount">£65</span></span>
+                                            </a>
+                                            <a href="shop-detail.html#" rel="nofollow" data-product_id="529" data-product_sku="" class="add_to_cart_button button product_type_simple">Add to cart</a>
+                                            <a class="detil" href="shop-detail.html#">Show details</a>
+                                        </li>
+			
+                                        <li class="post-526 product type-product status-publish has-post-thumbnail hentry last instock">
+                                            <a href="shop-detail.html">
+                                                <img src="../placehold.it/270x395.png" alt="" class="attachment-shop_thumbnail">
+                                                <h3>Nanamica Graphic Tee</h3>
+                                                <span class="price"><span class="amount">£85</span></span>
+                                            </a>
+                                            <a href="shop-detail.html" rel="nofollow" data-product_id="526" data-product_sku="" class="add_to_cart_button button product_type_simple">Add to cart</a>
+                                            <a class="detil" href="shop-detail.html">Show details</a>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                        
+                                    <div id="sidebar" class="span3">
+                                    <div id="recent_reviews-2" class="widget woocommerce widget_recent_reviews">
+                                        <h3 class="title"><span>Recent Reviews</span></h3>
+                                        <ul class="product_list_widget">
+                                            <li>
+                                                <a href="shop-detail.html">
+                                                    <img width="150" height="150" src="../placehold.it/150x150.png" class="attachment-shop_thumbnail wp-post-image" alt="shop-girl3">
+                                                    Aenean rhoncus nisi sit amet
+                                                </a>
+                                                <div class="product-rate-side">
+                                                    <div class="ratings">
+                                                        <input class="star" type="radio" name="home-top-rating-3" value="1" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-3" value="2" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-3" value="3" disabled="disabled" checked="checked"/>
+                                                        <input class="star" type="radio" name="home-top-rating-3" value="4" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-3" value="5" disabled="disabled"/>
+                                                    </div>
+                                                </div><br/>
+                                                by Magazine Author
+                                            </li>
+                                            <li>
+                                                <a href="shop-detail.html">
+                                                    <img width="150" height="150" src="../placehold.it/150x150.png" class="attachment-shop_thumbnail wp-post-image" alt="shop-girl3">
+                                                    Aenean rhoncus nisi sit amet
+                                                </a>
+                                                <div class="product-rate-side">
+                                                    <div class="ratings">
+                                                        <input class="star" type="radio" name="home-top-rating-4" value="1" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-4" value="2" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-4" value="3" disabled="disabled" checked="checked"/>
+                                                        <input class="star" type="radio" name="home-top-rating-4" value="4" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-4" value="5" disabled="disabled"/>
+                                                    </div>
+                                                </div><br/>
+                                                by Magazine Author
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div id="featured-products-2" class="widget woocommerce widget_featured_products">
+                                        <h3 class="title"><span>Featured Products</span></h3>
+                                        <ul class="product_list_widget">
+                                            <li>
+                                                <a href="shop-detail.html" title="Aenean rhoncus nisi sit amet">
+                                                    <img width="150" height="150" src="../placehold.it/150x150.png" class="attachment-shop_thumbnail wp-post-image" alt="shop-girl3">
+                                                    Aenean rhoncus nisi sit amet
+                                                </a>
+                                                <span class="from">From: </span>
+                                                <span class="amount">£95</span>
+                                            </li>
+                                            <li>
+                                                <a href="http://demo.minimalthemes.net/magazine-static/%5C" title="Aenean rhoncus nisi sit amet">
+                                                    <img width="150" height="150" src="../placehold.it/150x150.png" class="attachment-shop_thumbnail wp-post-image" alt="shop-girl3">
+                                                    Aenean rhoncus nisi sit amet
+                                                </a>
+                                                <del>
+                                                    <span class="amount">£89</span>
+                                                </del>
+                                                <ins>
+                                                    <span class="amount">£85</span>
+                                                </ins>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div id="top-rated-products-2" class="widget woocommerce widget_top_rated_products">
+                                        <h3 class="title"><span>Top Rated Products</span></h3>
+                                        <ul class="product_list_widget">
+                                            <li>
+                                                <a href="shop-detail.html" title="Aenean rhoncus nisi sit amet">
+                                                    <img width="150" height="150" src="../placehold.it/150x150.png" class="attachment-shop_thumbnail wp-post-image" alt="shop-girl3">
+                                                    Aenean rhoncus nisi sit amet
+                                                </a>
+                                                 <div class="product-rate-side">
+                                                    <div class="ratings">
+                                                        <input class="star" type="radio" name="home-top-rating-5" value="1" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-5" value="2" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-5" value="3" disabled="disabled" checked="checked"/>
+                                                        <input class="star" type="radio" name="home-top-rating-5" value="4" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-5" value="5" disabled="disabled"/>
+                                                    </div>
+                                                </div><br/>
+                                                <span class="amount">£55</span>
+                                            </li>
+
+                                            <li>
+                                                <a href="shop-detail.html" title="Nulla euismod sapien">
+                                                    <img width="150" height="150" src="../placehold.it/150x150.png" class="attachment-shop_thumbnail wp-post-image" alt="shop-girl3">
+                                                    Nulla euismod sapien
+                                                </a>
+                                                 <div class="product-rate-side">
+                                                    <div class="ratings">
+                                                        <input class="star" type="radio" name="home-top-rating-6" value="1" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-6" value="2" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-6" value="3" disabled="disabled" checked="checked"/>
+                                                        <input class="star" type="radio" name="home-top-rating-6" value="4" disabled="disabled"/>
+                                                        <input class="star" type="radio" name="home-top-rating-6" value="5" disabled="disabled"/>
+                                                    </div>
+                                                </div><br/>
+                                                <span class="from">From: </span>
+                                                <del><span class="amount">£100</span></del>
+                                                <ins><span class="amount">£95</span></ins>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div><!-- sidebar -->                                    
+                                </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div><!-- #main-left -->
+                    <div class="clearfix"></div>
+                </div><!-- #main -->
+            </div><!-- #content -->
+        </div>
+        
+        <footer id="footer" class="row-fluid">
+		<div id="footer-widgets" class="container">
+			<div class="footer-widget span3 block1">
+				<div class="widget widget_latestpost">
+					<h3 class="title"><span>Latest News</span></h3>
+					<div class="latest-posts widget">
+						<div class="latest-post clearfix">
+							<a href="shop-detail.html#"><img width="225" height="136" src="../placehold.it/225x136.png" class="thumb fl" alt="" title="" /></a>
+							<h4><a href="shop-detail.html#" rel="bookmark" title="Lectus non rutrum pulvinar urna leo dignissim lorem">Lectus non rutrum pulvinar urna leo...</a></h4>
+							<div class="post-time">August 12, 2013</div>
+							<div class="ratings" style="float: none">
+								<input class="star" type="radio" name="footer-latest-post-1" value="1" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-1" value="2" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-1" value="3" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-1" value="4" disabled="disabled" checked="checked"/>
+								<input class="star" type="radio" name="footer-latest-post-1" value="5" disabled="disabled"/>
+							</div>
+						</div>
+
+						<div class="latest-post clearfix">
+						<a href="shop-detail.html#"><img width="225" height="136" src="../placehold.it/225x136.png" class="thumb fl" alt="" title="" /></a>
+						<h4><a href="shop-detail.html#" rel="bookmark" title="Suspen disse auctor dapibus neque pulvinar urna leo">Suspen disse auctor dapibus neque p...</a></h4>
+						<div class="post-time">August 11, 2013</div>
+							<div class="ratings" style="float: none">
+								<input class="star" type="radio" name="footer-latest-post-2" value="1" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-2" value="2" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-2" value="3" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-2" value="4" disabled="disabled" checked="checked"/>
+								<input class="star" type="radio" name="footer-latest-post-2" value="5" disabled="disabled"/>
+							</div>
+						</div>
+
+						<div class="latest-post clearfix">
+						<a href="shop-detail.html#"><img width="225" height="136" src="../placehold.it/225x136.png" class="thumb fl" alt="" title="" /></a>
+						<h4><a href="shop-detail.html#" rel="bookmark" title="Porta lorem ipsum dolor sit amet, consectetur adipiscing risus">Porta lorem ipsum dolor sit amet, c...</a></h4>
+						<div class="post-time">August 2, 2013</div>
+							<div class="ratings" style="float: none">
+								<input class="star" type="radio" name="footer-latest-post-3" value="1" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-3" value="2" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-3" value="3" disabled="disabled"/>
+								<input class="star" type="radio" name="footer-latest-post-3" value="4" disabled="disabled" checked="checked"/>
+								<input class="star" type="radio" name="footer-latest-post-3" value="5" disabled="disabled"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="footer-widget span3 block2">
+				<div class="widget">
+					<h3 class="title"><span>Latest Tweets</span></h3>
+					<div class="magz-twitter-tweet">
+						<a href="http://twitter.com/envato"><img class="twit-pic" src="http://demo.minimalthemes.net/magazine-static/images/envato.png" alt=""></a>
+						<div class="twit-entry">&quot;RT <a href="http://twitter.com/SayersM">@SayersM</a> "Envato is here <a href="http://twitter.com/#!/search?q=%23YOW13">#YOW13</a>! http://t.co/FqARi13BlN" <a href="http://twitter.com/#!/search?q=%23lanyardlife">#lanyardlife</a>&quot;<div class="magz-twitter-tweet-time" id="magz-twitter-tweet-time-1">4 hours ago</div></div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="magz-twitter-tweet">
+						<a href="http://twitter.com/envato"><img class="twit-pic" src="http://demo.minimalthemes.net/magazine-static/images/envato.png" alt=""></a><div class="twit-entry">&quot;RT <a href="http://twitter.com/MicrolancerBeta">@MicrolancerBeta</a>: Want a cool t-shirt? Of course you do! We're giving away Microlancer t-shirts while stocks last. Learn more: http://t.…&quot;<div class="magz-twitter-tweet-time" id="magz-twitter-tweet-time-2">4 hours ago</div></div>
+						<div class="clearfix"></div>
+					</div>
+				
+					<div id="magz-twitter-follow-link"><a target="_blank" href="http://twitter.com/envato">Follow Twitter</a></div>
+				</div>
+			</div>
+			
+			<div class="footer-widget span3 block3">
+				<div class="widget">
+					<h3 class="title"><span>Tag Cloud</span></h3>
+					<div class="tagcloud">
+						<a href='shop-detail.html#'>Blog</a>
+						<a href='shop-detail.html#'>Framework</a>
+						<a href='shop-detail.html#'>Grid</a>
+						<a href='shop-detail.html#'>Magazine</a>
+						<a href='shop-detail.html#'>Mobile</a>
+						<a href='shop-detail.html#'>Responsive</a>
+						<a href='shop-detail.html#'>Sidebar</a>
+						<a href='shop-detail.html#'>Themes</a>
+						<a href='shop-detail.html#'>WordPress</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="footer-widget span3 block4">
+				<div class="widget">
+					<h3 class="title"><span>Social Media</span></h3>
+						<div class="socmed clearfix">		
+							<ul>
+								<li>
+									<a href="shop-detail.html#"><img src="images/rss-icon.png" alt=""></a>
+									<h4>RSS</h4>
+									<p>Subscribe</p>
+								</li>
+								<li>
+									<a href="shop-detail.html#"><img src="images/twitter-icon.png" alt=""></a>
+									<h4>37005</h4>
+									<p>Followers</p>
+								</li>
+								<li>
+									<a href="shop-detail.html#"><img src="images/fb-icon.png" alt=""></a>
+									<h4>109</h4>
+									<p>Fans</p>
+								</li>
+							</ul>
+						</div>
+				</div>
+			</div>
+			
+			<div class="footer-widget span6 block5">
+				<img class="footer-logo" src="images/footer-logo.png" alt="Magazine">
+					<div class="footer-text">
+						<h4>About Magazine</h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius mod tempor incididu... </p>
+					</div><div class="clearfix"></div>
+			</div>
+
+		</div><!-- footer-widgets -->
+
+	
+		<div id="site-info" class="container">
+		
+			<div id="footer-nav" class="fr">
+				<ul class="menu">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="blog.html">Blog</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div>
+
+			<div id="credit" class="fl">
+				<p>All Right Reserved by minimalthemes</p>
+			</div>
+
+		</div><!-- .site-info -->
+		
+	</footer>
+
+    </div>
+</body>
+</html>
