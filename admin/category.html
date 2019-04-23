@@ -304,7 +304,8 @@
                         alert("Sẽ chuyển đến danh sách bài viết...");
                     }
                     else if ($(this).prop('class').includes('edit')) {
-                        alert("Sẽ cho phép sửa tên chuyên mục...");
+                        var oldName = $(this).closest("tr").find("td:eq(1)").text();
+                        var newName = prompt("Nhập tên mới:", oldName);
                     }
                     else {
                         alert("Sẽ xóa chuyên mục và toàn bộ bài viết...");
@@ -314,7 +315,7 @@
 
             // Hàm thêm
             function add() {
-                alert("Sẽ thêm chuyên mục mới...")
+                var newName = prompt("Nhập tên chuyên mục mới:", "");
             }
         </script>
 
