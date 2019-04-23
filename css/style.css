@@ -1,21 +1,12 @@
-/*
-Theme Name:Magazine
-Description:A responsive multipurpose magazine WordPress theme
-Version:1.4
-Author:Minimalthemes
-Theme URI:http://themeforest.net/item/magazine-responsive-multipurpose-wordpress-theme/5467980
-Author URI: http://themeforest.net/user/minimalthemes/portfolio
-License URI:http://themeforest.net/
-Tags:white,two-columns,flexible-width,custom-background,threaded-comments
-*/
 
 body {
   background-color:#09151f;
-  background: url("images/background.jpg") no-repeat top center fixed;
+  background: url("../images/background.jpg") no-repeat top center fixed;
   color: #939ead;
   font-family: Roboto, sans-serif;
   font-weight: normal;
   font-size: 13px;
+  padding: 0 !important;
 }
 
 .entry-content img,
@@ -2547,7 +2538,7 @@ table.shop_attributes td p{
     border-top:none;
     border-bottom:none;
     text-align:right;
-    width:50%;
+    width: 50%;
 }
 .checkout .accordion-heading{
     background: #eaf5e0;
@@ -3383,7 +3374,7 @@ span.dropcap.green {
 @media (max-width:700px) {
     .woocommerce div.product div.summary, .woocommerce-page div.product div.summary, .woocommerce #content div.product div.summary, .woocommerce-page #content div.product div.summary {
         float: none;
-        width: 100%%;
+        width: 100%;
         margin-bottom: 2em;
     }
     .woocommerce div.product div.images, .woocommerce-page div.product div.images, .woocommerce #content div.product div.images, .woocommerce-page #content div.product div.images{
