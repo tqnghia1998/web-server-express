@@ -38,6 +38,29 @@ img.wp-smiley,
   padding:0;
 }
 
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a:visited:active{
+  background-color: #4CAF50;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+
 .entry-content dl.gallery-item {
   margin:0;
 }
