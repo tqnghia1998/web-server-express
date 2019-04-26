@@ -16,6 +16,18 @@
     <link rel='stylesheet' id='Roboto-css' href='../../fonts.googleapis.com/css.css' type='text/css' media='all' />
     <link rel='stylesheet' href='../css/ngocStyle.css' />
 
+    <style>
+            .thaotacButton {
+                background: transparent;
+                border: 0px;
+                margin-left:3px;
+            }
+        
+            .thaotacButton:focus{
+              outline: none;
+            }
+        
+        </style>
 
     <script type='text/javascript' src="../js/jquery-1.10.2.min.js"></script>
     <script type='text/javascript' src='../js/html5.js'></script>
@@ -274,7 +286,7 @@
                     style="position:relative;margin-left:0px; padding-left:0px; width: 20%; height: 100%;background: transparent">
                     <ul id="tabnav">
                         <li style="width: 100%; text-align: left; float:none; background: transparent">
-                            <h3><a href="index.html" class="selected"><img src="../images/view-bg.png" alt="Popular">Bài chờ xuất
+                            <h3><a href="index.html"><img src="../images/view-bg.png" alt="Popular">Bài chờ xuất
                                     bản&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;</a></h3>
                         </li>
                         <li style="width: 100%; text-align: left; float:none;">
@@ -287,7 +299,7 @@
                                     duyệt&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;</a></h3>
                         </li>
                         <li style="width: 100%; text-align: left; float:none;">
-                            <h3><a href="rejected.html"><img src="../images/time.png" alt="Comments">Bài bị từ
+                            <h3><a href="rejected.html" class="selected"><img src="../images/time.png" alt="Comments">Bài bị từ
                                     chối&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;</a></h3>
                         </li>
                         <li style="width: 100%; text-align: left; float:none;">
@@ -303,7 +315,7 @@
 
                         <div id="tab" class="table-background"
                             style="padding:10px; height:100%; display: block; box-shadow: inset 2px 2px 9px 1px rgba(97,97,97,1);">
-                            <h1>Danh sách bài đã được kiểm duyệt và đang chờ xuất bản</h1>
+                            <h1>Danh sách bài đăng bị từ chối </h1>
                             <section>
                                 <!--for demo wrap-->
 
@@ -312,10 +324,11 @@
                                         <thead>
                                             <tr>
                                                 <th style="width:5%">STT</th>
-                                                <th style="width:55%">Tiêu đề bài viết</th>
-                                                <th style="width:20%">Chuyên mục</th>
-                                                <th style="width:20%">Ngày đăng</th>
-
+                                                <th style="width:40%">Tiêu đề bài viết</th>
+                                                <th style="width:11%">Chuyên mục</th>
+                                                <th style="width:11%">Ngày đăng</th>
+                                                <th style="width:25%">Lý do bị từ chối</th>
+                                                <th style="width:8%">Thao tác</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -325,21 +338,29 @@
                                         <tbody>
                                             <tr>
                                                 <td style="width:5%">1</td>
-                                                <td style="width:55%">Giá dầu thế giới sẽ tiếp tục tăng cao?</td>
-                                                <td style="width:20%">Thời sự</td>
-                                                <td style="width:20%">2019-02-02</td>
-
-
+                                                <td style="width:40%">Giá dầu thế giới sẽ tiếp tục tăng cao?</td>
+                                                <td style="width:11%">Thời sự</td>
+                                                <td style="width:11%">2019-02-02</td>
+                                                <td style="width:25%">Chưa đủ nội dung yêu cầu</td>
+                                                <td style="width:8%">
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
 
 
                                             <tr>
                                                 <td>2</td>
                                                 <td>Tọa đàm nâng cao hiệu quả hoạt động Công đoàn</td>
-                                                <td>Công đoàn</td>
                                                 <td>2019-02-02</td>
-
-
+                                                <td>Công đoàn</td>
+                                                <td>Chưa có chữ ký phóng viên</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
 
                                             <tr>
@@ -347,12 +368,24 @@
                                                 <td>Tàu hỏa húc văng xe tải xuống ruộng, tài xế tử vong trong cabin</td>
                                                 <td>Xã hội - Giao thông</td>
                                                 <td>2019-08-06</td>
+                                                <td>Chưa có hình ảnh minh hoạ</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
                                                 <td>Dàn sao Việt và Hàn cùng 'đổ bộ' Lễ hội 'Chúng ta là một'</td>
                                                 <td>Văn hóa - Nghệ thuật</td>
                                                 <td>2015-01-27</td>
+                                                <td>Chưa có tag</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>5</td>
@@ -360,24 +393,48 @@
                                                 </td>
                                                 <td>Văn hóa- Ẩm thực</td>
                                                 <td>2019-07-31</td>
+                                                <td>Chưa có tiêu đề</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>6</td>
                                                 <td>Ba điểm check-in lí tưởng ở Đà Lạt để lại nhiều tiếc nuối</td>
                                                 <td>Văn hóa - Du lịch</td>
                                                 <td>2015-05-05</td>
+                                                <td>Nội dung phản cảm, không đúng quy chuẩn</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>7</td>
                                                 <td>Mỗi lít xăng 'cõng' hơn 56% thuế, phí?</td>
                                                 <td>Kinh tế</td>
                                                 <td>2018-12-21</td>
+                                                <td>Không đúng chuyên mục</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>8</td>
                                                 <td>Nắng nóng, trồng dừa xiêm lùn 'trúng mánh', 1 cây cho 2 triệu</td>
                                                 <td>Kinh tế</td>
                                                 <td>2011-05-19</td>
+                                                <td>Chưa có tiêu đề</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>9</td>
@@ -385,6 +442,12 @@
                                                 </td>
                                                 <td>Xã hội - Giao thông</td>
                                                 <td>2019-12-11</td>
+                                                <td>Chưa có chữ ký phóng viên</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
 
                                             <tr>
@@ -392,7 +455,12 @@
                                                 <td>Tọa đàm nâng cao hiệu quả hoạt động Công đoàn</td>
                                                 <td>2019-02-02</td>
                                                 <td>Công đoàn</td>
-
+                                                <td>Không đúng chuyên mục</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
 
                                             <tr>
@@ -400,12 +468,24 @@
                                                 <td>Tàu hỏa húc văng xe tải xuống ruộng, tài xế tử vong trong cabin</td>
                                                 <td>Xã hội - Giao thông</td>
                                                 <td>2019-08-06</td>
+                                                <td>Nội dung phản cảm, không đúng quy chuẩn</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>12</td>
                                                 <td>Dàn sao Việt và Hàn cùng 'đổ bộ' Lễ hội 'Chúng ta là một'</td>
                                                 <td>Văn hóa - Nghệ thuật</td>
                                                 <td>2015-01-27</td>
+                                                <td>Chưa có hình ảnh minh hoạ</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>13</td>
@@ -413,24 +493,48 @@
                                                 </td>
                                                 <td>Văn hóa- Ẩm thực</td>
                                                 <td>2019-07-31</td>
+                                                <td>Chưa có tiêu đề</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>14</td>
                                                 <td>Ba điểm check-in lí tưởng ở Đà Lạt để lại nhiều tiếc nuối</td>
                                                 <td>Văn hóa - Du lịch</td>
                                                 <td>2015-05-05</td>
+                                                <td>Nội dung phản cảm, không đúng quy chuẩn</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>15</td>
                                                 <td>Mỗi lít xăng 'cõng' hơn 56% thuế, phí?</td>
                                                 <td>Kinh tế</td>
                                                 <td>2018-12-21</td>
+                                                <td>Chưa có hình ảnh minh hoạ</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>16</td>
                                                 <td>Nắng nóng, trồng dừa xiêm lùn 'trúng mánh', 1 cây cho 2 triệu</td>
                                                 <td>Kinh tế</td>
                                                 <td>2011-05-19</td>
+                                                <td>Chưa có tiêu đề</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>17</td>
@@ -438,12 +542,19 @@
                                                 </td>
                                                 <td>Xã hội - Giao thông</td>
                                                 <td>2019-12-11</td>
+                                                <td>Chưa có hình ảnh minh hoạ</td>
+                                                <td>
+                                                    <button class="thaotacButton" title="Chỉnh sửa bài viết"
+                                                        data-toggle="tooltip"><img
+                                                            src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </section>
                         </div>
+
 
                     </div>
 
@@ -483,7 +594,7 @@
         jQuery213(document).ready(function () {
 
             // Đoạn code này xử lý sự kiện bắt dòng
-            jQuery213('td').click(function () {
+            jQuery213('td:not(:last-child)').click(function () {
 
                 var row_index = jQuery213(this).parent().index('tr');
 
@@ -492,6 +603,11 @@
                 alert('Row # ' + (row_index) + ' Column # ' + (col_index));
 
             });
+
+            jQuery213(document).on("click", ".thaotacButton", function() {
+                alert('Duyệt bài thành công, sẽ chỉnh sửa chuyên mục và tag');
+            });
+
             scrollTo("content");
         })
 
