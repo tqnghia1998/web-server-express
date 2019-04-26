@@ -557,21 +557,47 @@
 
     <!-- Modal content -->
     <div class="modal-content">
-      <span class="exit">&times;</span>
-      <p>Moderate</p>
-    </div>
 
+      <span class="exit">&times;</span>
+      <h2 style="color: black; text-align: center">Hiệu chỉnh bài viết</h2>
+      <form>
+        <label for="tag-typer">Thêm tag: </label>
+        <input id="tag-typer" type="text" style="width:100%">
+
+
+        <label>Chuyên mục: </label>
+        <select>
+          <option>Đời sống</option>
+          <option>Thể thao</option>
+          <option>Phụ nữ</option>
+        </select>
+
+        <label for="datepublish">Ngày xuất bản: </label>
+        <input id="datepublish" type="date">
+
+        <div style="float:right;">
+        <input style="margin-bottom: -80px; margin-right: -10px" type="button" class="btn btn-large" value="Xác nhận" onclick="moderate()">
+      </div>
+      </form>
+
+    </div>
   </div>
 
   <div id="myModal-reject" class="modal-container">
 
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="exit">&times;</span>
-        <p>Reject</p>
-      </div>
-  
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="exit">&times;</span>
+      <h2 style="color: black; text-align: center">Lý do từ chối bài viết</h2>
+      <form action="">
+        <textarea placeholder="Lý do từ chối bài viết ....." style="width:100%; height: 100%;"></textarea>
+        <div style="float:right;">
+            <input type="button" style="margin-right: -13px" class="btn btn-large" value="Xác nhận" onclick="reject()">
+          </div>
+      </form>
     </div>
+
+  </div>
   <script>
 
 
@@ -582,18 +608,18 @@
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script>
     var jQuery213 = jQuery.noConflict(true);
-    jQuery213(document).ready(function () {
+    jQuery213(document).ready(function (	) {
 
       jQuery213(document).on("click", ".thaotacButton", function () {
         if (jQuery213(this).children(":first").prop('src').includes('checkmark')) {
           var currentRow = jQuery213(this).closest('tr');
           // When the user clicks the button, open the modal 
-          
-            jQuery213('#myModal-moderate').show( "slow" );
+
+          jQuery213('#myModal-moderate').show("slow");
 
         } else if (jQuery213(this).children(":first").prop('src').includes('multiply')) {
-          
-          jQuery213('#myModal-reject').show( "slow" );
+
+          jQuery213('#myModal-reject').show("slow");
         }
       });
 
@@ -611,40 +637,54 @@
 
 
     var modalModerate = document.getElementById('myModal-moderate');
-    
+
     var modalReject = document.getElementById('myModal-reject');
 
     // Get the <span> element that closes the modal
     var spanModerate = document.getElementsByClassName("exit")[0];
-    
+
     var spanReject = document.getElementsByClassName("exit")[1];
 
 
     // When the user clicks on <span> (x), close the modal
     spanModerate.onclick = function () {
-      modalModerate.style.display = "none";
+      jQuery213('#myModal-moderate').hide("slow");
     }
 
     spanReject.onclick = function () {
-      modalReject.style.display = "none";
+      jQuery213('#myModal-reject').hide("slow");
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
       if (event.target == modalModerate) {
-        modalModerate.style.display = "none";
+        jQuery213('#myModal-moderate').hide("slow");
       }
-      if (event.target == modalReject){
-        modalReject.style.display = "none";
+      if (event.target == modalReject) {
+        jQuery213('#myModal-reject').hide("slow");
       }
     }
+
+    function moderate() {
+      alert("Duyệt bài thành công");
+      jQuery213('#myModal-moderate').hide("slow");
+    }
+
+    function reject() {
+      alert("Đã từ chối bài viết");
+      jQuery213('#myModal-reject').hide("slow");
+    }
+
 
     // This is a functions that scrolls to #id
     function scrollTo(id) {
       // Scroll
       jQuery213('html,body').animate({ scrollTop: jQuery213("#" + id).offset().top + 18 }, 'slow');
     }
+
+    document.getElementById("date").setAttribute("min", Date());
   </script>
+  <h1>Anh Đức Đẹp Trai</h1>
 </body>
 
 </html>
