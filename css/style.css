@@ -3658,3 +3658,21 @@ span.dropcap.green {
 .btnComment:hover{
   background-color: #008000
 }
+.BigAvatarPost{
+  width: 80%;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.NormalAvatarPost{
+  width: 50%;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.titleCate{
+  background-color: #09151f;
+  color: white;
+}
