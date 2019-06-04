@@ -1,0 +1,107 @@
+
+  
+  #tag-typer{
+    outline: 1px;
+    border: 1px solid #CCCCCC;
+    padding: 6px;
+    margin-left: 0px;
+    
+    width: 50%;
+    background-color: transparent;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .tag{
+    display: inline-block;
+    background: #F95;
+    color: #FFF;
+    padding: 5px 10px 5px 10px;
+    margin:2px 5px 2px 18px;
+    font: normal 16px sans-serif;
+    position: relative;
+    cursor: default;
+    box-shadow:1px 1px 0 rgba(0,0,0,.2);
+    -webkit-transform-origin:0% 50%;
+    -webkit-animation: swing 1s;
+    -o-animation: swing 1s;
+    animation: swing 1s ;
+  }
+  
+  .tag:before{
+    content: "";
+    position: absolute;
+    width: 0;
+    background: inherit;
+    height: 10px;
+    border: 10px solid #fafafa;
+    border-right-color: transparent;
+    -webkit-border-radius: 10px 0 0 10px;
+    -moz-border-radius:10px 0 0 10px;
+    border-radius:10px 0 0 10px;
+    left: -20px;
+    top: 0;
+  }
+  
+  .tag:after{
+    content: "";
+    width: 6px;
+    height: 6px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: rgb(255, 255, 255);
+    position: absolute;
+    left: -3px;
+    top: 12px;
+  }
+  
+  .tag .close{
+    position: absolute;
+    background: transparent;
+    right: -6px;
+    top: -10px;
+    visibility: hidden;
+    
+  }
+
+  .tag:hover .close{
+    visibility: visible;
+    
+  }
+
+  .tag:hover .tag::after{
+    background: #FF9955;
+  }
+  
+  .close:hover {
+    color: rgba(0,0,0,.5);
+  }
+  
+  
+  .colors {
+    list-style:none;
+  }
+  .colors li{
+    display: inline-block;
+    width:15px;
+    height: 15px;
+  }
+  
+  /* Chrome, Safari, Opera */
+  @-webkit-keyframes swing
+  {
+    0%   {-webkit-transform: rotate(100deg)}
+    25%  {-webkit-transform: rotate(-25deg)}
+    50%  {-webkit-transform: rotate(15deg)}
+    100% {-webkit-transform: rotate(0deg)}
+  }
+  
+  
+  @keyframes swing
+  {
+    0%   {-webkit-transform: rotate(-200)}
+    25%  {-webkit-transform: rotate(-70)}
+    50%  {-webkit-transform: rotate(-185)}
+    100% {-webkit-transform: rotate(-180)}
+  }

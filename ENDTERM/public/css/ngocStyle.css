@@ -1,0 +1,126 @@
+.ngoc-table tr{
+    color: black;
+}
+
+body > #standalone-container {
+    margin: 50px auto;
+    max-width: 720px;
+  }
+  #editor-container {
+    height: 350px;
+  }
+
+  
+h1{
+  font-size: 30px;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+table{
+  width:100%;
+  border-spacing:0px 3px;
+  border-collapse: separate;
+}
+
+
+
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:567px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+th{
+  padding: 15px 10px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  background: rgba(61, 76, 84, 0.7);
+  height: 20px;
+}
+td{
+  padding: 12px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: rgb(0, 0, 0);
+  border-bottom: solid 2px rgba(61, 76, 84, 0.3);
+}
+
+tbody tr{
+  box-shadow: 0px 0px 24px -6px rgba(163, 163, 163, 0.75);
+}
+
+
+
+tbody tr:hover{
+  background: rgba(51, 51, 51, 0.2);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* demo styles */
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+    width: 3px;
+} 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgb(104, 150, 64); 
+} 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 3px rgb(104, 150, 64); 
+}
+
+.modal-container {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  border-radius: 10px;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px 40px 40px 20px;
+  border: 1px solid #888;
+  width: 35%;
+  line-height: 30px;
+  border-radius: 20px 20px 10px 10px;
+}
+
+/* The Close Button */
+.exit {
+  color: #aaaaaa;
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: -20px;
+  margin-top: -10px;
+}
+
+.exit:hover,
+.exit:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
