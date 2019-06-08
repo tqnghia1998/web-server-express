@@ -1,181 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
 
-        <title>ADMIN</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <!-- tqnghia1998 custom CSS -->
-        <style>
-            .thaotacButton {
-                width: 30px; margin-right: 5px; background: transparent; border: 0px
-            }
-        </style>
+    <title>ADMIN</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- tqnghia1998 custom CSS -->
+    <style>
+        .thaotacButton {
+            width: 30px;
+            margin-right: 5px;
+            background: transparent;
+            border: 0px
+        }
+    </style>
 
-        <!-- MetisMenu CSS -->
-        <link href="../css/metisMenu.min.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- DataTables CSS -->
-        <link href="../css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../css/metisMenu.min.css" rel="stylesheet">
 
-        <!-- DataTables Responsive CSS -->
-        <link href="../css/dataTables/dataTables.responsive.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="../css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 
-        <!-- Custom CSS -->
-        <link href="../css/startmin.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="../css/dataTables/dataTables.responsive.css" rel="stylesheet">
 
-        <!-- Custom Fonts -->
-        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom CSS -->
+    <link href="../css/startmin.css" rel="stylesheet">
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
+    <!-- Custom Fonts -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-    </head>
-    <body>
+</head>
 
-        <div id="wrapper">
+<body>
 
-            <!-- Navigation -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="../admin/dashboard">Quản trị viên</a>
-                </div>
+    <div id="wrapper">
 
-                <ul class="nav navbar-nav navbar-left navbar-top-links">
-                    <li><a href="../"><i class="fa fa-home fa-fw"></i> Trang chủ</a></li>
-                </ul>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../admin/dashboard">Quản trị viên</a>
+            </div>
 
-                <!-- Lựa chọn đăng xuất -->
-                <ul class="nav navbar-right navbar-top-links">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> Trịnh Quang Nghĩa <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="../admin/info"><i class="fa fa-user fa-fw"></i> Thông tin tài khoản</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Cài đặt</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="../login"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+            <ul class="nav navbar-nav navbar-left navbar-top-links">
+                <li><a href="../"><i class="fa fa-home fa-fw"></i> Trang chủ</a></li>
+            </ul>
 
-                <!-- Sidebar -->
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <!-- Ô tìm kiếm -->
-                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
+            <!-- Lựa chọn đăng xuất -->
+            <ul class="nav navbar-right navbar-top-links">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> Trịnh Quang Nghĩa <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="../admin/info"><i class="fa fa-user fa-fw"></i> Thông tin tài khoản</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Cài đặt</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="../login"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Sidebar -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <!-- Ô tìm kiếm -->
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </span>
-                                </div>
-                                <!-- /input-group -->
-                            </li>
-                            <!-- Tổng quan -->
-                            <li>
-                                <a href="../admin/dashboard"><i class="fa fa-dashboard fa-fw"></i> Tổng quan</a>
-                            </li>
-                            <!-- Các trang quản lý -->
-                            <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý dữ liệu<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="../admin/category">Quản lý chuyên mục</a>
-                                    </li>
-                                    <li>
-                                        <a href="../admin/tag">Quản lý nhãn</a>
-                                    </li>
-                                    <li>
-                                        <a href="../admin/post">Quản lý bài viết</a>
-                                    </li>
-                                    <li>
-                                        <a href="../admin/user" class="active">Quản lý người dùng</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                            <!-- Thông tin tài khoản -->
-                            <li>
-                                <a href="../admin/info"><i class="fa fa-user-md fa-fw"></i> Thông tin tài khoản</a>
-                            </li>
-                            <!-- Đăng xuất -->
-                            <li>
-                                <a href="../admin/logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
-                            </li>
-                        </ul>
-                    </div>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <!-- Tổng quan -->
+                        <li>
+                            <a href="../admin/dashboard"><i class="fa fa-dashboard fa-fw"></i> Tổng quan</a>
+                        </li>
+                        <!-- Các trang quản lý -->
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý dữ liệu<span
+                                    class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="../admin/category">Quản lý chuyên mục</a>
+                                </li>
+                                <li>
+                                    <a href="../admin/tag">Quản lý nhãn</a>
+                                </li>
+                                <li>
+                                    <a href="../admin/post">Quản lý bài viết</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class='far fa-id-card'></i> Quản lý người dùng<span
+                                            class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="../admin/subscriber">Người đăng kí</a>
+                                        </li>
+                                        <li>
+                                            <a href="../admin/writer">Phóng viên</a>
+                                        </li>
+                                        <li>
+                                            <a href="../admin/editor">Biên tập viên</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <!-- Thông tin tài khoản -->
+                        <li>
+                            <a href="../admin/info"><i class="fa fa-user-md fa-fw"></i> Thông tin tài khoản</a>
+                        </li>
+                        <!-- Đăng xuất -->
+                        <li>
+                            <a href="../admin/logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-    {{{body}}}
- 
-</div>
-        <!-- /#wrapper -->
+            </div>
+        </nav>
+        {{{body}}}
 
-        <!-- jQuery -->
-        <script src="../js/jquery.min.js"></script>
+    </div>
+    <!-- /#wrapper -->
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="../js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="../js/jquery.min.js"></script>
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="../js/metisMenu.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
 
-        <!-- DataTables JavaScript -->
-        <script src="../js/dataTables/jquery.dataTables.min.js"></script>
-        <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../js/metisMenu.min.js"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="../js/startmin.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="../js/dataTables/jquery.dataTables.min.js"></script>
+    <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
 
-        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-        <script>
-            $(document).ready(function() {
-                $('#dataTables-example1').DataTable({
-                    responsive: true
-                });
-                $('#dataTables-example2').DataTable({
-                    responsive: true
-                });
-                $('#dataTables-example3').DataTable({
-                    responsive: true
-                });
-                $('[data-toggle="tooltip"]').tooltip();
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/startmin.js"></script>
 
-                // Xử lý sự kiện các thao tác
-                $('.thaotacButton').click(function(){
-                    if ($(this).prop('class').includes('eye')) {
-                        alert("Sẽ xem chi tiết thông tin người dùng...");
-                    }
-                    else if ($(this).prop('class').includes('plus')) {
-                        alert("Sẽ gia hạn tài khoản độc giả...");
-                    }
-                    else if ($(this).prop('class').includes('off')) {
-                        alert("Sẽ vô hiệu hóa tài khoản...");
-                    }
-                    else {
-                        alert("Sẽ phân công chuyên mục cho biên tập viên...");
-                    }
-                });  
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example1').DataTable({
+                responsive: true
             });
-        </script>
+            $('#dataTables-example2').DataTable({
+                responsive: true
+            });
+            $('#dataTables-example3').DataTable({
+                responsive: true
+            });
+            $('[data-toggle="tooltip"]').tooltip();
 
-    </body>
+            // Xử lý sự kiện các thao tác
+            $('.thaotacButton').click(function () {
+                if ($(this).prop('class').includes('eye')) {
+                    alert("Sẽ xem chi tiết thông tin người dùng...");
+                }
+                else if ($(this).prop('class').includes('plus')) {
+                    alert("Sẽ gia hạn tài khoản độc giả...");
+                }
+                else if ($(this).prop('class').includes('off')) {
+                    alert("Sẽ vô hiệu hóa tài khoản...");
+                }
+                else {
+                    alert("Sẽ phân công chuyên mục cho biên tập viên...");
+                }
+            });
+        });
+    </script>
+</body>
+
 </html>
