@@ -1,14 +1,16 @@
 var express = require('express');
-var exphbs  = require('express-handlebars');
-
-
 var app = express();
-app.engine('handlebars', exphbs({
-    defaultLayout: 'admin.handlebars',
-    layoutsDir: 'views/layouts'
-}));
-app.set('view engine', 'handlebars');
-app.use(express.static(__dirname+'/public'));
+
+// Some initialization
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
+
+// Some middleware
+require('./middlewares/view-engine')(app);
+require('./middlewares/passport')(app);
+require('./middlewares/session')(app);
+
+// Some single route
 app.get('/', function(req, res) {
     res.render('page/home', {layout: 'main'});
 })
@@ -36,9 +38,14 @@ app.get('/admin/category', function(req, res) {
 app.get('/login', function(req, res) {
     res.render('page/allusers/login', {layout: 'main'});
 })
+
+// Some routes
 app.use('/admin/subscriber', require('./routes/admin/user.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
 app.use('/admin/editor', require('./routes/admin/editor.route'));
+app.use('/allusers', require('./routes/allusers/account.route'));
+
+// Listen
 app.listen(3000, () =>{
     console.log('server is running at http://localhost:3000')
 })
