@@ -36,6 +36,9 @@ module.exports = {
     singleByUsername: username => {
         return db.load(`SELECT * FROM users WHERE Username = '${username}'`);
     },
+    singleByPseudonym: pseudonym => {
+        return db.load(`SELECT * FROM writters WHERE Pseudonym = '${pseudonym}'`);
+    },
 
     // Insert
     add: entity => {
