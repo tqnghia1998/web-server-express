@@ -1,3 +1,73 @@
+{{#section 'js'}}
+	<script>
+		// Default role
+		var whichRole = "#subscriber";
+
+		// Check data before submit
+		function checkData() {
+
+			var form = document.getElementById('registerForm');
+			var role = document.createElement('input');
+			role.setAttribute('name', 'role');
+			role.setAttribute('type', 'hidden');
+			
+			// If user is a writter
+			if (whichRole == "#writter") {
+				var pseudonym = document.getElementById("pseudonym").value;
+				if (pseudonym.length === 0) {
+					alert("Vui lòng nhập bút danh.")
+					return false;
+				}
+				role.setAttribute('value', '2');
+				var input = document.createElement('input');
+				input.setAttribute('name', 'pseudonym');
+				input.setAttribute('value', pseudonym);
+				input.setAttribute('type', 'hidden');
+    			form.appendChild(input);
+			}
+
+			// If user is a editor
+			if (whichRole == "#editor") {
+				var category = document.getElementById("category").value;
+				if (category.length === 0) {
+					alert("Vui lòng chọn chuyên mục quản lý.")
+					return false;
+				}
+				role.setAttribute('value', '3');
+				var input = document.createElement('input');
+				input.setAttribute('name', 'category');
+				input.setAttribute('value', category);
+				input.setAttribute('type', 'hidden');
+    			form.appendChild(input);
+			}
+
+			// If user is a subscriber
+			if (whichRole == "#subscriber") {
+				role.setAttribute('value', '4');
+			}
+
+			form.appendChild(role);
+			return true;
+		}
+		jQuery.noConflict()(function ($) {
+			$(document).ready(function() { 
+				$('a[data-toggle="tab"]').on('click', function (e) {
+					whichRole = $(e.target).attr("href");
+				});
+				var today = new Date();
+				document.getElementById("beginDate").valueAsDate = today;
+				today.setDate(today.getDate() + 7)
+				document.getElementById("endDate").valueAsDate = today;
+			});
+		});
+		Date.prototype.addDays = function(days) {
+			var date = new Date(this.valueOf());
+			date.setDate(date.getDate() + days);
+			return date;
+		}
+	</script>
+{{/section}}
+
 <!-- Nội dung trang web -->
 <div id="content" class="container">
 
@@ -11,32 +81,33 @@
 				</header><!-- .entry-header -->
 
 				<!-- Các ô nhập thông tin -->
-				<form method="post" style="float: left">
-					<div style="line-height: 100%"><br></div>
-					<div class="cform name">
-						<input type="text" name="cf_name" id="cf_name" value="" placeholder="Họ tên"/>
-					</div><br><br><br>
-					<div class="cform email">
-						<input type="text" name="cf_email" id="cf_email" value="" placeholder="Địa chỉ E-mail" />
-					</div><br><br><br>
-					<label>Ngày sinh</label>
-					<select style="width: 45px; margin: 5px">
-						<option>1</option><option>...</option><option>31</option>
-					</select>
-					<select style="width: 45px; margin: 5px">
-						<option>1</option><option>...</option><option>12</option>
-					</select>
-					<select style="width: 90px; margin: 5px">
-						<option>1980</option><option>...</option><option>2010</option>
-					</select><br><br>
-					<div class="cform">
-						<input type="password" name="cf_password" id="cf_password" value="" placeholder="Mật khẩu" />
-					</div><br><br><br>
-					<div class="cform">
-						<input type="password" name="cf_repassword" id="cf_repassword" value="" placeholder="Xác nhận mật khẩu" />
-					</div><br><br><br><br>
-					<div>
-						<input type="submit" value="Đăng ký" name="sendRegister" id="cf_send" />
+				<form id="registerForm" method="POST" style="float: left" action="register" onsubmit="return checkData();">
+					<div class="form-group">
+						<label for="fullname">Họ tên</label>
+						<input type="text" name="fullname" id="fullname" required autofocus/>
+					</div><br>
+					<div class="form-group">
+						<label for="username">Tên đăng nhập</label>
+						<input type="text" name="username" id="username" required autofocus/>
+					</div><br>
+					<div class="form-group">
+						<label for="email">Địa chỉ E-mail</label>
+						<input type="text" name="email" id="email" required/>
+					</div><br>
+					<div class="form-group">
+						<label for="birthday">Ngày sinh</label>
+						<input type="date" name="birthday" id="birthday"/>
+					</div><br>
+					<div class="form-group">
+						<label for="password">Mật khẩu</label>
+						<input type="password" name="password" id="password" required/>
+					</div><br>
+					<div class="form-group">
+						<label for="repassword">Nhập lại mật khẩu</label>
+						<input type="password" name="repassword" id="repassword" required/>
+					</div><br><br>
+					<div class="form-group">
+						<input type="submit" value="Đăng ký" id="cf_send"/>
 					</div>
 				</form>
 
@@ -45,22 +116,22 @@
 
 					<!-- Tabs lựa chọn vai trò -->
 					<div id="tabwidget" class="widget tab-container"> 
-						<ul id="tabnav" class="clearfix"> 
-							<li><h3><a href="register#tab1" class="selected"><img src="../images/subscriber.png">Độc giả</a></h3></li>
-							<li><h3><a href="register#tab2"><img src="../images/writter.png" alt="Recent">Phóng viên</a></h3></li>
-							<li><h3><a href="register#tab3"><img src="../images/editor.png" alt="Comments">Biên tập viên</a></h3></li>
+						<ul id="tabnav" class="clearfix">
+							<li><h3><a href="#subscriber" data-toggle="tab" class="active"><img src="../images/subscriber.png">Độc giả</a></h3></li>
+							<li><h3><a href="#writter" data-toggle="tab"><img src="../images/writter.png" alt="Recent">Phóng viên</a></h3></li>
+							<li><h3><a href="#editor" data-toggle="tab"><img src="../images/editor.png" alt="Comments">Biên tập viên</a></h3></li>
 						</ul> 
 		
 					<div id="tab-content">
 						
 						<!-- Thông tin riêng của độc giả -->
-						<div id="tab1" style="display: block; ">
+						<div id="subscriber" style="display: block; ">
 							<ul id="itemContainer" class="recent-tab">
 								<li>
-									<img src="../images/dummy/name.png" class="thumb"/>
+									<img src="../images/dummy/phone.png" class="thumb"/>
 									<div class="cform">
-										<br><input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Họ và tên chủ thẻ" />
-										<p style="margin-left: 10px; color: red"><b>(*)</b> Vui lòng nhập họ và tên của chủ thẻ</p>
+										<br><input style="margin: 10px;" type="text" placeholder="Nhập số điện thoại" />
+										<p style="margin-left: 10px; color: red"><b>(*)</b> Hệ thống sẽ gửi mã xác nhận</p>
 									</div><br><br>										
 									<div class="clearfix"></div>			
 								</li>
@@ -85,8 +156,16 @@
 								<li>
 									<table width="100%">
 										<tr style="font-size: 15px; font-weight: bold">
-											<td>Ngày đăng ký: <font color="green">01/04/2019</font></td>
-											<td>Ngày hết hạn: <font color="green">08/04/2019</font></td>
+											<td>
+												<label for="endDate">Ngày hiệu lực</label>
+												<input type="date" id="beginDate" readonly>
+												<p style="margin-left: 5px; color: blue; font-size: 12px">Bắt đầu từ thời điểm đăng ký</p>
+											</td>
+											<td>
+												<label for="endDate">Ngày hết hạn</label>
+												<input type="date" id="endDate" readonly>
+												<p style="margin-left: 5px; color: blue; font-size: 12px">Hiệu lực đến cuối ngày</p>
+											</td>
 										</tr>
 									</table>
 									<div class="clearfix"></div>				
@@ -97,12 +176,15 @@
 						</div><!-- /#tab1 -->
 			
 						<!-- Thông tin riêng của phóng viên -->
-						<div id="tab2" style="display: none;">	
+						<div id="writter" style="display: none;">	
 							<ul id="itemContainer2" class="recent-tab">
 								<li>
 									<img src="../images/dummy/nickname.png" class="thumb"/>
 									<div class="cform">
-										<br><input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Bút danh" required/>
+										<br>
+										<form id="writterForm">
+											<input id="pseudonym" style="margin: 10px;" type="text" placeholder="Bút danh" required/>
+										</form>
 										<p style="margin-left: 10px; color: red"><b>(*)</b> Vui lòng nhập bút danh của bạn</p>
 									</div><br><br>
 									<div class="clearfix"></div>
@@ -112,22 +194,16 @@
 						</div><!-- /#tab2 --> 
 			
 						<!-- Thông tin riêng của biên tập viên -->
-						<div id="tab3" style="display: none; ">
+						<div id="editor" style="display: none; ">
 							<ul>
 								<li>
 									<img src="../images/dummy/editor.jpg" style="margin: 10px; width: 25%; height: 25%"/>
 									<img src="../images/dummy/news.png" style="margin: 25px; width: 35%; height: 35%; float:right"/><br>
 									<div class="cform">
-										<select style="margin: 10px; font-weight: bold">
-											<option>Xã hội</option>
-											<option>Xã hội - Thời sự</option>
-											<option>Xã hội - Thế giới</option>
-											<option>Xã hội - Giao thông</option>
-											<option>Văn hóa</option>
-											<option>Văn hóa - Ẩm thực</option>
-											<option>Văn hóa - Nghệ thuật</option>
-											<option>Văn hóa - Du lịch</option>
-											<option>Kinh tế</option>
+										<select style="margin: 10px; font-weight: bold" id="category">
+										{{#each this.categories}}
+											<option value="{{cateID}}">{{cateName}}</option>
+										{{/each}}
 										</select>
 										<p style="margin-left: 10px; color: red;"><b>(*)</b> Vui lòng chọn chuyên mục phụ trách</p>
 										<p style="margin-left: 10px; color: red;"><b>(*)</b> Quản trị viên sẽ phân công thêm</p>

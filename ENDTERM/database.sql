@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `baodientu16th` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+CREATE DATABASE  IF NOT EXISTS `baodientu16th` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `baodientu16th`;
--- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
 -- Host: localhost    Database: baodientu16th
 -- ------------------------------------------------------
--- Server version	8.0.15
+-- Server version	8.0.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,6 +40,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Thời sự',NULL);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,6 +70,33 @@ CREATE TABLE `comments` (
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `editors`
+--
+
+DROP TABLE IF EXISTS `editors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `editors` (
+  `userID` int(11) NOT NULL,
+  `cateID` int(11) NOT NULL,
+  PRIMARY KEY (`userID`,`cateID`),
+  KEY `FK_Editor_Cate_idx` (`cateID`),
+  CONSTRAINT `FK_Editor_Cate` FOREIGN KEY (`cateID`) REFERENCES `categories` (`cateID`),
+  CONSTRAINT `FK_Editor_User` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `editors`
+--
+
+LOCK TABLES `editors` WRITE;
+/*!40000 ALTER TABLE `editors` DISABLE KEYS */;
+INSERT INTO `editors` VALUES (30,1);
+/*!40000 ALTER TABLE `editors` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -171,7 +199,7 @@ CREATE TABLE `subscribers` (
   `dateSubEnd` date DEFAULT NULL,
   PRIMARY KEY (`userID`),
   CONSTRAINT `FK_Sub_User` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +208,7 @@ CREATE TABLE `subscribers` (
 
 LOCK TABLES `subscribers` WRITE;
 /*!40000 ALTER TABLE `subscribers` DISABLE KEYS */;
-INSERT INTO `subscribers` VALUES (1,'2019-03-04','2019-03-21');
+INSERT INTO `subscribers` VALUES (28,'2019-06-11','2019-06-18');
 /*!40000 ALTER TABLE `subscribers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,14 +247,13 @@ CREATE TABLE `users` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `uName` varchar(45) DEFAULT NULL,
   `Username` varchar(20) DEFAULT NULL,
-  `Password` varchar(45) DEFAULT NULL,
+  `Password` varchar(250) DEFAULT NULL,
   `Role` int(11) NOT NULL,
-  `Pseudonym` varchar(45) DEFAULT NULL,
   `Email` varchar(45) DEFAULT NULL,
-  `Phone` varchar(12) DEFAULT NULL,
   `Birthday` date DEFAULT NULL,
-  PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `uName_UNIQUE` (`uName`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,8 +262,33 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Nguyễn Xuân Nghiêm','xuanghjem','123456',3,'Xuân Nghiêm','xuanghjem@gmail.com','0985002876','1998-10-21'),(2,'Trần Bá Ngọc','ngoctran','123456',2,'Bá Ngọc','ngoctran@gmail.com','0123654789','1998-05-04'),(3,'Trịnh Quang Nghĩa','quangnghia','123456',2,'Quang Nghĩa','quangnghia@gmail.com','0321456987','1998-07-08'),(4,'Đặng Hoài Nam','hoainam','123456',3,'Hoài Nam','hoainam@gmail.com','0125494984','1998-11-20'),(5,'Tạ Đăng Hiếu Nghĩa','hieunghia','123456',4,'Hiếu Nghĩa','hieunghia@gmail.com','0123456785','1998-02-02'),(6,'Nguyễn Trung Nghĩa','trungnghia','123456',4,'Trung Nghĩa','trungnghia@gmail.com','0123456985','1998-03-05');
+INSERT INTO `users` VALUES (28,'Trịnh Quang Nghĩa','nghiatq','$2b$10$ovi01hVyG3pvKNoYlXgxfetQ0.mpHRDY8t5.fAFhgw1tIObUBNGd6',4,'tonystrinh@gmail.com','1998-07-08'),(29,'Trần Bá Ngọc','ngoctb','$2b$10$Zzo7H2QzG97OXsSGekKMQ.tBIqzEITh4Oyyk0vFtLpQcYcoChbFuC',2,'tranbangoc@gmail.com','1998-07-08'),(30,'Nguyễn Xuân Nghiêm','nghiemnx','$2b$10$aNRw.FMpREjf0KVFBYIxkOmKvYCBQ8SpnpVV8uGDv1Mb6iY7UCKnm',3,'nguyenxuannghiem@gmail.com','1998-08-08');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `writters`
+--
+
+DROP TABLE IF EXISTS `writters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `writters` (
+  `userID` int(11) NOT NULL,
+  `Pseudonym` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`userID`),
+  CONSTRAINT `FK_Writter_User` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `writters`
+--
+
+LOCK TABLES `writters` WRITE;
+/*!40000 ALTER TABLE `writters` DISABLE KEYS */;
+INSERT INTO `writters` VALUES (29,'Ngọc đỉnh kout');
+/*!40000 ALTER TABLE `writters` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -248,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-10 15:50:17
+-- Dump completed on 2019-06-11 17:31:06

@@ -1,5 +1,6 @@
 var passport = require('passport');
-var userModel = require('../models/users.model')
+var bcrypt = require('bcrypt');
+var userModel = require('../models/users.model');
 var LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function (app) {
@@ -12,16 +13,15 @@ module.exports = function (app) {
     }, (username, password, done) => {
         userModel.singleByUsername(username).then(rows => {
             if (rows.length === 0) {
-                return done(err, false, {
+                return done(null, false, {
                     message: 'Tài khoản không tồn tại'
                 });
             }
             var user = rows[0];
 
             // Compare password
-            // var ret = bcrypt.compareSync(password, user.Password);
-            // if (ret) {}
-            if (password != user.Password) {
+            var ret = bcrypt.compareSync(password, user.Password);
+            if (!ret) {
                 return done(null, false, {
                     message: 'Mật khẩu không chính xác'
                 })
