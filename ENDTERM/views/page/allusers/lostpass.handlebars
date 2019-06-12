@@ -1,4 +1,39 @@
-﻿<!-- Nội dung trang web -->
+﻿{{#section 'css'}}
+	<style>
+		.text-danger {
+			color: red;
+		}
+	</style>
+{{/section}}
+{{#section 'js'}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+	<script>
+		jQuery.noConflict()(function ($) {
+			$('#lostpassForm').validate({
+				rules: {
+					username: {
+						remote: {
+							url: '/allusers/register/is-available',
+							data: {
+								checkIsExisted: false
+							}
+						}
+					}
+				},
+				messages: {
+					username: {
+						required: 'Tên đăng nhập không được để trống.',
+						remote: 'Tên đăng nhập không tồn tại.'
+					}
+				},
+				errorElement: 'small',
+				errorClass: 'help-block text-danger'
+			});
+		});
+	</script>
+{{/section}}
+
+<!-- Nội dung trang web -->
 <div id="content" class="container">
 
 	<div id="main" class="row-fluid">
@@ -13,38 +48,23 @@
 
 			<!-- Các ô nhập thông tin -->
 			<center>
-				<form method="post">
+				<form method="post" id="lostpassForm" action="lostpass">
 					<table>
 						<tr>
-							<td align="left">
-								<div class="cform email">
-									<input type="text" name="cf_email" id="cf_email" value="" placeholder="Địa chỉ E-mail" style="height: 30px" />
-								</div>
+							<td style="height: 30px">Tên đăng nhập</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" name="username" id="username" style="height: 25px" required/>
 							</td>
 						</tr>
 						<tr>
-							<td align="right">
-								<div class="cform">
-									<input type="submit" value="Lấy mã xác nhận" name="sendEmail" id="cf_send"/><br><br>
-								</div>
+							<td>
+								<input type="submit" value="Lấy lại mật khẩu" name="sendEmail" id="cf_send"/><br><br>
 							</td>
 						</tr>
 						<tr>
-							<td>Nhập mã xác nhận</td>
-						</tr>
-						<tr>
-							<td align="left">
-								<div class="cform email">
-									<input type="text" name="cf_email" id="cf_email" value="" placeholder="Mã xác nhận" style="height: 30px" disabled/>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">
-								<div class="cform">
-									<input type="submit" value="Lấy lại mật khẩu" name="sendRequestNewPassword" id="cf_send" disabled/><br><br>
-								</div>
-							</td>
+							<td><p style="color: blue; visibility: hidden" id="info">(i) <b>Vui lòng kiểm tra E-mail để lấy lại mật khẩu</b></p></td>
 						</tr>
 					</table>
 				</form>

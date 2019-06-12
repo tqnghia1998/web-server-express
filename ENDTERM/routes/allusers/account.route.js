@@ -3,15 +3,47 @@ var passport = require('passport');
 var bcrypt = require('bcrypt');
 var userModel = require('../../models/users.model');
 var categoryModel = require('../../models/categories.model');
+var verifyToken = require('generate-sms-verification-code');
+var QRCode = require('qrcode');
+var nodemailer =  require('nodemailer');
 var router = express.Router();
 
 // Register zone
+router.get('/register/is-available', (req, res, next) => {
+    userModel.singleByUsername(req.query.username).then(rows => {
+        if (rows.length > 0) {
+            return res.json(!(req.query.checkIsExisted == true));
+        }
+        return res.json(req.query.checkIsExisted == true);
+    });
+});
+router.get('/register/is-pseudonym-available', (req, res, next) => {
+    userModel.singleByPseudonym(req.query.pseudonym).then(rows => {
+        if (rows.length > 0) {
+            return res.json(false);
+        }
+        return res.json(true);
+    });
+});
 router.get('/register', (req, res, next) => {
+
+    // Generate code
+    var generatedToken = verifyToken(6, {type: 'string'})
+    var urlImage;
+
+    // Generate QRCode
+    QRCode.toDataURL(generatedToken, function (err, url) {
+        urlImage = url;
+    })
+    
+    // Get list of categories
     var listCate = categoryModel.all();
     listCate.then(rows => {
         res.render('page/allusers/register', {
             layout: 'main',
-            categories: rows
+            categories: rows,
+            qrCode: urlImage,
+            token: generatedToken
         });
     }).catch(err => {
         console.log("Error when query categories" + err);
@@ -31,7 +63,6 @@ router.post('/register', (req, res, next) => {
         Email: req.body.email,
         Birthday: req.body.birthday,
     }
-    console.log(JSON.stringify(entity));
     
     // Add to database
     userModel.add(entity).then(id => {
@@ -104,5 +135,52 @@ router.post('/login', (req, res, next) => {
 router.get('/lostpass', (req, res, next) => {
     res.render('page/allusers/lostpass', {layout: 'main'});
 });
+router.get('/changepass', (req, res, next) => {
+    res.render('page/allusers/lostpass', {layout: 'main'});
+});
+router.post('/lostpass', (req, res) => {
+
+    // Generate url
+    
+
+    // Get the user
+    var user = userModel.singleByUsername(req.body.username);
+    user.then(rows => {
+
+        // Config mail server
+        var transporter =  nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'tonystrinh@gmail.com',
+                pass: 'tqnghia1122'
+            }
+        });
+
+        // Mail content
+        var mainOptions = {
+            from: 'Báo điện tử 16TH',
+            to: rows[0].Email,
+            subject: '[Báo điện tử 16TH] Yêu cầu đổi mật khẩu',
+            html: '<p>Vui lòng kiểm tra thông tin dưới đây trước khi tiến hành đổi mật khẩu:</b>' + 
+            '<ul><li>Họ tên: <b>' + rows[0].uName +
+            '</b></li><li>Tên đăng nhập: <b>' + rows[0].Username +
+            '</b></li></ul><p>Nếu thông tin trên là đúng, vui lòng truy cập đường dẫn sau:\n' +
+            url
+        }
+
+        // Send mail
+        transporter.sendMail(mainOptions, function(err, info){
+            if (err) {
+                console.log("Error when sending mail to change pass: " + err);
+                res.redirect('/allusers/lostpass');
+            } else {
+                res.redirect('/allusers/login');
+            }
+        });
+    }).catch(err => {
+        console.log("Error when config mail to change pass: " + err);
+        res.redirect('/allusers/lostpass');
+    });
+})
 
 module.exports = router;

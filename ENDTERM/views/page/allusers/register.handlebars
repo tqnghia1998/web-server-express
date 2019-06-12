@@ -1,11 +1,19 @@
+{{#section 'css'}}
+	<style>
+		.text-danger {
+			color: red;
+		}
+	</style>
+{{/section}}
 {{#section 'js'}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 	<script>
 		// Default role
 		var whichRole = "#subscriber";
+		var isPseudonymExisted = false;
 
 		// Check data before submit
 		function checkData() {
-
 			var form = document.getElementById('registerForm');
 			var role = document.createElement('input');
 			role.setAttribute('name', 'role');
@@ -16,6 +24,10 @@
 				var pseudonym = document.getElementById("pseudonym").value;
 				if (pseudonym.length === 0) {
 					alert("Vui lòng nhập bút danh.")
+					return false;
+				}
+				if (isPseudonymExisted) {
+					alert("Bút danh đã tồn tại.")
 					return false;
 				}
 				role.setAttribute('value', '2');
@@ -43,14 +55,20 @@
 
 			// If user is a subscriber
 			if (whichRole == "#subscriber") {
+				var qrCode = document.getElementById("qrCode").value;
+				if (qrCode != JSON.parse('{{{token}}}')) {
+					alert("Mã xác nhận không đúng.")
+					return false;
+				}
 				role.setAttribute('value', '4');
 			}
-
 			form.appendChild(role);
 			return true;
 		}
 		jQuery.noConflict()(function ($) {
-			$(document).ready(function() { 
+
+			// Set begin and end day for subscriber
+			$(document).ready(function() {
 				$('a[data-toggle="tab"]').on('click', function (e) {
 					whichRole = $(e.target).attr("href");
 				});
@@ -58,6 +76,67 @@
 				document.getElementById("beginDate").valueAsDate = today;
 				today.setDate(today.getDate() + 7)
 				document.getElementById("endDate").valueAsDate = today;
+			});
+			
+			// Check validate for form
+			$('#registerForm').validate({
+				rules: {
+					username: {
+						minlength: 6,
+						remote: {
+							url: '/allusers/register/is-available',
+							data: {
+								checkIsExisted: true
+							}
+						}
+					},
+					password: {
+						minlength: 6
+					},
+					repassword: {
+						equalTo: $('[name="password"]')
+					}
+				},
+				messages: {
+					fullname: {
+						required: 'Họ tên không được để trống.'
+					},
+					username: {
+						required: 'Tên đăng nhập không được để trống.',
+						minlength: 'Tên đăng nhập tối thiểu 6 ký tự.',
+						remote: 'Tên đăng nhập đã tồn tại.'
+					},
+					email: {
+						required: "Địa chỉ E-mail không được để trống.",
+						email: 'Địa chỉ E-mail không hợp lệ.'
+					},
+					birthday: {
+						required: 'Ngày sinh không hợp lệ.'
+					},
+					password: {
+						required: 'Mật khẩu không được để trống.',
+						minlength: 'Mật khẩu tối thiểu 6 ký tự'
+					},
+					repassword: {
+						required: 'Nhập lại mật khẩu không được để trống.',
+						equalTo: 'Mật khẩu không trùng nhau.'
+					}
+				},
+				errorElement: 'small',
+				errorClass: 'help-block text-danger'
+			});
+			$('#writterForm').validate({
+				rules: {
+					pseudonym: {
+						remote: {
+							url: '/allusers/register/is-pseudonym-available',
+							success: function (data) {
+								isPseudonymExisted = data !== true;
+								document.getElementById('invalidPseudonym').style.visibility = data !== true ? 'visible' : 'hidden';
+							}
+						}
+					}
+				}
 			});
 		});
 		Date.prototype.addDays = function(days) {
@@ -88,15 +167,15 @@
 					</div><br>
 					<div class="form-group">
 						<label for="username">Tên đăng nhập</label>
-						<input type="text" name="username" id="username" required autofocus/>
+						<input type="text" name="username" id="username" required/>
 					</div><br>
 					<div class="form-group">
 						<label for="email">Địa chỉ E-mail</label>
-						<input type="text" name="email" id="email" required/>
+						<input type="email" name="email" id="email" required/>
 					</div><br>
 					<div class="form-group">
 						<label for="birthday">Ngày sinh</label>
-						<input type="date" name="birthday" id="birthday"/>
+						<input type="date" name="birthday" id="birthday" required/>
 					</div><br>
 					<div class="form-group">
 						<label for="password">Mật khẩu</label>
@@ -115,7 +194,7 @@
 				<div id="sidebar" style="float: right; width: 75%">
 
 					<!-- Tabs lựa chọn vai trò -->
-					<div id="tabwidget" class="widget tab-container"> 
+					<div id="tabwidget" class="widget tab-container">
 						<ul id="tabnav" class="clearfix">
 							<li><h3><a href="#subscriber" data-toggle="tab" class="active"><img src="../images/subscriber.png">Độc giả</a></h3></li>
 							<li><h3><a href="#writter" data-toggle="tab"><img src="../images/writter.png" alt="Recent">Phóng viên</a></h3></li>
@@ -129,42 +208,32 @@
 							<ul id="itemContainer" class="recent-tab">
 								<li>
 									<img src="../images/dummy/phone.png" class="thumb"/>
-									<div class="cform">
-										<br><input style="margin: 10px;" type="text" placeholder="Nhập số điện thoại" />
-										<p style="margin-left: 10px; color: red"><b>(*)</b> Hệ thống sẽ gửi mã xác nhận</p>
-									</div><br><br>										
+									<div class="cform"><br>
+										<form id="subscriberForm" method="dialog">
+											<input style="margin: 10px;" type="text" placeholder="Mã xác nhận" id="qrCode" name="qrCode"/>
+										</form>
+										<p style="margin-left: 10px; color: blue">(i) <b>Vui lòng quét và nhập mã</b></p>
+									</div><br><br>
 									<div class="clearfix"></div>			
 								</li>
 								<li>
-									<img src="../images/dummy/creadit-card.png" class="thumb"/>
-									<div class="cform">
-										<br><input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Số thẻ Tín dụng/Ghi nợ" />
-										<p style="margin-left: 10px; color: red"><b>(*)</b> Vui lòng điền vào mục này</p>
-									</div><br><br>										
+									<img src="../images/dummy/qr-code.png" class="thumb" style="margin-top: 12px"/>
+									<img src="{{qrCode}}"/>
+									<br><br>										
 									<div class="clearfix"></div>					
 								</li>
 								<li>
-									<img src="../images/dummy/expiration-date.png" class="thumb"/>
-									<div class="cform">
-										<input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Ngày hết hạn" />
-										<input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Tháng hết hạn" />
-										<input style="margin: 10px;" type="text" name="cf_owner" id="cf_owner" size="50" maxlength="50" value="" placeholder="Năm hết hạn" />
-										<p style="margin-left: 10px; color: red"><b>(*)</b> Vui lòng điền vào các mục trên</p>
-									</div><br><br>		
-									<div class="clearfix"></div>
-								</li>
-								<li>
 									<table width="100%">
-										<tr style="font-size: 15px; font-weight: bold">
+										<tr style="font-size: 15px">
 											<td>
 												<label for="endDate">Ngày hiệu lực</label>
 												<input type="date" id="beginDate" readonly>
-												<p style="margin-left: 5px; color: blue; font-size: 12px">Bắt đầu từ thời điểm đăng ký</p>
+												<p style="margin-left: 5px; color: blue; font-size: 12px">(i) <b>Bắt đầu từ thời điểm đăng ký</b></p>
 											</td>
 											<td>
 												<label for="endDate">Ngày hết hạn</label>
 												<input type="date" id="endDate" readonly>
-												<p style="margin-left: 5px; color: blue; font-size: 12px">Hiệu lực đến cuối ngày</p>
+												<p style="margin-left: 5px; color: blue; font-size: 12px">(i) <b>Hiệu lực đến cuối ngày</b></p>
 											</td>
 										</tr>
 									</table>
@@ -179,13 +248,14 @@
 						<div id="writter" style="display: none;">	
 							<ul id="itemContainer2" class="recent-tab">
 								<li>
-									<img src="../images/dummy/nickname.png" class="thumb"/>
+									<img src="../images/dummy/name.png" class="thumb"/>
 									<div class="cform">
 										<br>
-										<form id="writterForm">
-											<input id="pseudonym" style="margin: 10px;" type="text" placeholder="Bút danh" required/>
+										<form id="writterForm" method="dialog"  style="margin-left: 10px">
+											<input id="pseudonym" name="pseudonym" style="margin-top: 10px;" type="text" placeholder="Bút danh"/><br>
+											<span style="color: red; visibility: hidden; font-size: 12px" id="invalidPseudonym">Bút danh này đã được sử dụng.</span>
 										</form>
-										<p style="margin-left: 10px; color: red"><b>(*)</b> Vui lòng nhập bút danh của bạn</p>
+										<p style="color: blue">&nbsp;&nbsp;(i) <b>Vui lòng nhập bút danh của bạn</b></p>
 									</div><br><br>
 									<div class="clearfix"></div>
 								</li>
@@ -204,9 +274,9 @@
 										{{#each this.categories}}
 											<option value="{{cateID}}">{{cateName}}</option>
 										{{/each}}
-										</select>
-										<p style="margin-left: 10px; color: red;"><b>(*)</b> Vui lòng chọn chuyên mục phụ trách</p>
-										<p style="margin-left: 10px; color: red;"><b>(*)</b> Quản trị viên sẽ phân công thêm</p>
+										</select><br><br>
+										<p style="margin-left: 10px; color: blue">(i) <b>Vui lòng chọn chuyên mục phụ trách</b></p>
+										<p style="margin-left: 10px; color: blue">(i) <b>Quản trị viên sẽ phân công thêm</b></p>
 									</div><br><br>										
 									<div class="clearfix"></div>
 								</li>
