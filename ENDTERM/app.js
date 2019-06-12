@@ -9,6 +9,7 @@ app.use(express.static(__dirname + '/public'));
 require('./middlewares/view-engine')(app);
 require('./middlewares/passport')(app);
 require('./middlewares/session')(app);
+app.use(require('./middlewares/locals.mdw'));
 
 // Some single route
 app.get('/', function(req, res) {
@@ -44,6 +45,7 @@ app.use('/admin/subscriber', require('./routes/admin/user.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
 app.use('/admin/editor', require('./routes/admin/editor.route'));
 app.use('/allusers', require('./routes/allusers/account.route'));
+app.use('/writer', require('./routes/writer/writer.route'));
 
 // Listen
 app.listen(3000, () =>{
