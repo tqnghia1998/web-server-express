@@ -134,21 +134,21 @@ CREATE TABLE `posts` (
   `posID` int(11) NOT NULL AUTO_INCREMENT,
   `cateID` int(11) DEFAULT NULL,
   `Title` varchar(500) DEFAULT NULL,
-  `DayPublish` datetime DEFAULT NULL,
+  `DayPublish` date DEFAULT NULL,
   `Description` varchar(100) DEFAULT NULL,
   `Content` varchar(5000) DEFAULT NULL,
   `Writer` int(11) DEFAULT NULL,
-  `Premium` bit(1) DEFAULT NULL,
-  `Views` int(11) DEFAULT NULL,
-  `Approved` bit(1) DEFAULT NULL,
-  `Additional` varchar(500) DEFAULT NULL,
-  `Published` bit(1) DEFAULT NULL,
+  `Premium` tinyint(4) DEFAULT NULL,
+  `Views` int(10) DEFAULT NULL,
+  `Approved` tinyint(4) DEFAULT NULL,
+  `Additional` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Published` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`posID`),
   KEY `FK_Post_User_idx` (`Writer`),
   KEY `FK_Post_Cate_idx` (`cateID`),
   CONSTRAINT `FK_Post_Cate` FOREIGN KEY (`cateID`) REFERENCES `categories` (`cateID`),
-  CONSTRAINT `FK_Post_User` FOREIGN KEY (`Writer`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_Post_User` FOREIGN KEY (`Writer`) REFERENCES `writers` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,6 +157,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES (1,1,'Khởi động dự án xử lý dioxin ở sân bay Biên Hòa','2019-05-05','Khởi động dự án xử lý dioxin ở sân bay Biên Hòa','Khởi động dự án xử lý dioxin ở sân bay Biên Hòa',29,1,5,1,'',1),(2,1,'Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ','2019-03-05','Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ','Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ',29,0,6,0,NULL,1),(3,1,'Trịnh Quan Nghĩa Chơi Bê Đê và cái kết','2019-06-08','Trịnh Quan Nghĩa Chơi Bê Đê và cái kết','Trịnh Quan Nghĩa Chơi Bê Đê và cái kết',29,0,6,1,NULL,0);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,6 +184,7 @@ CREATE TABLE `postsandtags` (
 
 LOCK TABLES `postsandtags` WRITE;
 /*!40000 ALTER TABLE `postsandtags` DISABLE KEYS */;
+INSERT INTO `postsandtags` VALUES (1,1),(2,1),(1,2),(2,2),(3,2),(1,3),(3,4);
 /*!40000 ALTER TABLE `postsandtags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +225,7 @@ CREATE TABLE `tags` (
   `tagID` int(11) NOT NULL AUTO_INCREMENT,
   `tagName` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`tagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +234,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES (1,'nghia');
+INSERT INTO `tags` VALUES (1,'nghia'),(2,'danhnhau'),(3,'sinhvien'),(4,'nghiencuu');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,6 +253,7 @@ CREATE TABLE `users` (
   `Role` int(11) NOT NULL,
   `Email` varchar(45) DEFAULT NULL,
   `Birthday` date DEFAULT NULL,
+  `Actived` tinyint(4) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `uName_UNIQUE` (`uName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
@@ -262,18 +265,18 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (28,'Trịnh Quang Nghĩa','nghiatq','$2b$10$ovi01hVyG3pvKNoYlXgxfetQ0.mpHRDY8t5.fAFhgw1tIObUBNGd6',4,'tonystrinh@gmail.com','1998-07-08'),(29,'Trần Bá Ngọc','ngoctb','$2b$10$Zzo7H2QzG97OXsSGekKMQ.tBIqzEITh4Oyyk0vFtLpQcYcoChbFuC',2,'tranbangoc@gmail.com','1998-07-08'),(30,'Nguyễn Xuân Nghiêm','nghiemnx','$2b$10$aNRw.FMpREjf0KVFBYIxkOmKvYCBQ8SpnpVV8uGDv1Mb6iY7UCKnm',3,'nguyenxuannghiem@gmail.com','1998-08-08');
+INSERT INTO `users` VALUES (28,'Trịnh Quang Nghĩa','nghiatq','$2b$10$ovi01hVyG3pvKNoYlXgxfetQ0.mpHRDY8t5.fAFhgw1tIObUBNGd6',4,'tonystrinh@gmail.com','1998-07-08',1),(29,'Trần Bá Ngọc','ngoctb','$2b$10$Zzo7H2QzG97OXsSGekKMQ.tBIqzEITh4Oyyk0vFtLpQcYcoChbFuC',2,'tranbangoc@gmail.com','1998-07-08',1),(30,'Nguyễn Xuân Nghiêm','nghiemnx','$2b$10$aNRw.FMpREjf0KVFBYIxkOmKvYCBQ8SpnpVV8uGDv1Mb6iY7UCKnm',3,'nguyenxuannghiem@gmail.com','1998-08-08',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `writters`
+-- Table structure for table `writers`
 --
 
-DROP TABLE IF EXISTS `writters`;
+DROP TABLE IF EXISTS `writers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `writters` (
+CREATE TABLE `writers` (
   `userID` int(11) NOT NULL,
   `Pseudonym` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userID`),
@@ -282,13 +285,13 @@ CREATE TABLE `writters` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `writters`
+-- Dumping data for table `writers`
 --
 
-LOCK TABLES `writters` WRITE;
-/*!40000 ALTER TABLE `writters` DISABLE KEYS */;
-INSERT INTO `writters` VALUES (29,'Ngọc đỉnh kout');
-/*!40000 ALTER TABLE `writters` ENABLE KEYS */;
+LOCK TABLES `writers` WRITE;
+/*!40000 ALTER TABLE `writers` DISABLE KEYS */;
+INSERT INTO `writers` VALUES (29,'Ngọc đỉnh kout');
+/*!40000 ALTER TABLE `writers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -300,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-11 17:31:06
+-- Dump completed on 2019-06-14 10:25:17

@@ -1,14 +1,15 @@
 var express = require('express');
-var userModel = require('../../models/users.model');
+var Model = require('../../models/users.model');
 
 var router = express.Router();
 
 router.get('/', (req, res)=>{
-    var u = userModel.editor();
+    var u = Model.allEditor();
     u.then(rows=>{
         console.log(rows);
         res.render('page/admin/editor',{
-            users: rows,
+            layout: 'admin',
+            users: rows
         });
     }).catch(error=>{
         console.log(error);

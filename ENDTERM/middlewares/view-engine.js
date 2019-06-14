@@ -10,7 +10,8 @@ module.exports = function (app) {
             format: val => {
                 return numeral(val).format('0,0');
             },
-            section: hbs_sections()
+            section: hbs_sections(),
+            
         }
     }));
     app.set('view engine', 'handlebars');

@@ -12,16 +12,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <button class="fa fa-plus fa-fw"
-                            style="width: 125px; background: transparent; border: 0px; font-weight: bold"
-                            onclick="add()">   Thêm bài viết<table></table></button>
-                    </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="table-responsive"
                             style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                                 <thead>
                                     <tr>
                                         <th width='5%'>STT</th>
@@ -33,210 +28,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{#each this.posts}}
                                     <tr>
-                                        <td>1</td>
-                                        <td>Khởi động dự án xử lý dioxin ở sân bay Biên Hòa</td>
-                                        <td><b>Xã hội</b> - Thời sự</td>
-                                        <td>2019-05-29</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ</td>
-                                        <td><b>Xã hội</b> - Giao thông</td>
-                                        <td>2019-12-11</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Tàu hỏa húc văng xe tải xuống ruộng, tài xế tử vong trong cabin</td>
-                                        <td><b>Xã hội</b> - Giao thông</td>
-                                        <td>2019-08-06</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Dàn sao Việt và Hàn cùng 'đổ bộ' Lễ hội 'Chúng ta là một'</td>
-                                        <td><b>Văn hóa</b> - Nghệ thuật</td>
-                                        <td>2015-01-27</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Vườn cây nhà đại gia: Sanh Bảo Đại 30 tỷ, lộc vừng phát lộc 8 tỷ</td>
-                                        <td><b>Văn hóa</b> - Ẩm thực</td>
-                                        <td>2019-07-31</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Ba điểm check-in lí tưởng ở Đà Lạt để lại nhiều tiếc nuối</td>
-                                        <td><b>Văn hóa</b> - Du lịch</td>
-                                        <td>2015-05-05</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>Mỗi lít xăng 'cõng' hơn 56% thuế, phí?</td>
-                                        <td><b>Kinh tế</b></td>
-                                        <td>2018-12-21</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>Nắng nóng, trồng dừa xiêm lùn 'trúng mánh', 1 cây cho 2 triệu</td>
-                                        <td><b>Kinh tế</b></td>
-                                        <td>2011-05-19</td>
+                                        <td>{{@key}}</td>
+                                        <td>{{Title}}</td>
+                                        <td>{{cateName}}</td>
+                                        <td>{{datePublished}}</td>
+                                        {{#if Published}}
+                                        <td>Đã xuất bản</td>
+                                        {{else}}
                                         <td>Nháp</td>
+                                        {{/if}}
                                         <td>
                                             <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
                                                 data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
                                             <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
                                                 data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>9</td>
-                                        <td>TP. Hồ Chí Minh: 10 năm cuộc vận động 'Người Việt dùng hàng Việt'</td>
-                                        <td><b>Kinh tế</b></td>
-                                        <td>2019-04-20</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
+                                            {{#if Published}}
+                                            {{else}}
                                             <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
                                                 data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
+                                            {{/if}}
+
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>Việt Nam - Hoa Kỳ ký bản ghi nhận hỗ trợ người khuyết tật</td>
-                                        <td><b>Xã hội</b> - Thời sự</td>
-                                        <td>2011-05-19</td>
-                                        <td>Xuất bản</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>11</td>
-                                        <td>Sửng sốt với DOHA – Trái tim của QATAR</td>
-                                        <td><b>Văn hóa</b> - Du lịch</td>
-                                        <td>2011-05-19</td>
-                                        <td>Nháp</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>12</td>
-                                        <td>Cải thiện chất lượng cuộc sống cho người khuyết tật tại 7 tỉnh</td>
-                                        <td><b>Xã hội</b> - Thời sự</td>
-                                        <td>2011-05-19</td>
-                                        <td>Nháp</td>
-                                        <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-edit fa-fw thaotacButton" title="Cập nhật"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                        </td>
-                                    </tr>
+                                    {{/each}}
                                 </tbody>
                             </table>
                         </div>
