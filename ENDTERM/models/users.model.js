@@ -56,15 +56,15 @@ module.exports = {
     
     // Update
     update: entity => {
-        return db.update(`users`, userID, entity);
+        return db.update(`users`, 'userID', entity);
     },
     updateSubs: entity => {
-        return db.update(`subscribers`, userID, entity);
+        return db.update(`subscribers`, 'userID', entity);
     },
     updateWritter: entity => {
-        return db.update(`writters`, userID, entity);
+        return db.update(`writters`, 'userID', entity);
     },
     updateEditor: entity => {
-        return db.update(`editors`, userID, entity);
+        return db.update(`editors`, 'userID', entity);
     }
 };

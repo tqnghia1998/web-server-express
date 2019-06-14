@@ -129,8 +129,12 @@
 							<li><a href="viewListNews.html">DU LỊCH</a></li>
 						</ul>
 					</li>
-					<li >
-						<a href="../allusers/login.html">LOG IN</a>
+					<li>
+						{{#if isLoggedIn}}
+							<a href="../allusers/logout">LOG OUT</a>
+						{{else}}
+							<a href="../allusers/login">LOG IN</a>
+						{{/if}}
 					</li>
 					
 				</ul>

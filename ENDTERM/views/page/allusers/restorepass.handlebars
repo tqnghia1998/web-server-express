@@ -1,0 +1,85 @@
+{{#section 'css'}}
+	<style>
+		.text-danger {
+			color: red;
+		}
+	</style>
+{{/section}}
+{{#section 'js'}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+	<script>
+		jQuery.noConflict()(function ($) {
+			$('#restorePassForm').validate({
+				rules: {
+					password: {
+						minlength: 6
+					},
+                    repassword: {
+                        equalTo: $('[name="password"]')
+                    }
+				},
+				messages: {
+					password: {
+						required: 'Mật khẩu không được để trống.',
+						minlength: 'Mật khẩu tối thiểu 6 ký tự.'
+					},
+                    repassword: {
+                        required: 'Nhập lại mật khẩu không được để trống.',
+						equalTo: 'Mật khẩu không trùng nhau.'
+                    }
+				},
+				errorElement: 'small',
+				errorClass: 'help-block text-danger'
+			});
+		});
+	</script>
+{{/section}}
+
+<!-- Nội dung trang web -->
+<div id="content" class="container">
+
+	<div id="main" class="row-fluid">
+
+		<!-- Phần thông tin cơ bản -->
+		<div id="main-left">
+			<article id="post-206" class="post-206 page type-page status-publish hentry instock">
+				<header class="entry-header">
+					<h1 class="entry-title"><span style="color: white">Thay mật khẩu mới</span></h1>
+				</header><!-- .entry-header -->
+			</article>
+
+			<!-- Các ô nhập thông tin -->
+			<center>
+				<form method="post" action="restorepass" id="restorePassForm">
+					<table>
+						<tr>
+							<td align="left">
+                                <label for="password">Mật khẩu mới</label>
+								<input type="password" name="password" id="password" required style="height: 25px" />
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+                                <label for="repassword">Nhập lại mật khẩu</label>
+								<input type="password" name="repassword" id="repassword" required style="height: 25px" />
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								<div class="cform">
+									<input type="submit" value="Đổi mật khẩu" id="cf_send"/><br><br>
+								</div>
+							</td>
+						</tr>
+					</table>
+                    <input type="hidden" name="userid" value="{{userID}}"/>
+                    <input type="hidden" name="code" value="{{code}}"/>
+				</form>
+			</center>
+		</div><!-- #main-left -->
+
+		<div class="clearfix"></div>
+
+	</div><!-- #main -->
+
+</div><!-- #content -->

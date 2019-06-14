@@ -1,3 +1,34 @@
+{{#section 'css'}}
+	<style>
+		.text-danger {
+			color: red;
+		}
+	</style>
+{{/section}}
+{{#section 'js'}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+	<script>
+		jQuery.noConflict()(function ($) {
+			$('#loginForm').validate({
+				rules: {
+
+				},
+				messages: {
+					Username: {
+						required: 'Tên đăng nhập không được để trống.'
+					},
+                    Password: {
+                        required: 'Mật khẩu không được để trống.'
+                    }
+				},
+				errorElement: 'small',
+				errorClass: 'help-block text-danger'
+			});
+		});
+	</script>
+{{/section}}
+
+
 <!-- Nội dung trang web -->
 <div id="content" class="container">
 
@@ -13,51 +44,48 @@
 
 			<!-- Các ô nhập thông tin -->
 			<center>
-				<form method="post" action="">
+				<form method="post" action="login" id="loginForm">
 					<table>
 						<tr>
 							<td align="left">
-								<div class="cform email">
-									<input type="text" name="Username" id="cf_email" value="" placeholder="Địa chỉ E-mail"
-										style="height: 30px" />
-								</div>
+                                <p style="color: green; font-size: 14px"><i>{{message}}</i></p>
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<div class="cform">
-									<input type="password" name="Password" id="cf_password" value="" placeholder="Mật khẩu"
-										style="height: 30px" />
-								</div>
+							<td align="left">
+                                <label for="Username">Tên đăng nhập</label>
+								<input type="text" name="Username" id="Username" required style="height: 25px" />
 							</td>
 						</tr>
 						<tr>
-							<td align="center">
-								<div class="cform">
-									<input type="checkbox" name="cf_remember" id="cf_remember" style="float:left; margin: 3px" />
-									<label for="cf_remember" style="text-align: left; width: 150px">&nbspGhi nhớ đăng nhập</label>
-								</div>
+							<td align="left">
+                                <label for="Password">Mật khẩu</label>
+								<input type="password" name="Password" id="Password" required style="height: 25px" />
 							</td>
 						</tr>
 						<tr>
-							<td align="center">
-								<a href="#"><img src="../images/another-login.png" height="100px" width="200px"><br></a><br>
+							<td align="left">
+                                <input type="checkbox" name="cf_remember" id="cf_remember" style="float:left; margin: 3px" />
+								<label for="cf_remember" style="text-align: left; width: 150px">&nbspGhi nhớ đăng nhập</label><br>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">
 								<div class="cform">
-									<input type="submit" value="Đăng nhập" name="sendLogin" id="cf_send" /><br><br>
+									<input type="submit" value="Đăng nhập" id="cf_send"/><br><br>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td><a href="register"><b><u>Đăng ký tài khoản</u></b></a></td>
-							<td><a href="lostpass"><u>Quên mật khẩu?</u></a></td>
+							<td>
+								<a href="register" style="font-size: 14px; color: blue"><b><u>Đăng ký tài khoản</u></b></a>
+								<a href="lostpass" style="margin-left: 80px; color: black">Quên mật khẩu?</a>
+							</td>
 						</tr>
 					</table>
 				</form>
 			</center>
+			
 		</div><!-- #main-left -->
 
 		<div class="clearfix"></div>

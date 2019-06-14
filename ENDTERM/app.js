@@ -7,12 +7,15 @@ app.use(express.static(__dirname + '/public'));
 
 // Some middleware
 require('./middlewares/view-engine')(app);
-require('./middlewares/passport')(app);
 require('./middlewares/session')(app);
+require('./middlewares/passport')(app);
 
 // Some single route
 app.get('/', function(req, res) {
-    res.render('page/home', {layout: 'main'});
+    res.render('page/home', {
+        layout: 'main',
+        isLoggedIn: req.isAuthenticated()
+    });
 })
 app.get('/admin', function(req, res) {
     res.render('page/admin/dashboard', {layout: 'admin'});
@@ -34,16 +37,14 @@ app.get('/admin/tag', function(req, res) {
 })
 app.get('/admin/category', function(req, res) {
     res.render('page/admin/category', {layout: 'admin'});
-})
-app.get('/login', function(req, res) {
-    res.render('page/allusers/login', {layout: 'main'});
-})
+});
 
 // Some routes
 app.use('/admin/subscriber', require('./routes/admin/user.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
 app.use('/admin/editor', require('./routes/admin/editor.route'));
 app.use('/allusers', require('./routes/allusers/account.route'));
+app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 
 // Listen
 app.listen(3000, () =>{
