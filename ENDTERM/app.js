@@ -7,8 +7,8 @@ app.use(express.static(__dirname + '/public'));
 
 // Some middleware
 require('./middlewares/view-engine')(app);
-require('./middlewares/passport')(app);
 require('./middlewares/session')(app);
+require('./middlewares/passport')(app);
 app.use(require('./middlewares/locals.mdw'));
 
 // Some single route
@@ -49,5 +49,5 @@ app.use('/writer', require('./routes/writer/writer.route'));
 
 // Listen
 app.listen(3000, () =>{
-    console.log('server is running at http://localhost:3000')
+    console.log('server is running at http://localhost:3000/writer/');
 })

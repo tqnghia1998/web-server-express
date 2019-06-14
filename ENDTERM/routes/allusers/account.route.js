@@ -127,7 +127,7 @@ router.post('/login', (req, res, next) => {
                 return next(err);
             }
             return res.redirect('/')
-        })
+        });
     })(req, res, next);
 });
 

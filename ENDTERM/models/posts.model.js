@@ -6,7 +6,7 @@ module.exports = {
     },
 
     single: id => {
-        return db.load(`select * from posts where postID = ${id}`);
+        return db.load(`select * from posts where posID = ${id}`);
     },
 
     add: entity => {
@@ -15,5 +15,14 @@ module.exports = {
 
     update: entity => {
         return db.update(`posts`, postID, entity);
+    },
+
+    allPublish: idWriter => {
+        return db.load(`select * from posts where DATE(DayPublish) < Date(now())`)
+    },
+
+    allApproved: idWriter => {
+        return db.load(`select * from posts where DATE(DayPublish) > Date(now())`);
     }
+    
 }
