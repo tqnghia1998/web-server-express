@@ -33,7 +33,7 @@ module.exports = function (app) {
         })
     });
 
-    passport.use(ls);
+    passport.use('local', ls);
 
     passport.serializeUser((user, done) => {
         return done(null, user);

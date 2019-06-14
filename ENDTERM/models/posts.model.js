@@ -2,7 +2,7 @@ var db = require('../utils/db');
 
 module.exports = {
     all: () => {
-        return db.load(`select * from posts`);
+        return db.load(`select *, date_format(DayPublish,"%d-%m-%Y") as datePublished from posts INNER JOIN categories ON posts.cateID = categories.cateID`);
     },
 
     single: id => {

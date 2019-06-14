@@ -20,9 +20,9 @@
                                          <tr>
                                             <th width='5%'>STT</th>
                                             <th width='20%'>Họ tên</th>
-                                            <th width='14%'>Số điện thoại</th>
                                             <th width='13%'>Ngày sinh</th>
                                             <th width='13%'>Email</th>
+                                            <th width='20%'>Chuyên mục quản lý</th>
                                             <th width='15%'>Thao tác</th>
                                         </tr>
                                 </thead>
@@ -31,9 +31,9 @@
                                             <tr>
                                                 <td>{{@key}}</td>
                                                 <td>{{uName}}</td>
-                                                <td>{{Phone}}</td>
-                                                <td>{{Birthday}}</td>
+                                                <td>{{formatBirthday}}</td>
                                                 <td>{{Email}}</td>
+                                                <td>{{cateName}}</td>
                                                 <td>
                                                     <button class="fa fa-eye fa-fw thaotacButton" title="Xem chi tiết"
                                                         data-toggle="tooltip"></button>

@@ -25,13 +25,12 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `categories` (
-  `cateID` int(11) NOT NULL,
+  `cateID` int(11) NOT NULL AUTO_INCREMENT,
   `cateName` varchar(45) DEFAULT NULL,
   `parentID` int(11) DEFAULT NULL,
   PRIMARY KEY (`cateID`),
-  KEY `FK_Cate_Cate_idx` (`parentID`),
-  CONSTRAINT `FK_Cate_Cate` FOREIGN KEY (`parentID`) REFERENCES `categories` (`cateID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `FK_Cate_Cate_idx` (`parentID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +94,6 @@ CREATE TABLE `editors` (
 
 LOCK TABLES `editors` WRITE;
 /*!40000 ALTER TABLE `editors` DISABLE KEYS */;
-INSERT INTO `editors` VALUES (30,1);
 /*!40000 ALTER TABLE `editors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,21 +132,21 @@ CREATE TABLE `posts` (
   `posID` int(11) NOT NULL AUTO_INCREMENT,
   `cateID` int(11) DEFAULT NULL,
   `Title` varchar(500) DEFAULT NULL,
-  `DayPublish` date DEFAULT NULL,
+  `DayPublish` datetime DEFAULT NULL,
   `Description` varchar(100) DEFAULT NULL,
   `Content` varchar(5000) DEFAULT NULL,
   `Writer` int(11) DEFAULT NULL,
-  `Premium` tinyint(4) DEFAULT NULL,
-  `Views` int(10) DEFAULT NULL,
-  `Approved` tinyint(4) DEFAULT NULL,
-  `Additional` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Published` tinyint(4) DEFAULT NULL,
+  `Premium` bit(1) DEFAULT NULL,
+  `Views` int(11) DEFAULT NULL,
+  `Approved` bit(1) DEFAULT NULL,
+  `Additional` varchar(500) DEFAULT NULL,
+  `Published` bit(1) DEFAULT NULL,
   PRIMARY KEY (`posID`),
   KEY `FK_Post_User_idx` (`Writer`),
   KEY `FK_Post_Cate_idx` (`cateID`),
   CONSTRAINT `FK_Post_Cate` FOREIGN KEY (`cateID`) REFERENCES `categories` (`cateID`),
-  CONSTRAINT `FK_Post_User` FOREIGN KEY (`Writer`) REFERENCES `writers` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_Post_User` FOREIGN KEY (`Writer`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +155,6 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,1,'Khởi động dự án xử lý dioxin ở sân bay Biên Hòa','2019-05-05','Khởi động dự án xử lý dioxin ở sân bay Biên Hòa','Khởi động dự án xử lý dioxin ở sân bay Biên Hòa',29,1,5,1,'',1),(2,1,'Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ','2019-03-05','Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ','Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ',29,0,6,0,NULL,1),(3,1,'Trịnh Quan Nghĩa Chơi Bê Đê và cái kết','2019-06-08','Trịnh Quan Nghĩa Chơi Bê Đê và cái kết','Trịnh Quan Nghĩa Chơi Bê Đê và cái kết',29,0,6,1,NULL,0);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +181,6 @@ CREATE TABLE `postsandtags` (
 
 LOCK TABLES `postsandtags` WRITE;
 /*!40000 ALTER TABLE `postsandtags` DISABLE KEYS */;
-INSERT INTO `postsandtags` VALUES (1,1),(2,1),(1,2),(2,2),(3,2),(1,3),(3,4);
 /*!40000 ALTER TABLE `postsandtags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +221,7 @@ CREATE TABLE `tags` (
   `tagID` int(11) NOT NULL AUTO_INCREMENT,
   `tagName` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`tagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +230,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES (1,'nghia'),(2,'danhnhau'),(3,'sinhvien'),(4,'nghiencuu');
+INSERT INTO `tags` VALUES (1,'nghia');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,10 +249,9 @@ CREATE TABLE `users` (
   `Role` int(11) NOT NULL,
   `Email` varchar(45) DEFAULT NULL,
   `Birthday` date DEFAULT NULL,
-  `Actived` tinyint(4) NOT NULL,
   PRIMARY KEY (`userID`),
-  UNIQUE KEY `uName_UNIQUE` (`uName`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `Username_UNIQUE` (`Username`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,18 +260,18 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (28,'Trịnh Quang Nghĩa','nghiatq','$2b$10$ovi01hVyG3pvKNoYlXgxfetQ0.mpHRDY8t5.fAFhgw1tIObUBNGd6',4,'tonystrinh@gmail.com','1998-07-08',1),(29,'Trần Bá Ngọc','ngoctb','$2b$10$Zzo7H2QzG97OXsSGekKMQ.tBIqzEITh4Oyyk0vFtLpQcYcoChbFuC',2,'tranbangoc@gmail.com','1998-07-08',1),(30,'Nguyễn Xuân Nghiêm','nghiemnx','$2b$10$aNRw.FMpREjf0KVFBYIxkOmKvYCBQ8SpnpVV8uGDv1Mb6iY7UCKnm',3,'nguyenxuannghiem@gmail.com','1998-08-08',1);
+INSERT INTO `users` VALUES (28,'Trịnh Quang Nghĩa','nghiatq','$2b$10$ovi01hVyG3pvKNoYlXgxfetQ0.mpHRDY8t5.fAFhgw1tIObUBNGd6',4,'tonystrinh@gmail.com','1998-07-08'),(29,'Trần Bá Ngọc','ngoctb','$2b$10$Zzo7H2QzG97OXsSGekKMQ.tBIqzEITh4Oyyk0vFtLpQcYcoChbFuC',2,'tranbangoc@gmail.com','1998-07-08'),(30,'Nguyễn Xuân Nghiêm','nghiemnx','$2b$10$aNRw.FMpREjf0KVFBYIxkOmKvYCBQ8SpnpVV8uGDv1Mb6iY7UCKnm',3,'nguyenxuannghiem@gmail.com','1998-08-08'),(32,'Nguyễn Xuân Nghiêm','nghiatq1','$2b$10$3.o/DlVMXCS3vqxupN4iRugeAmA.JSSNzrYt/.AJ7N7rj0QqMWfei',2,'tonystrinh@gmail.com','2019-06-12');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `writers`
+-- Table structure for table `writters`
 --
 
-DROP TABLE IF EXISTS `writers`;
+DROP TABLE IF EXISTS `writters`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `writers` (
+CREATE TABLE `writters` (
   `userID` int(11) NOT NULL,
   `Pseudonym` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userID`),
@@ -285,13 +280,13 @@ CREATE TABLE `writers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `writers`
+-- Dumping data for table `writters`
 --
 
-LOCK TABLES `writers` WRITE;
-/*!40000 ALTER TABLE `writers` DISABLE KEYS */;
-INSERT INTO `writers` VALUES (29,'Ngọc đỉnh kout');
-/*!40000 ALTER TABLE `writers` ENABLE KEYS */;
+LOCK TABLES `writters` WRITE;
+/*!40000 ALTER TABLE `writters` DISABLE KEYS */;
+INSERT INTO `writters` VALUES (29,'Ngọc đỉnh kout'),(32,'Ngọc đỉnh kout1');
+/*!40000 ALTER TABLE `writters` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -303,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-14 10:25:17
+-- Dump completed on 2019-06-12  1:31:24

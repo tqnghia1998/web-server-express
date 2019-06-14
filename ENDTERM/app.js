@@ -13,7 +13,10 @@ app.use(require('./middlewares/locals.mdw'));
 
 // Some single route
 app.get('/', function(req, res) {
-    res.render('page/home', {layout: 'main'});
+    res.render('page/home', {
+        layout: 'main',
+        isLoggedIn: req.isAuthenticated()
+    });
 })
 app.get('/admin', function(req, res) {
     res.render('page/admin/dashboard', {layout: 'admin'});
@@ -35,16 +38,17 @@ app.get('/admin/tag', function(req, res) {
 })
 app.get('/admin/category', function(req, res) {
     res.render('page/admin/category', {layout: 'admin'});
-})
-app.get('/login', function(req, res) {
-    res.render('page/allusers/login', {layout: 'main'});
-})
+});
 
 // Some routes
 app.use('/admin/subscriber', require('./routes/admin/user.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
 app.use('/admin/editor', require('./routes/admin/editor.route'));
+app.use('/admin/post', require('./routes/admin/post.route'));
+app.use('/admin/category', require('./routes/admin/category.route'));
+app.use('/admin/tag', require('./routes/admin/tag.route'));
 app.use('/allusers', require('./routes/allusers/account.route'));
+app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 app.use('/writer', require('./routes/writer/writer.route'));
 
 // Listen

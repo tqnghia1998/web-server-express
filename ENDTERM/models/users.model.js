@@ -7,15 +7,15 @@ module.exports = {
     },
 
     allSubs: ()=>{
-        return db.load('SELECT *, date_format(Birthday,"%d-%m-%Y") as formatBirthday FROM users INNER JOIN subscribers ON users.userID = subscribers.userID');
+        return db.load('SELECT *, date_format(dateSubBegin,"%d-%m-%Y") as dateBegin, date_format(dateSubEnd,"%d-%m-%Y") as dateEnd FROM users INNER JOIN subscribers ON users.userID = subscribers.userID');
     },
 
-    allWritter: ()=>{
-        return db.load('SELECT *, date_format(Birthday,"%d-%m-%Y") as formatBirthday FROM users INNER JOIN writters ON users.userID = writters.userID');
+    allwriter: ()=>{
+        return db.load('SELECT *, date_format(Birthday,"%d-%m-%Y") as formatBirthday FROM users INNER JOIN writers ON users.userID = writers.userID');
     },
 
     allEditor: ()=>{
-        return db.load('SELECT *, date_format(Birthday,"%d-%m-%Y") as formatBirthday FROM users INNER JOIN editors ON users.userID = editors.userID');
+        return db.load('SELECT *, date_format(Birthday,"%d-%m-%Y") as formatBirthday FROM users INNER JOIN editors ON users.userID = editors.userID INNER JOIN categories ON editors.cateID = categories.cateID' );
     },
 
     // Get by id
@@ -25,8 +25,8 @@ module.exports = {
     singleSubs: id => {
         return db.load(`SELECT * FROM subscribers WHERE userID = ${id}`);
     },
-    singleWritter: id => {
-        return db.load(`SELECT * FROM writters WHERE userID = ${id}`);
+    singlewriter: id => {
+        return db.load(`SELECT * FROM writers WHERE userID = ${id}`);
     },
     singleEditor: id => {
         return db.load(`SELECT * FROM editors WHERE userID = ${id}`);
@@ -37,7 +37,7 @@ module.exports = {
         return db.load(`SELECT * FROM users WHERE Username = '${username}'`);
     },
     singleByPseudonym: pseudonym => {
-        return db.load(`SELECT * FROM writters WHERE Pseudonym = '${pseudonym}'`);
+        return db.load(`SELECT * FROM writers WHERE Pseudonym = '${pseudonym}'`);
     },
 
     // Insert
@@ -47,8 +47,8 @@ module.exports = {
     addSubs: entity => {
         return db.add(`subscribers`, entity);
     },
-    addWritter: entity => {
-        return db.add(`writters`, entity);
+    addwriter: entity => {
+        return db.add(`writers`, entity);
     },
     addEditor: entity => {
         return db.add(`editors`, entity);
@@ -56,15 +56,15 @@ module.exports = {
     
     // Update
     update: entity => {
-        return db.update(`users`, userID, entity);
+        return db.update(`users`, 'userID', entity);
     },
     updateSubs: entity => {
-        return db.update(`subscribers`, userID, entity);
+        return db.update(`subscribers`, 'userID', entity);
     },
     updateWritter: entity => {
-        return db.update(`writters`, userID, entity);
+        return db.update(`writters`, 'userID', entity);
     },
     updateEditor: entity => {
-        return db.update(`editors`, userID, entity);
+        return db.update(`editors`, 'userID', entity);
     }
 };
