@@ -80,55 +80,17 @@
 					</li>
 									
 					<li><a href="index.html"><img src="../images/home.png" alt="Magazine"></a></li>
-					<li class="dropdown"><a href="viewListNews.html">XÃ HỘI</a>
+
+					{{#each lcCategories}}
+					<li class="dropdown"><a href="viewListNews.html">{{cateName}}</a>
 						<ul class="sub-menu">
+							
 							<li><a href="viewListNews.html">GIAO THÔNG</a></li>
-							<li><a href="viewListNews.html">MÔI TRƯỜNG - KHÍ HẬU</a></li>
+
 						</ul>
 					</li>
-					
-					<li class="dropdown"><a href="../guest/viewListNews.html#">KINH TẾ</a>
-						<ul class="sub-menu">
-							<li><a href="viewListNews.html">KINH DOANH</a></li>
-							<li><a href="viewListNews.html">CHỨNG KHOÁNG</a></li>
-						</ul>
-					</li>
-					<li class="dropdown"><a href="viewListNews.html">GIÁO DỤC</a>
-						<ul class="sub-menu">
-							<li><a href="viewListNews.html">ĐÀO TẠO - THI CỬ</a></li>
-							<li><a href="viewListNews.html">HỌC BỔNG - DU HỌC</a></li>
-						</ul>
-					</li>
-					<li class="dropdown"><a href="viewListNews.html">THỂ THAO</a>
-						<ul class="sub-menu">
-							<li><a href="viewListNews.html">BÓNG ĐÁ QUỐC TẾ</a></li>
-							<li><a href="viewListNews.html">BÓNG ĐÁ VIỆT NAM</a></li>
-						</ul>
-					</li>
-					<li class="dropdown"><a href="viewListNews.html">CÔNG NGHỆ</a>
-						<ul class="sub-menu">
-							<li><a href="viewListNews.html">CNTT - VIỄN THÔNG</a></li>
-							<li><a href="viewListNews.html">THIẾT BỊ - PHẦN CỨNG</a></li>
-						</ul>
-					</li>
-					<li class="dropdown"><a href="viewListNews.html">PHÁP LUẬT</a>
-						<ul class="sub-menu">
-							<li><a href="viewListNews.html">HÌNH SỰ - DÂN SỰ</a></li>
-							<li><a href="viewListNews.html">AN NINH - TRẬT TỰ</a></li>
-						</ul>
-					</li>
-					<li class="dropdown"><a href="viewListNews.html">ĐỜI SỐNG</a>
-						<ul class="sub-menu">
-							<li><a href="viewListNews.html">DINH DƯỠNG - LÀM ĐẸP</a></li>
-							<li><a href="viewListNews.html">TÌNH YÊU - HÔN NHÂN</a></li>
-						</ul>
-					</li>
-					<li class="dropdown"><a href="viewListNews.html">VĂN HÓA</a>
-						<ul style="width: fit-content" class="sub-menu">
-							<li><a href="viewListNews.html">ẨM THỰC</a></li>
-							<li><a href="viewListNews.html">DU LỊCH</a></li>
-						</ul>
-					</li>
+					{{/each}}
+
 					<li >
 						<a href="../allusers/login.html">LOG IN</a>
 					</li>
