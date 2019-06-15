@@ -7,7 +7,7 @@ router.get('/', (req, res)=>{
     var u = Model.all();
     u.then(rows=>{
         console.log(rows);
-        res.render('page/admin/post',{
+        res.render('page/admin/vwposts/post',{
             layout: 'admin',
             posts: rows
         });
@@ -16,6 +16,9 @@ router.get('/', (req, res)=>{
     });
     //res.end('lafm bieesn quas')
     
+});
+router.get('/viewpost', (req, res)=>{
+    res.render('page/admin/vwposts/viewpost',{layout: 'admin'});
 })
 
 module.exports = router;

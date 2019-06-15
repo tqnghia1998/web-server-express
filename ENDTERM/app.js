@@ -1,6 +1,11 @@
 var express = require('express');
+var morgan = require('morgan');
 var app = express();
 
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
 // Some initialization
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
@@ -30,15 +35,6 @@ app.get('/admin/dashboard', function(req, res) {
 app.get('/admin/logout', function(req, res) {
     res.render('page/admin/logout', {layout: 'admin'});
 })
-app.get('/admin/post', function(req, res) {
-    res.render('page/admin/post', {layout: 'admin'});
-})
-app.get('/admin/tag', function(req, res) {
-    res.render('page/admin/tag', {layout: 'admin'});
-})
-app.get('/admin/category', function(req, res) {
-    res.render('page/admin/category', {layout: 'admin'});
-});
 
 // Some routes
 app.use('/admin/subscriber', require('./routes/admin/user.route'));
