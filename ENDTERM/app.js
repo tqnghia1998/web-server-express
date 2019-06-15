@@ -30,9 +30,7 @@ app.get('/admin/dashboard', function(req, res) {
 app.get('/admin/logout', function(req, res) {
     res.render('page/admin/logout', {layout: 'admin'});
 })
-app.get('/admin/post', function(req, res) {
-    res.render('page/admin/post', {layout: 'admin'});
-})
+
 app.get('/admin/tag', function(req, res) {
     res.render('page/admin/tag', {layout: 'admin'});
 })
@@ -50,8 +48,8 @@ app.use('/admin/tag', require('./routes/admin/tag.route'));
 app.use('/allusers', require('./routes/allusers/account.route'));
 app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 app.use('/writer', require('./routes/writer/writer.route'));
-
+app.use('/editor', require('./routes/editor/editor.route'));
 // Listen
 app.listen(3000, () =>{
-    console.log('server is running at http://localhost:3000/writer/');
+    console.log('server is running at http://localhost:3000/editor');
 })

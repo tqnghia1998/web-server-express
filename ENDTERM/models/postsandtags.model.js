@@ -6,4 +6,7 @@ module.exports = {
         return db.add(`postsandtags`, entity);
     },
 
+    allByPost: id => {
+        return db.load(`select * from postsandtags p join tags t on p.tagID = t.tagID where posID = ${id}`);
+    },
 }

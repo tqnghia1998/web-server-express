@@ -38,7 +38,7 @@
 <script type='text/javascript' src='/js/jquery.sidr.min.js'></script>
 <script type='text/javascript' src='/js/jquery.touchSwipe.min.js'></script>
 <script type='text/javascript' src='/js/custom.js'></script>
-{{{_sections.js}}}
+
 
 </head>
 
@@ -50,7 +50,7 @@
 	<header id="header" class="container">
 		<div id="mast-head">
 			<div id="logo">
-				<a href="index.html" title="Magazine" rel="home"><img src="../images/study.png" alt="Magazine" /></a>
+				<a href="index.html" title="Magazine" rel="home"><img src="/images/study.png" alt="Magazine" /></a>
 			</div>
 		</div>
     <nav class="navbar navbar-inverse clearfix nobot">
@@ -59,7 +59,6 @@
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>		
 			</a>
-
       <div class="nav-collapse" id="swipe-menu-responsive">
 				<ul class="nav">
 					<li>
@@ -79,7 +78,7 @@
 					</span>
 					</li>
 									
-					<li><a href="index.html"><img src="../images/home.png" alt="Magazine"></a></li>
+					<li><a href="index.html"><img src="/images/home.png" alt="Magazine"></a></li>
 
 					{{#each lcCategories}}
 					<li class="dropdown"><a href="viewListNews.html">{{cateName}}</a>
@@ -89,11 +88,12 @@
 
 						</ul>
 					</li>
+					{{/each}}
 					<li>
 						{{#if isLoggedIn}}
-							<a href="../allusers/logout">LOG OUT</a>
+							<a href="/allusers/logout">LOG OUT</a>
 						{{else}}
-							<a href="../allusers/login">LOG IN</a>
+							<a href="/allusers/login">LOG IN</a>
 						{{/if}}
 					</li>
 					
@@ -112,7 +112,7 @@
 			<div class="span3">
 				<article class="post">
 					<a href="viewNews.html" title="Đòi nợ thành công Tottenham, Man City trở lại ngôi đầu Ngoại hạng Anh" rel="bookmark">
-					<img width="225" height="136" src="../images/PhotoOfNews/ManCity.gif" class="thumb"/>
+					<img width="225" height="136" src="/images/PhotoOfNews/ManCity.gif" class="thumb"/>
 					</a>
 					<div class="entry">
 						<h3><a href="viewNews.html" title="Đòi nợ thành công Tottenham, Man City trở lại ngôi đầu Ngoại hạng Anh" rel="bookmark">
@@ -127,7 +127,7 @@
 			<div class="span3">
 				<article class="post">
 					<a href="viewNews.html#" title="Gần chục nghìn người đổ về công viên nước Hồ Tây tắm giải nhiệt" rel="bookmark">
-					<img width="225" height="136" src="../images/PhotoOfNews/TamHoTay.jpg" class="thumb"/>
+					<img width="225" height="136" src="/images/PhotoOfNews/TamHoTay.jpg" class="thumb"/>
 					</a>
 					<div class="entry">
 						<h3><a href="viewNews.html#" title="Gần chục nghìn người đổ về công viên nước Hồ Tây tắm giải nhiệt
@@ -142,7 +142,7 @@
 			<div class="span3" width="225" height="136">
 				<article class="post">
 					<a href="viewNews.html#" title="Đội trưởng CLB Sài Gòn nhận thẻ đỏ vì chơi xấu với Mạc Hồng Quân" rel="bookmark">
-					<img width="225" height="136" src="../images/PhotoOfNews/CLBSaiGon.gif" class="thumb"/>
+					<img width="225" height="136" src="/images/PhotoOfNews/CLBSaiGon.gif" class="thumb"/>
 					</a>
 					<div class="entry">
 						<h3><a href="viewNews.html#" title="Đội trưởng CLB Sài Gòn nhận thẻ đỏ vì chơi xấu với Mạc Hồng Quân" rel="bookmark">Đội trưởng CLB Sài Gòn nhận thẻ đỏ vì chơi xấu với Mạc...</a></h3>
@@ -156,7 +156,7 @@
 			<div class="span3">
 				<article class="post" width="225" height="136">
 					<a href="viewNews.html#" title="Đột kích nhiều karaoke, khách sạn ở Quảng Bình, phá chuyên án ma túy và mại dâm" rel="bookmark">
-					<img width="225" height="136" src="../images/PhotoOfNews/KaraokeBanDam.jpg" class="thumb" alt="KaraokeBanDam" />
+					<img width="225" height="136" src="/images/PhotoOfNews/KaraokeBanDam.jpg" class="thumb" alt="KaraokeBanDam" />
 					</a>
 					<div class="entry">
 						<h3><a href="viewNews.html#" title="Đột kích nhiều karaoke, khách sạn ở Quảng Bình, phá chuyên án ma túy và mại dâm" rel="bookmark">Đột kích nhiều karaoke, khách sạn ở Quảng Bình...</a></h3>
@@ -213,6 +213,7 @@
 			</div>
 		</div><!-- .site-info -->
 	</footer>	
+	{{{_sections.js}}}
 </div><!-- #wrapper -->
 </body>
 </html>
