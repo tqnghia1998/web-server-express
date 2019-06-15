@@ -9,8 +9,21 @@
             <!-- /.col-lg-12 -->
         </div>
         {{#if alert}}
-        <div class="alert alert-danger">
-            <strong>Cảnh báo: </strong> Nhãn đang được sử dụng, không thể xóa!
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Cảnh báo:</strong> Nhãn đang được sử dụng, không thể xóa!
+        </div>
+        {{/if}}
+        {{#if exist}}
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Cảnh báo:</strong> Tên nhãn bạn thêm hoặc cập nhật đã tồn tại!
+        </div>
+        {{/if}}
+        {{#if empty}}
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Cảnh báo:</strong> Tên nhãn bạn thêm hoặc cập nhật rỗng!
         </div>
         {{/if}}
         <!-- Bảng quản lý -->
@@ -52,7 +65,7 @@
                                         <td>
                                             <form method="POST" action="/admin/tag/update/{{tagID}}">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="{{tagName}}"
+                                                    <input type="text" class="form-control" value="{{tagName}}"
                                                         id="txtTagName" name="tagName">
                                                     <span class="input-group-btn" style="width:0;">
                                                         <button type="submit" class="btn btn-success">

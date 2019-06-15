@@ -10,39 +10,102 @@ router.get('/', (req, res) => {
         res.render('page/admin/vwtags/tag', {
             layout: 'admin',
             tags: rows,
-            alert: false
+            alert: false,
+            exist: false
         });
     }).catch(error => {
         console.log(error);
     });
-    //res.end('lafm bieesn quas')
-
 })
 router.post('/', (req, res) => {
-    var entity = {
-        TagName: req.body.TagName
+    var name = null;
+    name = req.body.TagName;
+    if(name!="" && name!=null)
+    {
+        var entity = {
+            TagName: name
+        }
+        Model.add(entity).then(
+            id => {
+                console.log(id);
+                res.redirect('/admin/tag');
+            }).catch(error => {
+                var u = Model.all();
+                u.then(rows => {
+                    console.log(rows);
+                    res.render('page/admin/vwtags/tag', {
+                        layout: 'admin',
+                        tags: rows,
+                        alert: false,
+                        exist: true,
+                        empty: false
+                    });
+                }).catch(error => {
+                    console.log(error);
+                });
+            });
     }
-    Model.add(entity).then(
-        id => {
-            console.log(id);
-            res.redirect('/admin/tag');
-        }).catch(error => {
-            console.log(error);
-        })
+    else{
+        var u = Model.all();
+                u.then(rows => {
+                    console.log(rows);
+                    res.render('page/admin/vwtags/tag', {
+                        layout: 'admin',
+                        tags: rows,
+                        alert: false,
+                        exist: false,
+                        empty: true
+                    });
+                }).catch(error => {
+                    console.log(error);
+                });
+    }
+    
+
 })
 
 router.post('/update/:id', (req, res) => {
-    var entity = {
-        tagID: req.params.id,
-        tagName: req.body.tagName
+    var name = null;
+    name = req.body.tagName;
+    if(name!="" && name!=null){
+        var entity = {
+            tagID: req.params.id,
+            tagName: name
+        }
+        Model.update(entity).then(
+            n => {
+                res.redirect('/admin/tag');
+            }).catch(error => {
+                var u = Model.all();
+                u.then(rows => {
+                    console.log(rows);
+                    res.render('page/admin/vwtags/tag', {
+                        layout: 'admin',
+                        tags: rows,
+                        alert: false,
+                        exist: true,
+                        empty: false
+                    });
+                }).catch(error => {
+                    console.log(error);
+                });
+            });
+    }else{
+        var u = Model.all();
+                u.then(rows => {
+                    console.log(rows);
+                    res.render('page/admin/vwtags/tag', {
+                        layout: 'admin',
+                        tags: rows,
+                        alert: false,
+                        exist: false,
+                        empty: true
+                    });
+                }).catch(error => {
+                    console.log(error);
+                });
     }
-    Model.update(entity).then(
-        n => {
-            res.redirect('/admin/tag');
-        }).catch(error => {
-            console.log(error);
-            res.end('error occured!');
-        })
+    
 })
 
 router.post('/delete/:id', (req, res) => {
@@ -53,15 +116,14 @@ router.post('/delete/:id', (req, res) => {
         }).catch(error => {
             var u = Model.all();
             u.then(rows => {
-                console.log(rows);
                 res.render('page/admin/vwtags/tag', {
                     layout: 'admin',
                     tags: rows,
-                    alert: true
+                    alert: true,
+                    exist: false
                 });
-            }).catch(error => {
-                console.log(error);
-            });
-        })
+            })
+        });
 })
+
 module.exports = router;
