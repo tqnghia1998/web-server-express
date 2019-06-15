@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var categoriesModel = require('../../models/categories.model');
+var postModel = require('../../models/posts.model');
+var userModel = require('../../models/users.model');
+var tagModel = require('../../models/tags.model');
 var multer = require('multer');
+var postsandtagsModel = require('../../models/postsandtags.model');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,41 +25,132 @@ router.post('/uploadimage', upload.array('uploadphoto', 10), function (req, res,
 })
 
 router.get('/', (req, res) => {
-    //Chưa có dữ liệu
-    res.render('page/writer/index.handlebars');
+    if (req.isAuthenticated()) {
+        var p = userModel.singleEditor(req.session.passport.user.userID);
+        p.then(rows => {
+            if (rows.length === 0) {
+                res.redirect('/');
+            }
+            else {
+                // postModel
+                res.render('page/writer/index.handlebars')
+            }
+        })
+    }
+    else {
+        res.redirect('/allusers/login');
+    }
 })
 
 router.get('/published', (req, res) => {
-    //Chưa có dữ liệu
-    res.render('page/writer/published.handlebars');
+    if (req.isAuthenticated()) {
+        var p = userModel.singleEditor(req.session.passport.user.userID);
+        p.then(rows => {
+            if (rows.length === 0) {
+                res.redirect('/');
+            }
+            else {
+
+                res.render('page/writer/published.handlebars');
+            }
+        })
+    }
+    else {
+        res.redirect('/allusers/login');
+    }
 })
 
 router.get('/waiting', (req, res) => {
-    //Chưa có dữ liệu
-    res.render('page/writer/waiting.handlebars');
+    if (req.isAuthenticated()) {
+        var p = userModel.singleEditor(req.session.passport.user.userID);
+        p.then(rows => {
+            if (rows.length === 0) {
+                res.redirect('/');
+            }
+            else {
+                res.render('page/writer/waiting.handlebars');
+            }
+        })
+    }
+    else {
+        res.redirect('/allusers/login');
+    }
 })
 
 router.get('/rejected', (req, res) => {
-    //Chưa có dữ liệu
-    res.render('page/writer/rejected.handlebars');
+    if (req.isAuthenticated()) {
+        var p = userModel.singleEditor(req.session.passport.user.userID);
+        p.then(rows => {
+            if (rows.length === 0) {
+                res.redirect('/');
+            }
+            else {
+                res.render('page/writer/rejected.handlebars');
+            }
+        })
+    }
+    else {
+        res.redirect('/allusers/login');
+    }
 })
 
 router.get('/post', (req, res) => {
-    //Chưa có phân quyền
-    // var p = categoriesModel.all();
-    // p.then(rows => {
-    //     res.render('page/writer/post.handlebars', {
-    //         categories: rows
-    //     });
-    // }).catch(err => {
-    //     console.log(err);
-    //     res.end('error occured.');
-    // });    
-    res.render('page/writer/post.handlebars');
+    // if (req.isAuthenticated()) {
+
+    //     var p = userModel.singleEditor(req.session.passport.user.userID);
+    //     p.then(rows => {
+    //         if (rows.length === 0) {
+    //             res.redirect('/');
+    //         }
+    //         else {
+                res.render('page/writer/post.handlebars');
+    //         }
+    //     })
+    // }
+    // else {
+    //     res.redirect('/allusers/login');
+    // }
 })
 
-router.post('/post', (req, res) => {
-    console.log(req.body.uploadphoto);
+router.post('/post', (req, res, next) => {
+    var param = req.body;
+    var userID = 29;
+    var premium = false;
+    if (param.IsPremium === 'on') {
+        premium = true;
+    }
+
+    var entity = {
+        cateID: param.Category,
+        Title: param.Title,
+        DayPublish: null,
+        Description: param.Description,
+        Content: param.Content,
+        Writer: userID,//req.session.passport.user.userID,
+        Premium: premium,
+        Views: 0,
+        Approved: false,
+        Additional: '',
+        Published: false
+    }
+
+
+    postModel.add(entity).then(idPost => {
+        var alltag = param.HiddenTag.split(';');
+        alltag.pop();
+        for (var tag of alltag){
+            tagModel.add({tagName : tag}).then(idTag => {
+                postsandtagsModel.add({
+                    posID: idPost,
+                    tagID: idTag,
+                })
+            })
+        }
+    }).catch(err => {
+        console.log(err);
+    })
+
+    console.log(req.body);
 })
 
 module.exports = router;

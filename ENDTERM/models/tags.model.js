@@ -9,15 +9,12 @@ module.exports = {
         return db.load(`select * from tags where tagID = ${id}`);
     },
 
-    allByCat: id => {
-        return db.load(`select * from tags where tagID = ${id}`);
-    },
-
-    single: id => {
-        return db.load(`select * from tags where tagID = ${id}`);
-    },
-
     add: entity => {
         return db.add(`tags`, entity);
-    }
+    },
+
+    update: entity => {
+        return db.update(`tags`, `tagID`, entity);
+    },
+    
 }

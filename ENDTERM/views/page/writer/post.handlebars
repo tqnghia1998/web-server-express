@@ -45,8 +45,9 @@
 
 <script>
     tinymce.init({
-        selector: '#txtFullDes',
+        selector: 'textarea#Content',
         menubar: false,
+        entity_encoding : "raw",
         height: 500,
         plugins: 'paste image link autolink lists table media',
         toolbar: [
@@ -165,19 +166,27 @@ window.addEventListener("load", function() {
 
                     <form method="POST" id="FormPost">
                         <div style="width: 100%">
-                            <label style="color:black; padding-top: 55px" for="tieude">
+                            <label style="color:black; padding-top: 55px" for="title">
                                 <p><b>Tiêu đề bài viết</b></p>
                             </label>
-                            <input style="width: 60%" maxlength="250" id="tieude" name="TieuDe" type="text"
+                            <input style="width: 60%" maxlength="250" id="Title" name="Title" type="text"
                                 placeholder="Nhập tiêu đề bài viết tại đây" />
                         </div>
 
+                        <div style="width: 100%">
+                            <label style="color:black; padding-top: 55px" for="Description">
+                                <p><b>Mô tả</b></p>
+                            </label>
+                            <input style="width: 60%" maxlength="250" id="Description" name="Description" type="text"
+                                placeholder="Nhập mô tả ngắn cho bài viết" />
+                        </div>
+
                         <div id="standalone-container" style="margin-top:10px">
-                            <label style="color:black;" for="txtFullDes">
+                            <label style="color:black;" for="Content">
                                 <p><b>Nội dung bài viết</b></p>
                             </label>
 
-                            <textarea class="form-control" id="txtFullDes" name="FullDes"></textarea>
+                            <textarea class="form-control" id="Content" name="Content">{{this.content.Content}}</textarea>
 
                         </div>
 
@@ -187,10 +196,10 @@ window.addEventListener("load", function() {
                                 <p><b>Chuyên mục</b></p>
                             </label>
 
-                            <select style="width:51%" name="CategoryName">
+                            <select style="width:51%" name="Category">
 
                                 {{#each lcCategories}}
-                                <option style="font-weight:bold">{{cateName}}</option>
+                                <option style="font-weight:bold" value="{{cateID}}">{{cateName}}</option>
                                 {{/each}}
                             </select>
                         </div>
@@ -209,8 +218,9 @@ window.addEventListener("load", function() {
                             </div>
                         </div>
 
-                        <input type="file" name="123">
-
+                        <div style="margin-top:20px;" class="checkbox">
+                            <label><input type="checkbox" name="IsPremium">Premium</label>
+                        </div>
                         
                         <div
                             style="display:flex; justify-content: center; width: 100%; margin-top: 20px; height: 40px; ">
