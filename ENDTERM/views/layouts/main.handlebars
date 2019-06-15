@@ -38,7 +38,55 @@
 <script type='text/javascript' src='/js/jquery.sidr.min.js'></script>
 <script type='text/javascript' src='/js/jquery.touchSwipe.min.js'></script>
 <script type='text/javascript' src='/js/custom.js'></script>
+<script>
+	jQuery.noConflict()(function ($) {
 
+
+		// Get list of categories and display on menu
+		var listCate = [];
+		$(document).ready(function() {
+
+			// Get data
+			{{#each lcCategories}}
+			var category = {
+				cateID: {{cateID}},
+				cateName: '{{cateName}}',
+				parentID: '{{parentID}}'
+			}
+			listCate.push(category);
+			{{/each}}
+
+			// Bring them onto menu
+			var append = "";
+			var area = document.getElementById('listCate');
+			for (var i = 0; i < listCate.length; i++) {
+				if (listCate[i].parentID.length === 0) {
+					append += "<li class='dropdown'><a href='#'>" + listCate[i].cateName + "</a>";
+					var flag = false;
+					for (var j = 0; j < listCate.length; j++) {
+						if (listCate[j].parentID == listCate[i].cateID) {
+							if (!flag) {
+								flag = true;
+								append += "<ul class='sub-menu dropdown-menu'>";
+							}
+							append += "<li><a href='#'>" + listCate[j].cateName + "</a></li>"
+						}
+					}
+					if (flag) {
+						append += "</ul>";
+					}
+					append += "</li>"
+				}
+			}
+			area.innerHTML += append;
+
+			// Login & logout
+			area.innerHTML += "<li>{{#if isLoggedIn}}<a href='../allusers/logout'>Đăng xuất</a>{{else}}<a href='../allusers/login'>Đăng nhập</a>{{/if}}</li>"
+		});
+	});
+	
+</script>
+{{{_sections.js}}}
 
 </head>
 
@@ -53,50 +101,34 @@
 				<a href="index.html" title="Magazine" rel="home"><img src="/images/study.png" alt="Magazine" /></a>
 			</div>
 		</div>
-    <nav class="navbar navbar-inverse clearfix nobot">
+    	<nav class="navbar navbar-inverse clearfix nobot">
 			<a id="responsive-menu-button" href="index.html#swipe-menu">
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>		
 			</a>
-      <div class="nav-collapse" id="swipe-menu-responsive">
-				<ul class="nav">
+
+      		<div class="nav-collapse" id="swipe-menu-responsive">
+				<ul class="nav" id="listCate">
 					<li>
-					<span id="close-menu">
-						<a class="close-this-menu">Đóng</a>
-							<script type="text/javascript">
-								jQuery('a.sidr-class-close-this-menu').click(function(){
-									jQuery('div.sidr').css({
-										'right': '-476px'
+						<span id="close-menu">
+							<a class="close-this-menu">Đóng</a>
+								<script type="text/javascript">
+									jQuery('a.sidr-class-close-this-menu').click(function(){
+										jQuery('div.sidr').css({
+											'right': '-476px'
+										});
+										jQuery('body').css({
+										'right': '0'
+										});							
 									});
-									jQuery('body').css({
-									'right': '0'
-									});							
-								});
-							</script>
-						
-					</span>
-					</li>
-									
-					<li><a href="index.html"><img src="/images/home.png" alt="Magazine"></a></li>
-
-					{{#each lcCategories}}
-					<li class="dropdown"><a href="viewListNews.html">{{cateName}}</a>
-						<ul class="sub-menu">
-							
-							<li><a href="viewListNews.html">GIAO THÔNG</a></li>
-
-						</ul>
+								</script>
+						</span>
 					</li>
 					{{/each}}
 					<li>
-						{{#if isLoggedIn}}
-							<a href="/allusers/logout">LOG OUT</a>
-						{{else}}
-							<a href="/allusers/login">LOG IN</a>
-						{{/if}}
+						<a href="index.html"><img src="../images/home.png" alt="Magazine"></a>
 					</li>
-					
 				</ul>
 			</div><!--/.nav-collapse -->
 			
