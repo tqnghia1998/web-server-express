@@ -13,9 +13,7 @@ app.use(require('./middlewares/locals.mdw'));
 
 // Some single route
 app.get('/', function(req, res) {
-    res.render('page/home', {
-        layout: 'main',
-    });
+    res.redirect('/index');
 })
 app.get('/admin', function(req, res) {
     res.render('page/admin/dashboard', {layout: 'admin'});
@@ -49,8 +47,9 @@ app.use('/admin/tag', require('./routes/admin/tag.route'));
 app.use('/allusers', require('./routes/allusers/account.route'));
 app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 app.use('/writer', require('./routes/writer/writer.route'));
+app.use('/', require('./routes/guest/guest.route'));
 
 // Listen
 app.listen(3000, () =>{
-    console.log('server is running at http://localhost:3000/writer/');
+    console.log('server is running at http://localhost:3000/');
 })

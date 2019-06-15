@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `baodientu16th` /*!40100 DEFAULT CHARACTER SET ut
 USE `baodientu16th`;
 -- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
--- Host: localhost    Database: baodientu16th
+-- Host: 127.0.0.1    Database: baodientu16th
 -- ------------------------------------------------------
 -- Server version	8.0.16
 
@@ -134,8 +134,8 @@ CREATE TABLE `posts` (
   `posID` int(11) NOT NULL AUTO_INCREMENT,
   `cateID` int(11) DEFAULT NULL,
   `Title` varchar(500) DEFAULT NULL,
-  `DayPublish` date DEFAULT NULL,
-  `Description` varchar(100) DEFAULT NULL,
+  `DayPublish` datetime DEFAULT NULL,
+  `Description` varchar(200) DEFAULT NULL,
   `Content` varchar(5000) DEFAULT NULL,
   `Writer` int(11) DEFAULT NULL,
   `Premium` tinyint(4) DEFAULT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE `posts` (
   KEY `FK_Post_Cate_idx` (`cateID`),
   CONSTRAINT `FK_Post_Cate` FOREIGN KEY (`cateID`) REFERENCES `categories` (`cateID`),
   CONSTRAINT `FK_Post_User` FOREIGN KEY (`Writer`) REFERENCES `writers` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,1,'Khởi động dự án xử lý dioxin ở sân bay Biên Hòa','2019-05-05','Khởi động dự án xử lý dioxin ở sân bay Biên Hòa','Khởi động dự án xử lý dioxin ở sân bay Biên Hòa',29,1,5,1,'',1,NULL),(2,1,'Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ','2019-03-05','Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ','Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ',29,0,6,0,NULL,1,NULL),(3,1,'Trịnh Quan Nghĩa Chơi Bê Đê và cái kết','2019-06-08','Trịnh Quan Nghĩa Chơi Bê Đê và cái kết','Trịnh Quan Nghĩa Chơi Bê Đê và cái kết',29,0,6,1,NULL,0,NULL);
+INSERT INTO `posts` VALUES (1,1,'Khởi động dự án xử lý dioxin ở sân bay Biên Hòa','2020-05-05 00:00:00','Khởi động dự án xử lý dioxin ở sân bay Biên Hòa Khởi động dự án xử lý dioxin ở sân bay Biên Hòa','Khởi động dự án xử lý dioxin ở sân bay Biên Hòa',29,1,5,1,'',1,NULL),(2,1,'Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ','2019-09-05 00:00:00','Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ','Nghệ An: Tàu hỏa đâm văng xe tải chở đất, tài xế tử vong tại chỗ',29,0,6,1,NULL,1,NULL),(3,1,'Trịnh Quan Nghĩa đẹp trai nhất lịch sử nhân loại từ trước đến nay','2019-06-18 00:00:00','Trịnh Quan Nghĩa đẹp trai nhất lịch sử nhân loại từ trước đến nay Trịnh Quan Nghĩa đẹp trai nhất','Trịnh Quan Nghĩa đẹp trai nhất lịch sử nhân loại từ trước đến nay',29,0,6,1,NULL,1,NULL),(4,2,'Nguyễn Xuân Nghiêm xung phong ra biển đảo','2019-06-12 00:00:00','Nguyễn Xuân Nghiêm xung phong ra biển đảo đánh giặc Trung Quốc để cống hiến cho tổ quốc thân yêu','Nguyễn Xuân Nghiêm xung phong ra biển đảo đánh giặc Trung Quốc',29,1,3,1,NULL,1,NULL);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +237,7 @@ CREATE TABLE `subscribers` (
 
 LOCK TABLES `subscribers` WRITE;
 /*!40000 ALTER TABLE `subscribers` DISABLE KEYS */;
-INSERT INTO `subscribers` VALUES (28,'2019-06-11','2019-06-15'),(31,'2019-06-14','2019-06-21');
+INSERT INTO `subscribers` VALUES (28,'2019-06-15','2019-06-22'),(31,'2019-06-15','2019-06-22');
 /*!40000 ALTER TABLE `subscribers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +292,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (28,'Trịnh Quang Nghĩa','nghiatq','$2b$10$gmohocIBqi6rWN1lXTi6R.a6x8RTK/bEi9wc4b0sn.4KXcv6A0rau',4,'tonystrinh@gmail.com','1998-07-08 00:00:00',1),(29,'Trần Bá Ngọc','ngoctb','$2b$10$Zzo7H2QzG97OXsSGekKMQ.tBIqzEITh4Oyyk0vFtLpQcYcoChbFuC',2,'tranbangoc@gmail.com','1998-07-08 00:00:00',1),(30,'Nguyễn Xuân Nghiêm','nghiemnx','$2b$10$aNRw.FMpREjf0KVFBYIxkOmKvYCBQ8SpnpVV8uGDv1Mb6iY7UCKnm',3,'nguyenxuannghiem@gmail.com','1998-08-08 00:00:00',1),(31,'Đặng Hoài Nam','namdh3','$2b$10$6C4pjmHWLMXBRN5K.jHtbeUHO9nkJFVuBA8HeD8bArMWolggU8UIa',4,'danghoainam@gmail.com','2019-06-25 00:00:00',1),(32,'Trịnh Nghĩa','nghiatrinh','$2b$10$gU8oq.djdmh8zb1axMCvXOb6ax83OgikB5ULDuY3X9AvCagkwzbai',3,'tonystrinh@gmail.com','2019-06-13 00:00:00',1),(34,'Trịnh Nghĩa','nghiatq2','$2b$10$SJrB23eKFtGdRHL.L69TD.33IgGWQVLVTMwiisAX8FDf9SMPME92G',2,'tonystrinh@gmail.com','2019-06-20 00:00:00',1);
+INSERT INTO `users` VALUES (28,'Trịnh Quang Nghĩa','nghiatq','$2b$10$wUox//pLnqWL7PQO1atW1uvLwduJH1cypQBmmq66Ss.4dKDNyY63u',4,'tonystrinh@gmail.com','1998-07-08 00:00:00',1),(29,'Trần Bá Ngọc','ngoctb','$2b$10$Zzo7H2QzG97OXsSGekKMQ.tBIqzEITh4Oyyk0vFtLpQcYcoChbFuC',2,'tranbangoc@gmail.com','1998-07-08 00:00:00',1),(30,'Nguyễn Xuân Nghiêm','nghiemnx','$2b$10$aNRw.FMpREjf0KVFBYIxkOmKvYCBQ8SpnpVV8uGDv1Mb6iY7UCKnm',3,'nguyenxuannghiem@gmail.com','1998-08-08 00:00:00',1),(31,'Đặng Hoài Nam','namdh3','$2b$10$6C4pjmHWLMXBRN5K.jHtbeUHO9nkJFVuBA8HeD8bArMWolggU8UIa',4,'danghoainam@gmail.com','2019-06-25 00:00:00',1),(32,'Trịnh Nghĩa','nghiatrinh','$2b$10$gU8oq.djdmh8zb1axMCvXOb6ax83OgikB5ULDuY3X9AvCagkwzbai',3,'tonystrinh@gmail.com','2019-06-13 00:00:00',1),(34,'Trịnh Nghĩa','nghiatq2','$2b$10$SJrB23eKFtGdRHL.L69TD.33IgGWQVLVTMwiisAX8FDf9SMPME92G',2,'tonystrinh@gmail.com','2019-06-20 00:00:00',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,4 +331,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-15 13:39:17
+-- Dump completed on 2019-06-15 20:38:11
