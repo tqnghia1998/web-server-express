@@ -24,16 +24,28 @@ router.post('/uploadimage', upload.array('uploadphoto', 10), function (req, res,
     res.send(fileinfo);
 })
 
+//Đã duyệt - chờ xuất bản
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        var p = userModel.singleEditor(req.session.passport.user.userID);
-        p.then(rows => {
-            if (rows.length === 0) {
+        var idUser;// = req.session.passport.user.userID;
+
+        var p = userModel.singlewriter(req.session.passport.user.userID);
+        p.then(rowsUser => {
+
+            if (rowsUser.length === 0) {
                 res.redirect('/');
             }
             else {
-                // postModel
-                res.render('page/writer/index.handlebars')
+                postModel.allApproved(req.session.passport.user.userID).then(rowsPost => {
+
+                    console.log(rowsPost);
+                    res.render('page/writer/index.handlebars', {
+                        posts: rowsPost,
+                    })
+                }).catch(err => {
+                    console.log(err);
+                    res.redirect('/');
+                })
             }
         })
     }
@@ -42,16 +54,26 @@ router.get('/', (req, res) => {
     }
 })
 
+// Đã xuất bản
 router.get('/published', (req, res) => {
     if (req.isAuthenticated()) {
-        var p = userModel.singleEditor(req.session.passport.user.userID);
-        p.then(rows => {
-            if (rows.length === 0) {
+        var idUser;// = req.session.passport.user.userID;
+        var p = userModel.singlewriter(req.session.passport.user.userID);
+        p.then(rowsUser => {
+
+            if (rowsUser.length === 0) {
                 res.redirect('/');
             }
             else {
-
-                res.render('page/writer/published.handlebars');
+                postModel.allPublish(req.session.passport.user.userID).then(rowsPost => {
+                    console.log(rowsPost);
+                    res.render('page/writer/published.handlebars', {
+                        posts: rowsPost,
+                    })
+                }).catch(err => {
+                    console.log(err);
+                    res.redirect('/');
+                })
             }
         })
     }
@@ -62,13 +84,21 @@ router.get('/published', (req, res) => {
 
 router.get('/waiting', (req, res) => {
     if (req.isAuthenticated()) {
-        var p = userModel.singleEditor(req.session.passport.user.userID);
+        var p = userModel.singlewriter(req.session.passport.user.userID);
         p.then(rows => {
             if (rows.length === 0) {
                 res.redirect('/');
             }
             else {
-                res.render('page/writer/waiting.handlebars');
+                postModel.allWaiting(req.session.passport.user.userID).then(rowsPost => {
+                    console.log(rowsPost);
+                    res.render('page/writer/waiting.handlebars', {
+                        posts: rowsPost,
+                    })
+                }).catch(err => {
+                    console.log(err);
+                    res.redirect('/');
+                })
             }
         })
     }
@@ -85,8 +115,8 @@ router.get('/rejected', (req, res) => {
                 res.redirect('/');
             }
             else {
-                res.render('page/writer/rejected.handlebars');
-            }
+                
+            }res.render('page/writer/rejected.handlebars');
         })
     }
     else {
@@ -95,51 +125,54 @@ router.get('/rejected', (req, res) => {
 })
 
 router.get('/post', (req, res) => {
-    // if (req.isAuthenticated()) {
-
-    //     var p = userModel.singleEditor(req.session.passport.user.userID);
-    //     p.then(rows => {
-    //         if (rows.length === 0) {
-    //             res.redirect('/');
-    //         }
-    //         else {
+    if (req.isAuthenticated()) {
+        var p = userModel.singlewriter(req.session.passport.user.userID);
+        p.then(rows => {
+            console.log(rows.length);
+            if (rows.length === 0) {
+                res.redirect('/');
+            }
+            else {
                 res.render('page/writer/post.handlebars');
-    //         }
-    //     })
-    // }
-    // else {
-    //     res.redirect('/allusers/login');
-    // }
+            }
+        })
+    }
+    else {
+        res.redirect('/allusers/login');
+    }
 })
 
 router.post('/post', (req, res, next) => {
-    var param = req.body;
-    var userID = 29;
+
     var premium = false;
-    if (param.IsPremium === 'on') {
+    if (req.body.IsPremium === 'on') {
         premium = true;
     }
 
+    var now = new Date();
+    var month = now.getMonth() + 1;
+    var daywritten = now.getFullYear() + '/' + month + '/' + now.getDate();
+
     var entity = {
-        cateID: param.Category,
-        Title: param.Title,
+        cateID: req.body.Category,
+        Title: req.body.Title,
         DayPublish: null,
-        Description: param.Description,
-        Content: param.Content,
-        Writer: userID,//req.session.passport.user.userID,
+        Description: req.body.Description,
+        Content: req.body.Content,
+        Writer: req.session.passport.user.userID,
         Premium: premium,
         Views: 0,
-        Approved: false,
+        Approved: 0,
         Additional: '',
-        Published: false
+        Published: 0,
+        DayWritten: daywritten,
     }
 
-
     postModel.add(entity).then(idPost => {
-        var alltag = param.HiddenTag.split(';');
+        var alltag = req.body.HiddenTag.split(';');
         alltag.pop();
-        for (var tag of alltag){
-            tagModel.add({tagName : tag}).then(idTag => {
+        for (var tag of alltag) {
+            tagModel.add({ tagName: tag }).then(idTag => {
                 postsandtagsModel.add({
                     posID: idPost,
                     tagID: idTag,
@@ -149,8 +182,45 @@ router.post('/post', (req, res, next) => {
     }).catch(err => {
         console.log(err);
     })
-
-    console.log(req.body);
 })
+
+router.get('/update/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        var idPos = req.params.id;
+        var p = userModel.singlewriter(req.session.passport.user.userID);
+        p.then(rowsUser => {
+            console.log(rowsUser.length);
+            if (rowsUser.length === 0) {
+                res.redirect('/');
+            }
+            else {
+                postModel.single(idPos).then(rowsPost => {
+                    postsandtagsModel.allByPost(idPos).then(rowsPostsAndTags => {
+                        var hiddenTag = '';
+                        var i;
+                        for (i = 0; i < rowsPostsAndTags.length; i++){
+                            hiddenTag += rowsPostsAndTags[i].tagName + ';';
+                        }
+                        var isUpdate = true;
+                        console.log(rowsPostsAndTags);
+                        res.render('page/writer/post.handlebars', {
+                            isUpdate: isUpdate,
+                            post: rowsPost[0],
+                            tag: rowsPostsAndTags,
+                            hiddenTag: hiddenTag,
+                        })
+                    })
+                })
+            }
+        })
+    }
+    else {
+        res.redirect('/allusers/login');
+    }
+    
+
+})
+
+
 
 module.exports = router;

@@ -250,7 +250,7 @@ DROP TABLE IF EXISTS `tags`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tags` (
   `tagID` int(11) NOT NULL AUTO_INCREMENT,
-  `tagName` varchar(100) DEFAULT NULL,
+  `tagName` varchar(100)  NOT NULL UNIQUE,
   PRIMARY KEY (`tagID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

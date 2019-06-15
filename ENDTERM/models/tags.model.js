@@ -13,8 +13,12 @@ module.exports = {
         return db.add(`tags`, entity);
     },
 
+    delete: id => {
+        return db.delete(`tags`, `tagID`, id);
+    },
+
+
     update: entity => {
         return db.update(`tags`, `tagID`, entity);
-    },
-    
+    },    
 }

@@ -1,5 +1,9 @@
 var express = require('express');
+// var morgan = require('morgan');
 var app = express();
+
+// app.use(morgan('dev'));
+app.use(express.json());
 
 // Some initialization
 app.use(express.urlencoded({ extended: true }));
@@ -27,16 +31,6 @@ app.get('/admin/dashboard', function(req, res) {
 app.get('/admin/logout', function(req, res) {
     res.render('page/admin/logout', {layout: 'admin'});
 })
-app.get('/admin/post', function(req, res) {
-    res.render('page/admin/post', {layout: 'admin'});
-})
-app.get('/admin/tag', function(req, res) {
-    res.render('page/admin/tag', {layout: 'admin'});
-})
-app.get('/admin/category', function(req, res) {
-    res.render('page/admin/category', {layout: 'admin'});
-});
-
 // Some routes
 app.use('/admin/subscriber', require('./routes/admin/user.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
@@ -48,8 +42,9 @@ app.use('/allusers', require('./routes/allusers/account.route'));
 app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 app.use('/writer', require('./routes/writer/writer.route'));
 app.use('/', require('./routes/guest/guest.route'));
+app.use('/editor', require('./routes/editor/editor.route'));
 
 // Listen
-app.listen(3000, () =>{
+app.listen(3000, () => {
     console.log('server is running at http://localhost:3000/');
 })
