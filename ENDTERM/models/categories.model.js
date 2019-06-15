@@ -9,7 +9,7 @@ module.exports = {
     },
 
     all: () => {
-        return db.load(`select c.cateID, c.cateName, count(p.posID) as numbersOf from categories c left join posts p on c.cateID = p.cateID group by c.cateID, c.cateName`);
+        return db.load(`select c.cateID, c.cateName, parentID, count(p.posID) as numbersOf from categories c left join posts p on c.cateID = p.cateID group by c.cateID, c.cateName`);
     },
 
     single: id => {

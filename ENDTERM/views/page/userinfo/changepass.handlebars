@@ -1,0 +1,124 @@
+{{#section 'css'}}
+	<style>
+		.text-danger {
+			color: red;
+		}
+	</style>
+{{/section}}
+{{#section 'js'}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+	<script>
+		jQuery.noConflict()(function ($) {
+			$('#changepassForm').validate({
+				rules: {
+                    password: {
+						minlength: 6
+					},
+					repassword: {
+						equalTo: $('[name="password"]')
+					}
+				},
+				messages: {
+					oldpassword: {
+						required: 'Mật khẩu cũ không được để trống.'
+					},
+                    password: {
+                        required: 'Mật khẩu không được để trống.',
+						minlength: 'Mật khẩu tối thiểu 6 ký tự.'
+                    },
+					repassword: {
+						required: 'Xác nhận mật khẩu không được để trống.',
+						equalTo: 'Mật khẩu không trùng nhau.'
+					}
+				},
+				errorElement: 'small',
+				errorClass: 'help-block text-danger'
+			});
+		});
+	</script>
+{{/section}}
+
+<!-- Nội dung trang web -->
+<div id="content" class="container">
+
+	<div id="main" class="row-fluid">
+
+		<!-- Phần thông tin cơ bản -->
+		<div id="main-left">
+			<article id="post-206" class="post-206 page type-page status-publish hentry instock">
+				<header class="entry-header">
+					<h1 class="entry-title"><span style="color: white">Thông tin tài khoản</span></h1>
+				</header><!-- .entry-header -->
+			</article>
+
+			<!-- Các mục thông tin -->
+			<div id="content" class="container" style="margin: -40px; margin-top:-30px;">
+				<div id="tabwidget" style="display:flex; height: 600px; justify-content: space-between">
+						<span style="margin-left:0px; padding-left:0px; width: 20%; height: 100%; background: #3D4C54">
+							<ul id="tabnav"> 
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="general">Thông tin cá nhân&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="#tab2" class="selected">Đổi mật khẩu&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="subscriber">Gia hạn tài khoản&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="writer">Bút danh&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="editor">Chuyên mục phụ trách&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+							</ul> 
+						</span>
+
+						<!-- Nội dung các mục -->
+						<div id="tab-content" style="border: 0px">
+							
+							<!-- Mục đổi mật khẩu -->
+							<div id="tab2">
+                                <form id="changepassForm" action="changepass" method="post">
+                                    <table>
+                                        <tr>
+                                            <td align="left">
+                                                <p style="color: {{messagecolor}}; font-size: 14px"><i>{{message}}</i></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>Mật khẩu cũ</label>
+                                                <div class="cform">
+                                                    <input type="password" name="oldpassword" id="oldpassword"  style="height: 25px" required/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>Mật khẩu mới</label>
+                                                <div class="cform">
+                                                    <input type="password" name="password" id="password" style="height: 25px" required/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>Xác nhận mật khẩu mới</label>
+                                                <div class="cform">
+                                                    <input type="password" name="repassword" id="repassword" style="height: 25px" required/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><br>
+                                                <div class="cform submit">
+                                                    <input type="submit" value="Lưu lại" name="sendChangePass" id="cf_send" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+							</div><!-- /#tab2 -->
+					
+					</div><!-- /#tab-content -->
+					
+					<div class="clearfix"></div>
+				</div><!-- /#tab-widget --> 
+			</div><!-- #content -->
+		</div><!-- #main-left -->
+		<div class="clearfix"></div>
+
+	</div><!-- #main -->
+
+</div><!-- #content -->

@@ -20,6 +20,5 @@ module.exports = {
 
     update: entity => {
         return db.update(`tags`, `tagID`, entity);
-    },
-    
+    },    
 }

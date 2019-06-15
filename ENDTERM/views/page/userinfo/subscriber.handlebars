@@ -1,0 +1,119 @@
+{{#section 'js'}}
+	<script>
+		function checkData() {
+			var input = document.getElementById('qrCode').value;
+			if (input == '{{token}}') {
+				return true;
+			}
+			alert("Mã xác nhận không hợp lệ")
+			return false;
+		}
+
+		jQuery.noConflict()(function ($) {
+
+			// Set begin and end day for subscriber
+			$(document).ready(function() {
+
+                // Set dates
+                var beginDate = new Date('{{info.dateSubBegin}}');
+                beginDate.setMinutes(beginDate.getMinutes() - beginDate.getTimezoneOffset());
+                document.getElementById('beginDate').valueAsDate = beginDate;
+
+                var endDate = new Date('{{info.dateSubEnd}}');
+                endDate.setMinutes(endDate.getMinutes() - endDate.getTimezoneOffset());
+                document.getElementById('endDate').valueAsDate = endDate;
+
+                // Others
+				var token = '{{token}}';
+                if (token.length > 0) {
+                    document.getElementById('qrCode').disabled = false;
+                    document.getElementById('cf_send').hidden = false;
+                    document.getElementById('invalid').hidden = false;
+                    document.getElementById('qrCodeImg').hidden = false;
+                    document.getElementById('valid').hidden = true;
+                }
+			});
+		});
+	</script>
+{{/section}}
+
+<!-- Nội dung trang web -->
+<div id="content" class="container">
+
+	<div id="main" class="row-fluid">
+
+		<!-- Phần thông tin cơ bản -->
+		<div id="main-left">
+			<article id="post-206" class="post-206 page type-page status-publish hentry instock">
+				<header class="entry-header">
+					<h1 class="entry-title"><span style="color: white">Thông tin tài khoản</span></h1>
+				</header><!-- .entry-header -->
+			</article>
+
+			<!-- Các mục thông tin -->
+			<div id="content" class="container" style="margin: -40px; margin-top:-30px;">
+				<div id="tabwidget" style="display:flex; height: 600px; justify-content: space-between">
+						<span style="margin-left:0px; padding-left:0px; width: 20%; height: 100%; background: #3D4C54">
+							<ul id="tabnav"> 
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="general">Thông tin cá nhân&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="changepass">Đổi mật khẩu&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="#tab3" class="selected">Gia hạn tài khoản&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="writer">Bút danh&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="editor">Chuyên mục phụ trách&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+							</ul> 
+						</span>
+
+						<!-- Nội dung các mục -->
+						<div id="tab-content" style="border: 0px">
+						
+							<!-- Thông tin riêng của độc giả -->
+                            <div id="tab3">
+                                <ul id="itemContainer" class="recent-tab">
+                                    <li style="border: 0px">
+                                        <img src="../images/dummy/phone.png" class="thumb"/>
+                                        <div class="cform"><br>
+                                            <form id="subscriberForm" method="post" action="subscriber" onsubmit="return checkData()">
+                                                <input style="margin: 10px;" type="text" placeholder="Mã xác nhận" id="qrCode" name="qrCode" disabled required/>
+                                                <input style="margin: 10px;" type="submit" value="Gia hạn" id="cf_send" hidden/>
+                                            </form>
+                                            <p style="margin-left: 10px; color: red; width: 180%" id="invalid" hidden>(*) <b>Đã hết hạn, vui lòng nhập mã để gia hạn</b></p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li style="border: 0px">
+                                        <img src="../images/dummy/qr-code.png" class="thumb"/>
+                                        <img src="{{qrCode}}" id="qrCodeImg" hidden/>
+                                        <p style="margin-top: 35px; color: blue; width: 180%" id="valid">&nbsp;&nbsp;&nbsp;(i) <b>Còn hạn sử dụng</b></p>
+                                        <div class="clearfix"></div>					
+                                    </li>
+                                    <li style="border: 0px">
+                                        <table width="100%">
+                                            <tr style="font-size: 15px">
+                                                <td>
+                                                    <label for="endDate">Ngày hiệu lực</label>
+                                                    <input type="date" id="beginDate" style="margin-right: 30px" readonly>
+                                                    <p style="margin-left: 5px; color: green; font-size: 12px">(i) <b>Bắt đầu từ thời điểm đăng ký</b></p>
+                                                </td>
+                                                <td >
+                                                    <label for="endDate" style="margin-left: 30px">Ngày hết hạn</label>
+                                                    <input type="date" id="endDate" style="margin-left: 30px" readonly>
+                                                    <p style="margin-left: 30px; color: green; font-size: 12px">(i) <b>Hiệu lực đến cuối ngày</b></p>
+                                                </td>
+                                            </tr>
+                                        </table>			
+                                    </li>
+                                    
+                                </ul>
+                            </div><!-- /#tab1 -->
+
+					    </div><!-- /#tab-content -->
+					
+					<div class="clearfix"></div>
+				</div><!-- /#tab-widget --> 
+			</div><!-- #content -->
+		</div><!-- #main-left -->
+		<div class="clearfix"></div>
+
+	</div><!-- #main -->
+
+</div><!-- #content -->

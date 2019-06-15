@@ -31,7 +31,6 @@ router.get('/register/is-available-lostpass', (req, res, next) => {
     });
 });
 router.get('/register/is-pseudonym-available', (req, res, next) => {
-    if (req.isAuthenticated()) return res.redirect('/');
 
     userModel.singleByPseudonym(req.query.pseudonym).then(rows => {
         if (rows.length > 0) {
@@ -78,6 +77,7 @@ router.post('/register', (req, res, next) => {
         Role: role,
         Email: req.body.email,
         Birthday: req.body.birthday,
+        Actived: 1
     }
     
     // Add to database
@@ -86,11 +86,11 @@ router.post('/register', (req, res, next) => {
         case 1:
             break;
         case 2:
-            var writterEntity = {
+            var writerEntity = {
                 userID: id,
                 Pseudonym: req.body.pseudonym
             }
-            userModel.addWritter(writterEntity).then(id => {
+            userModel.addWriter(writerEntity).then(id => {
                 res.redirect('/allusers/login?messagecode=1');
             })
             break;
@@ -116,20 +116,27 @@ router.post('/register', (req, res, next) => {
             })
             break;
         }
+    }).catch(err => {
+        console.log("Error when trying to register: ", err);
+        res.redirect('/allusers/login?messagecode=0');
     });
 });
 
 // Login zone
 router.get('/login', (req, res, next) => {
     if (req.isAuthenticated()) return res.redirect('/');
+
     var message;
     switch (req.query.messagecode) {
+        case '0': message = "Đã xảy ra lỗi khi đăng ký tài khoản."; break;
         case '1': message = "Đăng ký tài khoản thành công."; break;
         case '2': message = "Thông tin đăng nhập sai."; break;
         case '3': message = "Vui lòng kiểm tra E-mail."; break;
         case '4': message = "Đổi mật khẩu thành công."; break;
         case '5': message = "Đổi mật khẩu thất bại."; break;
         case '6': message = "Đăng xuất thành công."; break;
+        case '7': message = "Tài khoản của bạn đã bị vô hiệu hóa."; break;
+        case '8': message = "Token đổi mật khẩu đã hết hạn."; break;
     };
 
     res.render('page/allusers/login', {layout: 'main', message: message});
@@ -150,7 +157,11 @@ router.post('/login', (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            return res.redirect('/userinfo');
+            if (user.Actived === 0) {
+                req.logOut();
+                return res.redirect('/allusers/login?messagecode=7');
+            }
+            return res.redirect('/userinfo/general');
         })
     })(req, res, next);
 });
@@ -171,16 +182,16 @@ router.get('/lostpass', (req, res, next) => {
         // Check token is valid
         securityModel.get(userID).then(rows => {
             if (rows.length === 0) {
-                res.json("Đường dẫn bị sai!");
+                return res.redirect('/allusers/login?messagecode=8');
             }
             else {
                 var token = rows[0].password_reset_token;
                 var expiredate = rows[0].password_reset_expire;
                 if (token !== code) {
-                    res.json("Token bị sai!");
+                    return res.redirect('/allusers/login?messagecode=8');
                 }
                 else if (expiredate < new Date()) {
-                    res.json("Token đã quá hạn!");
+                    return res.redirect('/allusers/login?messagecode=8');
                 }
                 else {
                     res.render('page/allusers/restorepass', {
@@ -192,6 +203,7 @@ router.get('/lostpass', (req, res, next) => {
             }
         }).catch(err => {
             console.log("Error when trying get token from database: " + err);
+            return res.redirect('/allusers/login?messagecode=8');
         })
      }
 });
@@ -283,7 +295,15 @@ router.post('/restorepass', (req, res, next) => {
                     if (user.length !== 0) {
                         user[0].Password = hash;
                         userModel.update(user[0]).then(re => {
-                            res.redirect('/allusers/login?messagecode=4');
+
+                            // Make token expired now
+                            var entity = {
+                                userID: userID,
+                                password_reset_expire: new Date()
+                            }
+                            securityModel.update(entity).then(ex => {
+                                res.redirect('/allusers/login?messagecode=4');
+                            })
                         });
                     }
                     else {
@@ -291,11 +311,13 @@ router.post('/restorepass', (req, res, next) => {
                     }
                 }).catch(err => {
                     console.log("Error when getting user id: " + err);
+                    return res.redirect('/allusers/login?messagecode=5');
                 });
             }
         }
     }).catch(err => {
         console.log("Error when reseting password: " + err);
+        return res.redirect('/allusers/login?messagecode=5');
     })
 });
 
