@@ -1,0 +1,108 @@
+{{#section 'css'}}
+	<style>
+		.text-danger {
+			color: red;
+		}
+	</style>
+{{/section}}
+{{#section 'js'}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+	<script>
+        function onEdit(target) {
+			target.hidden = true;
+			document.getElementById('pseudonym').disabled = false;
+			document.getElementsByName('sendSave')[0].hidden = false;
+			document.getElementById('pseudonym').focus();
+		}
+		jQuery.noConflict()(function ($) {
+			$('#writerForm').validate({
+				rules: {
+                    pseudonym: {
+						remote: {
+                            url: '/allusers/register/is-pseudonym-available',
+                            success: function (data) {
+								document.getElementById('invalidPseudonym').style.visibility = data !== true ? 'visible' : 'hidden';
+							}
+                        }
+					}
+				},
+                messages: {
+                    pseudonym: {
+                        required: 'Bút danh không được để trống.'
+                    }
+                },
+				errorElement: 'small',
+				errorClass: 'help-block text-danger'
+			});
+		});
+	</script>
+{{/section}}
+
+<!-- Nội dung trang web -->
+<div id="content" class="container">
+
+	<div id="main" class="row-fluid">
+
+		<!-- Phần thông tin cơ bản -->
+		<div id="main-left">
+			<article id="post-206" class="post-206 page type-page status-publish hentry instock">
+				<header class="entry-header">
+					<h1 class="entry-title"><span style="color: white">Thông tin tài khoản</span></h1>
+				</header><!-- .entry-header -->
+			</article>
+
+			<!-- Các mục thông tin -->
+			<div id="content" class="container" style="margin: -40px; margin-top:-30px;">
+				<div id="tabwidget" style="display:flex; height: 600px; justify-content: space-between">
+						<span style="margin-left:0px; padding-left:0px; width: 20%; height: 100%; background: #3D4C54">
+							<ul id="tabnav"> 
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="general">Thông tin cá nhân&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="changepass">Đổi mật khẩu&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="subscriber">Gia hạn tài khoản&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="#tab4" class="selected">Bút danh&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="editor">Chuyên mục phụ trách&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+							</ul> 
+						</span>
+
+						<!-- Nội dung các mục -->
+						<div id="tab-content" style="border: 0px">
+							
+							<!-- Mục đổi bút danh -->
+							<div id="tab4">
+                                <form id="writerForm" method="post" action="writer">
+                                    <table>
+                                        <tr>
+                                            <img src="../images/dummy/name.png" style="width: 50%; height: 50%"/><br>
+                                        </tr>
+                                        <tr align="center">
+                                            <td>
+                                                <div class="cform"><br><br>
+                                                    <label for="pseudonym">Bút danh</label>
+                                                    <input type="text" name="pseudonym" id="pseudonym" value="{{pseudonym}}" style="height: 25px;" disabled required/><br><br>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="cform submit">
+                                                    <input type="button" value="Sửa" onclick="onEdit(this)" id="cf_send" />
+                                                    <input type="submit" value="Lưu lại" name="sendSave" id="cf_send" hidden/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br><span style="color: red; visibility: hidden; font-size: 12px; width: 150%" id="invalidPseudonym">Bút danh này đã được sử dụng.</span>
+                                </form>
+							</div><!-- /#tab4 -->
+
+					    </div><!-- /#tab-content -->
+					
+					<div class="clearfix"></div>
+				</div><!-- /#tab-widget --> 
+			</div><!-- #content -->
+		</div><!-- #main-left -->
+		<div class="clearfix"></div>
+
+	</div><!-- #main -->
+
+</div><!-- #content -->

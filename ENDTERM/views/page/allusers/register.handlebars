@@ -11,6 +11,7 @@
 		// Default role
 		var whichRole = "#subscriber";
 		var isPseudonymExisted = false;
+		var listCate = [];
 
 		// Check data before submit
 		function checkData() {
@@ -45,11 +46,18 @@
 					alert("Vui lòng chọn chuyên mục quản lý.")
 					return false;
 				}
+				else {
+					var category2 = document.getElementById("category2").value;
+					if (category2.length !== 0) {
+						category = category2;
+					}
+				}
 				role.setAttribute('value', '3');
 				var input = document.createElement('input');
 				input.setAttribute('name', 'category');
 				input.setAttribute('value', category);
 				input.setAttribute('type', 'hidden');
+				alert(category);
     			form.appendChild(input);
 			}
 
@@ -76,6 +84,26 @@
 				document.getElementById("beginDate").valueAsDate = today;
 				today.setDate(today.getDate() + 7)
 				document.getElementById("endDate").valueAsDate = today;
+
+				// List categories
+				{{#each lcCategories}}
+				var category = {
+					cateID: {{cateID}},
+					cateName: '{{cateName}}',
+					parentID: '{{parentID}}'
+				}
+				listCate.push(category);
+				{{/each}}
+
+				// Bring them onto menu
+				var append = "";
+				var area = document.getElementById('category');
+				for (var i = 0; i < listCate.length; i++) {
+					if (listCate[i].parentID.length === 0) {
+						append += "<option value='" + listCate[i].cateID + "'>" + listCate[i].cateName + "</option>";
+					}
+				}
+				area.innerHTML += append;
 			});
 			
 			// Check validate for form
@@ -141,6 +169,15 @@
 			date.setDate(date.getDate() + days);
 			return date;
 		}
+		function categoryChange(key) {
+			var area = document.getElementById('category2');
+			area.innerHTML = "<option value='' selected>Tất cả</option>";
+			for (var i = 0; i < listCate.length; i++) {
+				if (listCate[i].parentID == key.value) {
+					area.innerHTML += "<option value='" + listCate[i].cateID + "'>" + listCate[i].cateName + "</option>";
+				}
+			}
+		}
 	</script>
 {{/section}}
 
@@ -184,6 +221,7 @@
 					</div><br><br>
 					<div class="form-group">
 						<input type="submit" value="Đăng ký" id="cf_send"/>
+						<a href="login" style="float: right; margin-top: 20px; font-weight: bold; text-decoration: underline; color: blue">Đăng nhập</a>
 					</div>
 				</form>
 
@@ -261,19 +299,22 @@
 						</div><!-- /#tab2 --> 
 			
 						<!-- Thông tin riêng của biên tập viên -->
-						<div id="editor" style="display: none; ">
-							<ul>
+						<div id="editor" style="display: none">
+							<ul id="itemContainer" class="recent-tab">
 								<li>
-									<img src="../images/dummy/editor.jpg" style="margin: 10px; width: 25%; height: 25%"/>
-									<img src="../images/dummy/news.png" style="margin: 25px; width: 35%; height: 35%; float:right"/><br>
+									<img src="../images/dummy/editor.jpg" style="margin: 20px; width: 25%; height: 25%"/>
+									<img src="../images/dummy/news.png" style="margin: 35px; width: 35%; height: 35%; float:right"/><br>
 									<div class="cform">
-										<select style="margin: 10px; font-weight: bold" id="category">
-										{{#each this.categories}}
-											<option value="{{cateID}}">{{cateName}}</option>
-										{{/each}}
+										<label style="float: center" for="category">Cấp 1</label>
+										<select style="float: center" id="category" onchange="categoryChange(this)">
+											<option value="" selected disabled hidden>Chọn chuyên mục</option>
+										</select>
+										<label style="margin-top: 20px" for="category2">Cấp 2</label>
+										<select id="category2">
+											<option value="" selected disabled hidden>Chọn chuyên mục</option>
 										</select><br><br>
-										<p style="margin-left: 10px; color: blue">(i) <b>Vui lòng chọn chuyên mục phụ trách</b></p>
-										<p style="margin-left: 10px; color: blue">(i) <b>Quản trị viên sẽ phân công thêm</b></p>
+										<p style="color: blue">(i) <b>Vui lòng chọn chuyên mục phụ trách</b></p><br>
+										<p style="color: blue">(i) <b>Quản trị viên sẽ phân công thêm</b></p>
 									</div><br><br>										
 									<div class="clearfix"></div>
 								</li>

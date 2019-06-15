@@ -1,0 +1,62 @@
+<!-- Nội dung trang web -->
+<div id="content" class="container">
+
+	<div id="main" class="row-fluid">
+
+		<!-- Phần thông tin cơ bản -->
+		<div id="main-left">
+			<article id="post-206" class="post-206 page type-page status-publish hentry instock">
+				<header class="entry-header">
+					<h1 class="entry-title"><span style="color: white">Thông tin tài khoản</span></h1>
+				</header><!-- .entry-header -->
+			</article>
+
+			<!-- Các mục thông tin -->
+			<div id="content" class="container" style="margin: -40px; margin-top:-30px;">
+				<div id="tabwidget" style="display:flex; height: 600px; justify-content: space-between">
+						<span style="margin-left:0px; padding-left:0px; width: 20%; height: 100%; background: #3D4C54">
+							<ul id="tabnav"> 
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="general">Thông tin cá nhân&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="changepass">Đổi mật khẩu&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="subscriber">Gia hạn tài khoản&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="writer">Bút danh&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="#tab5" class="selected">Chuyên mục phụ trách&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+							</ul> 
+						</span>
+
+						<!-- Nội dung các mục -->
+						<div id="tab-content" style="border: 0px">
+							
+                            <!-- Mục xem chuyên mục phụ trách -->
+							<div id="tab5">
+								<label style="font-size: 20px; color: black; font-weight: bold">Danh sách các chuyên mục đang phụ trách</label><br>
+								<table class="table table-striped table-bordered table-hover" width="100%" style="font-size: 18px; ">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên chuyên mục</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each this.listCate}}
+                                        <tr>
+                                            <td>{{index}}</td>
+                                            <td>{{cateName}}</td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+								</table>
+								<p style="margin-left: 10px; color: green">(i) <b>Quản trị viên sẽ phân công mục này</b></p>
+							</div><!-- /#tab5 -->
+
+					    </div><!-- /#tab-content -->
+					
+					<div class="clearfix"></div>
+				</div><!-- /#tab-widget --> 
+			</div><!-- #content -->
+		</div><!-- #main-left -->
+		<div class="clearfix"></div>
+
+	</div><!-- #main -->
+
+</div><!-- #content -->

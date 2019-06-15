@@ -40,6 +40,10 @@ module.exports = function (app) {
     });
 
     passport.deserializeUser((user, done) => {
-        return done(null, user);
+        userModel.single(user.userID).then(users => {
+            return done(null, users[0]);
+        }).catch(err => {
+            console.log("Error when deserializing user: ", err);
+        });
     });
 }

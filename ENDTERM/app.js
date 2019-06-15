@@ -15,7 +15,6 @@ app.use(require('./middlewares/locals.mdw'));
 app.get('/', function(req, res) {
     res.render('page/home', {
         layout: 'main',
-        isLoggedIn: req.isAuthenticated()
     });
 })
 app.get('/admin', function(req, res) {
