@@ -4,7 +4,7 @@ var Model = require('../../models/posts.model');
 var router = express.Router();
 
 router.get('/', (req, res)=>{
-    var u = Model.all();
+    var u = Model.allbycate();
     
     u.then(rows=>{
         console.log(rows);

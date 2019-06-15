@@ -4,7 +4,9 @@ module.exports = {
     all: () => {
         return db.load(`select * from posts`);
     },
-
+    allbycate: () => {
+        return db.load(`select *, date_format(DayPublish,"%d-%m-%Y") as datePublished from posts INNER JOIN categories ON posts.cateID = categories.cateID`);
+    },
     single: id => {
         return db.load(`select * from posts where posID = ${id}`);
     },
