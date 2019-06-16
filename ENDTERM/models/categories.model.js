@@ -24,5 +24,10 @@ module.exports = {
         return db.load(`select * from categories where cateID = ${id}`);
     },
 
-    
+    // NghiaTQ
+    singleWithChild: id => {
+        return db.load(`SELECT child.cateName as child, parent.cateName as parent `
+                     + `FROM baodientu16th.categories as child LEFT JOIN baodientu16th.categories as parent `
+                     + `ON child.parentID = parent.cateID WHERE child.cateID = ${id}`)
+    }
 }

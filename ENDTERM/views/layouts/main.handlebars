@@ -61,7 +61,7 @@
 			var area = document.getElementById('listCate');
 			for (var i = 0; i < listCate.length; i++) {
 				if (listCate[i].parentID.length === 0) {
-					append += "<li class='dropdown'><a href='#'>" + listCate[i].cateName + "</a>";
+					append += "<li class='dropdown'><a href='/category/" + listCate[i].cateID + "'>" + listCate[i].cateName + "</a>";
 					var flag = false;
 					for (var j = 0; j < listCate.length; j++) {
 						if (listCate[j].parentID == listCate[i].cateID) {
@@ -69,7 +69,7 @@
 								flag = true;
 								append += "<ul class='sub-menu dropdown-menu'>";
 							}
-							append += "<li><a href='#'>" + listCate[j].cateName + "</a></li>"
+							append += "<li><a href='/category/" + listCate[j].cateID + "'>" + listCate[j].cateName + "</a></li>"
 						}
 					}
 					if (flag) {
