@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
         console.log(error);
     });
 })
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
     var name = null;
     name = req.body.TagName;
     var entity = {

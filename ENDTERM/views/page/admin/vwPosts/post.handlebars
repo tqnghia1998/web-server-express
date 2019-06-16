@@ -40,8 +40,8 @@
                                         <td>Nháp</td>
                                         {{/if}}
                                         <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết" onclick="window.location.href='/admin/post/viewpost/:{{posID}}'"
-                                                data-toggle="tooltip"></button>
+                                            <a class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết" href="/post/{{posID}}"" target="_blank""
+                                                data-toggle="tooltip"></a>
                                             <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
                                                 data-toggle="tooltip"></button>
                                             {{#if Published}}

@@ -9,6 +9,10 @@ module.exports = {
     },
 
     all: () => {
+        return db.load(`select c.cateID, c.cateName, parentID, count(p.posID) as numbersOf from categories c left join posts p on c.cateID = p.cateID group by c.cateID, c.cateName`);
+    },
+
+    cateForAdmin:() => {
         return db.load(
             `select c.cateID as chilID, c.cateName as chilName, k.cateName as parentName, count(p.posID) as numbersOf
         from categories c
@@ -16,14 +20,16 @@ module.exports = {
         left join posts p on c.cateID = p.cateID group by c.cateID, c.cateName`
         );
     },
-
     cateLevel1: id => {
         return db.load(`select *
         from categories c
         where c.parentID is null and c.cateID != ${id}`);
     },
-
     single: id => {
+        return db.load(`select * from categories where cateID = ${id}`);
+    },
+
+    viewOneCate: id => {
         return db.load(`select c.cateID as chilID, c.cateName as chilName, k.cateName as parentName, k.cateID as parentID
         from categories c
         left join categories k on c.parentID = k.cateID

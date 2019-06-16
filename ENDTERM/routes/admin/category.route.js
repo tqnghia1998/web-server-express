@@ -4,7 +4,7 @@ var Model = require('../../models/categories.model');
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    var u = Model.all();
+    var u = Model.cateForAdmin();
     u.then(rows => {
         res.render('page/admin/vwCategories/category', {
             layout: 'admin',
@@ -25,7 +25,7 @@ router.get('/edit/:id', (req, res) => {
             error: true
         })
     }
-    Model.single(id).then(rows => {
+    Model.viewOneCate(id).then(rows => {
         if (rows.length > 0) {
             var k = Model.cateLevel1(id);
             k.then(parentRows => {
@@ -67,7 +67,7 @@ router.post('/update', (req, res) => {
         id => {
             res.redirect('/admin/category');
         }).catch(error => {
-            var u = Model.all();
+            var u = Model.cateForAdmin();
             u.then(rows => {
                 res.render('page/admin/vwCategories/category', {
                     layout: 'admin',
@@ -98,7 +98,7 @@ router.post('/delete/:id', (req, res) => {
         });
 })
 
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
     var name = null;
     var pID = null;
     name = req.body.CateName;
@@ -113,7 +113,7 @@ router.post('/', (req, res) => {
         id => {
             res.redirect('/admin/category');
         }).catch(error => {
-            var u = Model.all();
+            var u = Model.cateForAdmin();
             u.then(rows => {
                 res.render('page/admin/vwCategories/category', {
                     layout: 'admin',

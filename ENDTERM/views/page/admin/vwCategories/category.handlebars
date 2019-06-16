@@ -41,7 +41,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <form name="myForm" class="form-inline" action="/admin/category/" method="POST" onsubmit="return validateForm()">
+                        <form name="myForm" class="form-inline" action="/admin/category/add" method="POST" onsubmit="return validateForm()">
                             <input type="text" class="form-control" placeholder="Tên chuyên mục" id="txtCateName"
                                 name="CateName">
 
@@ -87,6 +87,8 @@
 
                                         <td>
                                             <form method="POST" action="/admin/category/delete/{{chilID}}">
+                                                <a class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết" href="/category/{{chilID}}" target="_blank""
+                                                data-toggle="tooltip"></a>
                                                 <button class="fa fa-edit fa-fw thaotacButton" type="button"
                                                     onclick="location.href='/admin/category/edit/{{chilID}}'"
                                                     title="Cập nhật" data-toggle="tooltip"></button>

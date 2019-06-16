@@ -72,12 +72,11 @@
                                 <select class="form-control select1" id="txtparentID" name="parentID">
                                     {{#if this.categories.parentID}}
                                     <option value={{this.categories.parentID}}>{{this.categories.parentName}}</option>
-                                    {{else}}
-                                    <option value={{null}}>-- Không --</option>
                                     {{/if}}
                                     {{#each this.categoriesAdd}}
                                     <option value="{{cateID}}">{{cateName}}</option>
                                     {{/each}}
+                                    <option value={{null}}>-- Không --</option>
                                 </select>
                             </div>
                             <br>
