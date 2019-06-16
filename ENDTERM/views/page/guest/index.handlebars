@@ -1,0 +1,140 @@
+<!-- Nội dung trang web -->
+<div id="content" class="container">
+
+	<div id="main" class="row-fluid">
+		<div id="main-left" class="span8">
+			<div id="slider" class="clearfix">
+				<div id="slide-left" class="flexslider span8">
+					<ul class="slides">
+						{{#each this.mostViewedInWeek}}
+						<li data-thumb="../images/PhotoOfNews/MainNew1.jpg">
+							<a class="image_thumb_zoom" href="../guest/viewNews.html">
+								<img src="../images/PhotoOfNews/MainNew1.jpg" />
+							</a>
+							<div class="entry" style="height: 75px;">
+								<div style="font-size: 14px; color: white">{{Title}}</div>
+								<p style="margin-top: 2px">{{Description}}<br><a
+										style="float: right; margin-top: -5px; padding-right: 20px; color: rgb(73, 245, 21)">{{views}}</a>
+								</p>
+							</div>
+						</li>
+						{{/each}}
+					</ul>
+				</div>
+
+				<div id="slidebar" class="span4">
+					<div style="width:265%" id="tabwidget" class="widget tab-container">
+						<ul id="tabnav" class="clearfix">
+							<li style="width: 50%">
+								<h3><a href="index.html#tab1" class="selected"><img src="../images/time.png"
+											alt="Bài viết mới nhất">Bài viết mới nhất</a></h3>
+							</li>
+							<li style="width: 50%">
+								<h3><a href="index.html#tab2"><img src="../images/komen.png" alt="Xem nhiều nhất">Xem
+										nhiều nhất</a></h3>
+							</li>
+						</ul>
+						<div id="tab-content">
+
+							<!-- Tab bài viết mới nhất -->
+							<div id="tab1" style="display: block;">
+								<ul style="height:422px; width:100%; overflow:hidden; overflow-y:scroll">
+									{{#each this.mostRecent}}
+									<li>
+										<table style="width:100%; margin: 10px">
+											<tr>
+												<td style="width:50%; padding: 10px">
+													<a class="image_thumb_zoom" href="#">
+														<img class="ImageListNew"
+															src="../images/PhotoOfNews/MainNew1.jpg">
+													</a>
+												</td>
+												<td style="vertical-align: text-top;">
+													<h4 class="post-title" style="margin-"><a style="font-size: 15px;"
+															href="#">{{Title}}</a></h4>
+													<p>{{Description}}<br>
+														</br>Ngày đăng:
+														<a>{{DayPublish}}</a>
+														<br>Chuyên mục:
+														<a>{{cateName}}</a>
+													</p>
+												</td>
+											</tr>
+										</table>
+									</li>
+									{{/each}}
+								</ul>
+								<div class="clear"></div>
+
+								<!-- End most viewed post -->
+
+							</div><!-- /#tab1 -->
+
+							<!-- Tab bài viết xem nhiều nhất -->
+							<div id="tab2">
+								<ul style="height:422px; width:100%; overflow:hidden; overflow-y:scroll">
+									{{#each this.mostViewed}}
+									<li>
+										<table style="width:100%; margin: 10px">
+											<tr>
+												<td style="width:50%; padding: 10px">
+													<a class="image_thumb_zoom" href="#">
+														<img class="ImageListNew"
+															src="../images/PhotoOfNews/MainNew1.jpg">
+													</a>
+												</td>
+												<td style="vertical-align: text-top;">
+													<h4 class="post-title" style="margin-"><a style="font-size: 15px;"
+															href="#">{{Title}}</a></h4>
+													<p>{{Description}}<br>
+														</br>Lượt xem:
+														<a>{{Views}}</a>
+														<br>Chuyên mục:
+														<a>{{cateName}}</a>
+													</p>
+												</td>
+											</tr>
+										</table>
+									</li>
+									{{/each}}
+								</ul>
+							</div><!-- /#tab2 -->
+
+						</div><!-- /#tab-content -->
+					</div><!-- /#tab-widget -->
+				</div>
+			</div>
+		</div><!-- #main-left -->
+	</div><!-- sidebar -->
+
+	<div id="gallery">
+		<h3 style="background-color: #3D4C54"><span>
+				<font color="white">&nbsp&nbsp&nbsp&nbspChuyên mục nóng</font>
+			</span></h3>
+		<table style="width:100%">
+			<tr>
+				{{#each this.topCategories}}
+				<td style="width: 30%; padding: 10px">
+					<h4 class="title"><span style="width: 100%; padding: 5px">{{cateName}}</span></h4>
+					<div class="container1">
+						<a class="image_thumb_zoom" href="#">
+							<img src="../images/PhotoOfNews/MainNew1.jpg" />
+						</a>
+						<div class="text-block1">
+							<h4 style="">{{Title}}</br>
+								<a style="float: right; padding-bottom: 5px; color: rgb(69, 219, 24)">{{DayPublish}}</a>
+							</h4>
+						</div>
+					</div>
+				</td>
+				{{#if flag}}
+			</tr>
+			<tr>
+				{{/if}}
+				{{#if end}}
+			</tr>
+			{{/if}}
+			{{/each}}
+		</table>
+	</div>
+</div><!-- #content -->

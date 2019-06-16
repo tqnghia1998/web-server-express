@@ -61,7 +61,7 @@
 			var area = document.getElementById('listCate');
 			for (var i = 0; i < listCate.length; i++) {
 				if (listCate[i].parentID.length === 0) {
-					append += "<li class='dropdown'><a href='#'>" + listCate[i].cateName + "</a>";
+					append += "<li class='dropdown'><a href='/category/" + listCate[i].cateID + "'>" + listCate[i].cateName + "</a>";
 					var flag = false;
 					for (var j = 0; j < listCate.length; j++) {
 						if (listCate[j].parentID == listCate[i].cateID) {
@@ -69,7 +69,7 @@
 								flag = true;
 								append += "<ul class='sub-menu dropdown-menu'>";
 							}
-							append += "<li><a href='#'>" + listCate[j].cateName + "</a></li>"
+							append += "<li><a href='/category/" + listCate[j].cateID + "'>" + listCate[j].cateName + "</a></li>"
 						}
 					}
 					if (flag) {
@@ -98,7 +98,7 @@
 	<header id="header" class="container">
 		<div id="mast-head">
 			<div id="logo">
-				<a href="index.html" title="Magazine" rel="home"><img src="/images/study.png" alt="Magazine" /></a>
+				<a href="/" title="Magazine" rel="home"><img src="../images/study.png" alt="Magazine" /></a>
 			</div>
 		</div>
     	<nav class="navbar navbar-inverse clearfix nobot">
@@ -126,7 +126,7 @@
 						</span>
 					</li>
 					<li>
-						<a href="index.html"><img src="../images/home.png" alt="Magazine"></a>
+						<a href="/"><img src="../images/home.png" alt="Magazine"></a>
 					</li>
 				</ul>
 			</div><!--/.nav-collapse -->
@@ -135,81 +135,14 @@
 			
 	</header><!-- #masthead -->
 
-	<!-- Các headline -->
-	<div id="headline" class="container">
-		<h3 style="background-color: #3D4C54"><span><font color="white">&nbsp&nbsp&nbsp&nbspTin hot trong tuần</font></span></h3>
-		<div class="row-fluid">
-		
-			<div class="span3">
-				<article class="post">
-					<a href="viewNews.html" title="Đòi nợ thành công Tottenham, Man City trở lại ngôi đầu Ngoại hạng Anh" rel="bookmark">
-					<img width="225" height="136" src="/images/PhotoOfNews/ManCity.gif" class="thumb"/>
-					</a>
-					<div class="entry">
-						<h3><a href="viewNews.html" title="Đòi nợ thành công Tottenham, Man City trở lại ngôi đầu Ngoại hạng Anh" rel="bookmark">
-							Đòi nợ thành công Tottenham, Man City trở lại ngôi...</a></h3>
-						<p>THỂ THAO</p>
-						<p>45 phút trước</p>
-					</div>
-					<div class="clearfix"></div>
-				</article>
-			</div>
-		
-			<div class="span3">
-				<article class="post">
-					<a href="viewNews.html#" title="Gần chục nghìn người đổ về công viên nước Hồ Tây tắm giải nhiệt" rel="bookmark">
-					<img width="225" height="136" src="/images/PhotoOfNews/TamHoTay.jpg" class="thumb"/>
-					</a>
-					<div class="entry">
-						<h3><a href="viewNews.html#" title="Gần chục nghìn người đổ về công viên nước Hồ Tây tắm giải nhiệt
-							Zing 3 giờ" rel="bookmark">Gần chục nghìn người đổ về công viên nước Hồ Tây tắm... </a></h3>
-							<p>XÃ HỘI</p>
-						<p>1 giờ trước</p>
-					</div>
-					<div class="clearfix"></div>
-				</article>
-			</div>
-
-			<div class="span3" width="225" height="136">
-				<article class="post">
-					<a href="viewNews.html#" title="Đội trưởng CLB Sài Gòn nhận thẻ đỏ vì chơi xấu với Mạc Hồng Quân" rel="bookmark">
-					<img width="225" height="136" src="/images/PhotoOfNews/CLBSaiGon.gif" class="thumb"/>
-					</a>
-					<div class="entry">
-						<h3><a href="viewNews.html#" title="Đội trưởng CLB Sài Gòn nhận thẻ đỏ vì chơi xấu với Mạc Hồng Quân" rel="bookmark">Đội trưởng CLB Sài Gòn nhận thẻ đỏ vì chơi xấu với Mạc...</a></h3>
-						<p>THỂ THAO</p>
-						<p>2 giờ trước</p>
-					</div>
-					<div class="clearfix"></div>
-				</article>
-			</div>
-
-			<div class="span3">
-				<article class="post" width="225" height="136">
-					<a href="viewNews.html#" title="Đột kích nhiều karaoke, khách sạn ở Quảng Bình, phá chuyên án ma túy và mại dâm" rel="bookmark">
-					<img width="225" height="136" src="/images/PhotoOfNews/KaraokeBanDam.jpg" class="thumb" alt="KaraokeBanDam" />
-					</a>
-					<div class="entry">
-						<h3><a href="viewNews.html#" title="Đột kích nhiều karaoke, khách sạn ở Quảng Bình, phá chuyên án ma túy và mại dâm" rel="bookmark">Đột kích nhiều karaoke, khách sạn ở Quảng Bình...</a></h3>
-						<p>PHÁP LUẬT</p>
-						<p>3 giờ trước</p>
-					</div>
-					<div class="clearfix"></div>
-				</article>
-			</div>	
-		
-		</div>
-	</div>
-
 	<!-- Đoạn Intro -->
 	<div id="intr" class="container">
 		<div class="row-fluid">
 			<div class="brnews span9">
-				<h3 style="color: black">Tin cực nóng</h3>
-				<ul id="scroller">
-					<li><p><a href="viewNews.html#" title="Đòi nợ thành công Tottenham, Man City trở lại ngôi đầu Ngoại hạng Anh" rel="bookmark"><span class="title"></span> Đòi nợ thành công Tottenham, Man City trở lại ngôi đầu Ngoại hạng Anh</a></p></li>
-					<li><p><a href="viewNews.html#" title="Gần chục nghìn người đổ về công viên nước Hồ Tây tắm giải nhiệt" rel="bookmark"><span class="title"> Gần chục nghìn người đổ về công viên nước Hồ Tây tắm giải nhiệt</a></p></li>
-					<li><p><a href="viewNews.html#" title="Đội trưởng CLB Sài Gòn nhận thẻ đỏ vì chơi xấu với Mạc Hồng Quân" rel="bookmark"><span class="title"></span> Đội trưởng CLB Sài Gòn nhận thẻ đỏ vì chơi xấu với Mạc Hồng Quân</a></p></li>
+				<ul id="scroller" style="font-size: 12px; color: black">
+					<li style="float: left; width: 200px">Trịnh Quang Nghĩa</li>
+					<li style="float: left; width: 200px">Trần Bá Ngọc</li>
+					<li style="float: left; width: 200px">Nguyễn Xuân Nghiêm</li>
 				</ul>
 			</div>
 		
