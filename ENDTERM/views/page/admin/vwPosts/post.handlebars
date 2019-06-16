@@ -22,7 +22,7 @@
                                         <th width='5%'>STT</th>
                                         <th width='40%'>Tiêu đề</th>
                                         <th width='20%'>Chuyên mục</th>
-                                        <th width='10%'>Ngày tạo</th>
+                                        <th width='10%'>Ngày xuất bản</th>
                                         <th width='10%'>Trạng thái</th>
                                         <th width='15%'>Thao tác</th>
                                     </tr>
@@ -34,22 +34,23 @@
                                         <td>{{Title}}</td>
                                         <td>{{cateName}}</td>
                                         <td>{{datePublished}}</td>
-                                        {{#if Published}}
+                                        {{#if isPublished}}
                                         <td>Đã xuất bản</td>
                                         {{else}}
                                         <td>Nháp</td>
                                         {{/if}}
                                         <td>
-                                            <a class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết" href="/post/{{posID}}"" target="_blank""
-                                                data-toggle="tooltip"></a>
-                                            <button class="fa fa-remove fa-fw thaotacButton" title="Xóa"
-                                                data-toggle="tooltip"></button>
-                                            {{#if Published}}
-                                            {{else}}
-                                            <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
-                                                data-toggle="tooltip"></button>
-                                            {{/if}}
-
+                                            <form method="POST" action="/admin/post/publish/{{posID}}">
+                                                <a class="fa fa-eye fa-fw thaotacButton" title="Xem bài viết"
+                                                    href="/post/{{posID}}" target="_blank" data-toggle=" tooltip"></a>
+                                                <button class="fa fa-remove fa-fw thaotacButton" title="Xóa" onclick="return confirm('Bạn thực sự muốn xóa bài viết này?')"
+                                                    type="submit" formaction="/admin/post/delete/{{posID}}" data-toggle="tooltip"></button>
+                                                {{#if isPublished}}
+                                                {{else}}
+                                                <button class="fa fa-globe fa-fw thaotacButton" title="Xuất bản"
+                                                    type="submit" data-toggle="tooltip"></button>
+                                                {{/if}}
+                                            </form>
                                         </td>
                                     </tr>
                                     {{/each}}
