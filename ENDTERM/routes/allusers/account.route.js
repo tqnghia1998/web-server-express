@@ -52,8 +52,12 @@ router.get('/register', (req, res, next) => {
     })
     
     // Get list of categories
-    var listCate = categoryModel.all();
+    var listCate = categoryModel.allWithChild();
     listCate.then(rows => {
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].cateName = (rows[i].parent == null ? "" : rows[i].parent + " / ") + rows[i].child;
+        }
+
         res.render('page/allusers/register', {
             layout: 'main',
             categories: rows,
@@ -92,7 +96,10 @@ router.post('/register', (req, res, next) => {
             }
             userModel.addWriter(writerEntity).then(id => {
                 res.redirect('/allusers/login?messagecode=1');
-            })
+            }).catch(er => {
+                console.log("Error when creating writer account: ", er);
+                res.redirect('/allusers/login?messagecode=0');
+            });
             break;
         case 3:
             var editorEntity = {
@@ -101,7 +108,10 @@ router.post('/register', (req, res, next) => {
             }
             userModel.addEditor(editorEntity).then(id => {
                 res.redirect('/allusers/login?messagecode=1');
-            })
+            }).catch(er => {
+                console.log("Error when creating editor account: ", er);
+                res.redirect('/allusers/login?messagecode=0');
+            });
             break;
         case 4:
             var expired = new Date();
@@ -113,7 +123,10 @@ router.post('/register', (req, res, next) => {
             }
             userModel.addSubs(subsEntity).then(id => {
                 res.redirect('/allusers/login?messagecode=1');
-            })
+            }).catch(er => {
+                console.log("Error when creating subscriber account: ", er);
+                res.redirect('/allusers/login?messagecode=0');
+            });
             break;
         }
     }).catch(err => {

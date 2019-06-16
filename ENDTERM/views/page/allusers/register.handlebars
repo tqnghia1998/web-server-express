@@ -6,6 +6,7 @@
 	</style>
 {{/section}}
 {{#section 'js'}}
+	<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 	<script>
 		// Default role
@@ -15,6 +16,14 @@
 
 		// Check data before submit
 		function checkData() {
+
+			// Check reCapcha
+			var reCapcha = document.getElementById('g-recaptcha-response').value;
+			if (reCapcha.length === 0) {
+				alert("Vui lòng nhập reCapcha.");
+				return false;
+			}
+
 			var form = document.getElementById('registerForm');
 			var role = document.createElement('input');
 			role.setAttribute('name', 'role');
@@ -22,7 +31,7 @@
 			
 			// If user is a writter
 			if (whichRole == "#writter") {
-				var pseudonym = document.getElementById("pseudonym").value;
+				var pseudonym = document.getElementById("pseudonymEdit").value;
 				if (pseudonym.length === 0) {
 					alert("Vui lòng nhập bút danh.")
 					return false;
@@ -46,18 +55,11 @@
 					alert("Vui lòng chọn chuyên mục quản lý.")
 					return false;
 				}
-				else {
-					var category2 = document.getElementById("category2").value;
-					if (category2.length !== 0) {
-						category = category2;
-					}
-				}
 				role.setAttribute('value', '3');
 				var input = document.createElement('input');
 				input.setAttribute('name', 'category');
 				input.setAttribute('value', category);
 				input.setAttribute('type', 'hidden');
-				alert(category);
     			form.appendChild(input);
 			}
 
@@ -70,6 +72,7 @@
 				}
 				role.setAttribute('value', '4');
 			}
+			
 			form.appendChild(role);
 			return true;
 		}
@@ -77,33 +80,10 @@
 
 			// Set begin and end day for subscriber
 			$(document).ready(function() {
-				$('a[data-toggle="tab"]').on('click', function (e) {
-					whichRole = $(e.target).attr("href");
-				});
 				var today = new Date();
 				document.getElementById("beginDate").valueAsDate = today;
 				today.setDate(today.getDate() + 7)
 				document.getElementById("endDate").valueAsDate = today;
-
-				// List categories
-				{{#each lcCategories}}
-				var category = {
-					cateID: {{cateID}},
-					cateName: '{{cateName}}',
-					parentID: '{{parentID}}'
-				}
-				listCate.push(category);
-				{{/each}}
-
-				// Bring them onto menu
-				var append = "";
-				var area = document.getElementById('category');
-				for (var i = 0; i < listCate.length; i++) {
-					if (listCate[i].parentID.length === 0) {
-						append += "<option value='" + listCate[i].cateID + "'>" + listCate[i].cateName + "</option>";
-					}
-				}
-				area.innerHTML += append;
 			});
 			
 			// Check validate for form
@@ -150,9 +130,10 @@
 				errorElement: 'small',
 				errorClass: 'help-block text-danger'
 			});
+
 			$('#writterForm').validate({
 				rules: {
-					pseudonym: {
+					pseudonymEdit: {
 						remote: {
 							url: '/allusers/register/is-pseudonym-available',
 							success: function (data) {
@@ -169,14 +150,8 @@
 			date.setDate(date.getDate() + days);
 			return date;
 		}
-		function categoryChange(key) {
-			var area = document.getElementById('category2');
-			area.innerHTML = "<option value='' selected>Tất cả</option>";
-			for (var i = 0; i < listCate.length; i++) {
-				if (listCate[i].parentID == key.value) {
-					area.innerHTML += "<option value='" + listCate[i].cateID + "'>" + listCate[i].cateName + "</option>";
-				}
-			}
+		function changeRole(target) {
+			whichRole = target.id;
 		}
 	</script>
 {{/section}}
@@ -192,33 +167,33 @@
 				<header class="entry-header">
 					<h1 class="entry-title"><span style="color: white">Đăng ký tài khoản</span></h1>
 				</header><!-- .entry-header -->
-
 				<!-- Các ô nhập thông tin -->
 				<form id="registerForm" method="POST" style="float: left" action="register" onsubmit="return checkData();">
 					<div class="form-group">
 						<label for="fullname">Họ tên</label>
-						<input type="text" name="fullname" id="fullname" required autofocus/>
+						<input type="text" name="fullname" id="fullname" required autofocus style="width: 95%"/>
 					</div><br>
 					<div class="form-group">
 						<label for="username">Tên đăng nhập</label>
-						<input type="text" name="username" id="username" required/>
+						<input type="text" name="username" id="username" required style="width: 95%"/>
 					</div><br>
 					<div class="form-group">
 						<label for="email">Địa chỉ E-mail</label>
-						<input type="email" name="email" id="email" required/>
+						<input type="email" name="email" id="email" required style="width: 95%"/>
 					</div><br>
 					<div class="form-group">
 						<label for="birthday">Ngày sinh</label>
-						<input type="date" name="birthday" id="birthday" required/>
+						<input type="date" name="birthday" id="birthday" required style="width: 95%"/>
 					</div><br>
 					<div class="form-group">
 						<label for="password">Mật khẩu</label>
-						<input type="password" name="password" id="password" required/>
+						<input type="password" name="password" id="password" required style="width: 95%"/>
 					</div><br>
 					<div class="form-group">
 						<label for="repassword">Nhập lại mật khẩu</label>
-						<input type="password" name="repassword" id="repassword" required/>
-					</div><br><br>
+						<input type="password" name="repassword" id="repassword" required style="width: 95%"/>
+					</div><br>
+					<div class="g-recaptcha" data-sitekey="6LdUFqkUAAAAAM-cCdkMbEUcOkHi6KPJ5OFZAkC8"></div><br>
 					<div class="form-group">
 						<input type="submit" value="Đăng ký" id="cf_send"/>
 						<a href="login" style="float: right; margin-top: 20px; font-weight: bold; text-decoration: underline; color: blue">Đăng nhập</a>
@@ -226,14 +201,14 @@
 				</form>
 
 				<!-- Phần lựa chọn vai trò (subscriber, writer, editor,..) -->
-				<div id="sidebar" style="float: right; width: 75%">
+				<div id="sidebar" style="float: right; width: 69%">
 
 					<!-- Tabs lựa chọn vai trò -->
 					<div id="tabwidget" class="widget tab-container">
 						<ul id="tabnav" class="clearfix">
-							<li><h3><a href="#subscriber" data-toggle="tab" class="active"><img src="../images/subscriber.png">Độc giả</a></h3></li>
-							<li><h3><a href="#writter" data-toggle="tab"><img src="../images/writter.png" alt="Recent">Phóng viên</a></h3></li>
-							<li><h3><a href="#editor" data-toggle="tab"><img src="../images/editor.png" alt="Comments">Biên tập viên</a></h3></li>
+							<li><h3><a id="#subscriber" href="#subscriber" class="active" onclick="changeRole(this)"><img src="../images/subscriber.png">Độc giả</a></h3></li>
+							<li><h3><a id="#writter" href="#writter" onclick="changeRole(this)"><img src="../images/writter.png" alt="Recent">Phóng viên</a></h3></li>
+							<li><h3><a id="#editor" href="#editor" onclick="changeRole(this)"><img src="../images/editor.png" alt="Comments">Biên tập viên</a></h3></li>
 						</ul> 
 		
 					<div id="tab-content">
@@ -286,8 +261,8 @@
 									<img src="../images/dummy/name.png" class="thumb"/>
 									<div class="cform">
 										<br>
-										<form id="writterForm" method="dialog"  style="margin-left: 10px">
-											<input id="pseudonym" name="pseudonym" style="margin-top: 10px;" type="text" placeholder="Bút danh"/><br>
+										<form id="writterForm" method="dialog" style="margin-left: 10px">
+											<input id="pseudonymEdit" name="pseudonymEdit" style="margin-top: 10px;" type="text" placeholder="Bút danh"/><br>
 											<span style="color: red; visibility: hidden; font-size: 12px" id="invalidPseudonym">Bút danh này đã được sử dụng.</span>
 										</form>
 										<p style="color: blue">&nbsp;&nbsp;(i) <b>Vui lòng nhập bút danh của bạn</b></p>
@@ -305,16 +280,14 @@
 									<img src="../images/dummy/editor.jpg" style="margin: 20px; width: 25%; height: 25%"/>
 									<img src="../images/dummy/news.png" style="margin: 35px; width: 35%; height: 35%; float:right"/><br>
 									<div class="cform">
-										<label style="float: center" for="category">Cấp 1</label>
-										<select style="float: center" id="category" onchange="categoryChange(this)">
-											<option value="" selected disabled hidden>Chọn chuyên mục</option>
+										<label style="float: center" for="category">Chọn chuyên mục</label>
+										<select style="float: center" id="category">
+											{{#each categories}}
+											<option value="{{cateID}}">{{cateName}}</option>	
+											{{/each}}
 										</select>
-										<label style="margin-top: 20px" for="category2">Cấp 2</label>
-										<select id="category2">
-											<option value="" selected disabled hidden>Chọn chuyên mục</option>
-										</select><br><br>
-										<p style="color: blue">(i) <b>Vui lòng chọn chuyên mục phụ trách</b></p><br>
-										<p style="color: blue">(i) <b>Quản trị viên sẽ phân công thêm</b></p>
+										<p style="color: blue; width: 120%">(i) <b>Vui lòng chọn chuyên mục phụ trách</b></p>
+										<p style="color: blue; width: 120%">(i) <b>Quản trị viên sẽ phân công thêm</b></p>
 									</div><br><br>										
 									<div class="clearfix"></div>
 								</li>
