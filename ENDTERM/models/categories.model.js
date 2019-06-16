@@ -9,21 +9,39 @@ module.exports = {
     },
 
     all: () => {
-        return db.load(`select c.cateID, c.cateName, parentID, count(p.posID) as numbersOf from categories c left join posts p on c.cateID = p.cateID group by c.cateID, c.cateName`);
+        return db.load(
+            `select c.cateID as chilID, c.cateName as chilName, k.cateName as parentName, count(p.posID) as numbersOf
+        from categories c
+        left join categories k on c.parentID = k.cateID   
+        left join posts p on c.cateID = p.cateID group by c.cateID, c.cateName`
+        );
+    },
+
+    cateLevel1: id => {
+        return db.load(`select *
+        from categories c
+        where c.parentID is null and c.cateID != ${id}`);
     },
 
     single: id => {
-        return db.load(`select * from categories where cateID = ${id}`);
+        return db.load(`select c.cateID as chilID, c.cateName as chilName, k.cateName as parentName, k.cateID as parentID
+        from categories c
+        left join categories k on c.parentID = k.cateID
+        where c.cateID = ${id}
+       `);
     },
 
     allByCat: id => {
         return db.load(`select * from detailcategory where cateID = ${id}`);
     },
 
-    single: id => {
-        return db.load(`select * from categories where cateID = ${id}`);
+    update: entity => {
+        return db.update(`categories`, 'cateID', entity);
     },
 
+    delete: id => {
+        return db.delete(`categories`, `cateID`, id);
+    },
     // NghiaTQ
     singleWithChild: id => {
         return db.load(`SELECT child.cateName as child, parent.cateName as parent `
