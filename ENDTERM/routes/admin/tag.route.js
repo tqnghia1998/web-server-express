@@ -20,92 +20,53 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     var name = null;
     name = req.body.TagName;
-    if(name!="" && name!=null)
-    {
-        var entity = {
-            TagName: name
-        }
-        Model.add(entity).then(
-            id => {
-                console.log(id);
-                res.redirect('/admin/tag');
+    var entity = {
+        TagName: name
+    }
+    Model.add(entity).then(
+        id => {
+            console.log(id);
+            res.redirect('/admin/tag');
+        }).catch(error => {
+            var u = Model.all();
+            u.then(rows => {
+                console.log(rows);
+                res.render('page/admin/vwtags/tag', {
+                    layout: 'admin',
+                    tags: rows,
+                    alert: false,
+                    exist: true
+                });
             }).catch(error => {
-                var u = Model.all();
-                u.then(rows => {
-                    console.log(rows);
-                    res.render('page/admin/vwtags/tag', {
-                        layout: 'admin',
-                        tags: rows,
-                        alert: false,
-                        exist: true,
-                        empty: false
-                    });
-                }).catch(error => {
-                    console.log(error);
-                });
+                console.log(error);
             });
-    }
-    else{
-        var u = Model.all();
-                u.then(rows => {
-                    console.log(rows);
-                    res.render('page/admin/vwtags/tag', {
-                        layout: 'admin',
-                        tags: rows,
-                        alert: false,
-                        exist: false,
-                        empty: true
-                    });
-                }).catch(error => {
-                    console.log(error);
-                });
-    }
-    
-
+        });
 })
 
 router.post('/update/:id', (req, res) => {
     var name = null;
-    name = req.body.tagName;
-    if(name!="" && name!=null){
-        var entity = {
-            tagID: req.params.id,
-            tagName: name
-        }
-        Model.update(entity).then(
-            n => {
-                res.redirect('/admin/tag');
-            }).catch(error => {
-                var u = Model.all();
-                u.then(rows => {
-                    console.log(rows);
-                    res.render('page/admin/vwtags/tag', {
-                        layout: 'admin',
-                        tags: rows,
-                        alert: false,
-                        exist: true,
-                        empty: false
-                    });
-                }).catch(error => {
-                    console.log(error);
-                });
-            });
-    }else{
-        var u = Model.all();
-                u.then(rows => {
-                    console.log(rows);
-                    res.render('page/admin/vwtags/tag', {
-                        layout: 'admin',
-                        tags: rows,
-                        alert: false,
-                        exist: false,
-                        empty: true
-                    });
-                }).catch(error => {
-                    console.log(error);
-                });
+    name = req.body.TagNameUpdate;
+    var entity = {
+        tagID: req.params.id,
+        tagName: name
     }
-    
+    Model.update(entity).then(
+        n => {
+            res.redirect('/admin/tag');
+        }).catch(error => {
+            var u = Model.all();
+            u.then(rows => {
+                console.log(rows);
+                res.render('page/admin/vwtags/tag', {
+                    layout: 'admin',
+                    tags: rows,
+                    alert: false,
+                    exist: true
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+        });
 })
 
 router.post('/delete/:id', (req, res) => {

@@ -1,3 +1,32 @@
+<script type="text/javascript">
+
+    function validateForm() {
+        // Get form via form name:
+        var myForm = document.forms["myForm"];
+
+        var u = myForm["TagName"].value;
+
+        if (u == "") {
+            alert("Đừng để tên nhãn rỗng!");
+            myForm["TagName"].focus(); // Focus
+            return false;
+        }
+        return true;
+    }
+    function validateForm1() {
+        // Get form via form name:
+        var myForm = document.forms["myForm1"];
+
+        var u = myForm["TagNameUpdate"].value;
+
+        if (u == "") {
+            alert("Đừng để tên nhãn rỗng!");
+            myForm["TagNameUpdate"].focus(); // Focus
+            return false;
+        }
+        return true;
+    }
+</script>
 <div id="page-wrapper">
     <div class="container-fluid">
         <!-- Tiêu đề -->
@@ -17,13 +46,7 @@
         {{#if exist}}
         <div class="alert alert-danger alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Cảnh báo:</strong> Tên nhãn bạn thêm hoặc cập nhật đã tồn tại!
-        </div>
-        {{/if}}
-        {{#if empty}}
-        <div class="alert alert-danger alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Cảnh báo:</strong> Tên nhãn bạn thêm hoặc cập nhật rỗng!
+            <strong>Cảnh báo:</strong> Tên nhãn bạn nhập đã tồn tại!
         </div>
         {{/if}}
         <!-- Bảng quản lý -->
@@ -31,7 +54,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <form method="POST">
+                        <form name="myForm" method="POST" onsubmit = "return validateForm()">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Tên nhãn" id="txtTagName"
                                     name="TagName">
@@ -63,10 +86,10 @@
                                         <td>{{tagName}}</td>
                                         <td>{{numbersOf}}</td>
                                         <td>
-                                            <form method="POST" action="/admin/tag/update/{{tagID}}">
+                                            <form method="POST" action="/admin/tag/update/{{tagID}}" name="myForm1"  onsubmit = "return validateForm1()">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" value="{{tagName}}"
-                                                        id="txtTagName" name="tagName">
+                                                        id="txtTagName" name="TagNameUpdate">
                                                     <span class="input-group-btn" style="width:0;">
                                                         <button type="submit" class="btn btn-success">
                                                             Cập nhật
