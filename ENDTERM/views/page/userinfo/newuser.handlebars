@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Đăng nhập</title>
+        <title>Cập nhật thông tin</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -21,12 +21,23 @@
         <!-- Custom Fonts -->
         <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+	    <style>
+            .text-danger {
+                color: red;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <script type="text/javascript">
+            function checkData() {
+                var password = document.getElementById('password').value;
+                var repassword = document.getElementById('repassword').value;
+                if (password !== repassword) {
+                    alert("Mật khẩu không trùng nhau.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
     <body>
 
@@ -35,24 +46,25 @@
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Vui lòng cập nhật mật khẩu</h3>
+                            <h3 class="panel-title">Đặt mật khẩu</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <form role="form" action="newuser" method="POST" onsubmit="return checkData()">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Tài khoản" name="username" type="text" autofocus>
+                                        <input class="form-control" placeholder="Mật khẩu" name="password" id="password" type="password" autofocus required>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Mật khẩu" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Xác nhận mật khẩu" name="repassword" id="repassword" type="password" required>
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="remember" type="checkbox" value="Ghi nhớ">Ghi nhớ
-                                        </label>
+                                    <label>Chọn loại người dùng:</label>
+                                    <div class="checkbox" style="display: flex; justify-content: space-around">
+                                        <div><input type="radio" name="role" value="4" checked>&nbsp;&nbsp;Độc giả</div>
+                                        <div><input type="radio" name="role" value="3">&nbsp;&nbsp;Biên tập viên</div>
+                                        <div><input type="radio" name="role" value="2">&nbsp;&nbsp;Phóng viên</div>
                                     </div>
                                     <!-- TẠM THỜI CHUYỂN VỀ TRANG CHỦ -->
-                                    <a href="dashboard.html" class="btn btn-lg btn-success btn-block">Đăng nhập</a>
+                                    <input type="submit" class="btn btn-lg btn-success btn-block" value='Xác nhận'>
                                 </fieldset>
                             </form>
                         </div>
