@@ -175,6 +175,10 @@ router.post('/login', (req, res, next) => {
                 req.logOut();
                 return res.redirect('/allusers/login?messagecode=7');
             }
+            
+            if (user.Role == 1) {
+                return res.redirect('/admin/category');
+            }
             return res.redirect('/');
         })
     })(req, res, next);
@@ -343,8 +347,7 @@ router.get('/logout', (req, res, next) => {
 
 // Facebook zone
 router.get('/login/facebook', passport.authenticate('facebook', {scope: ['email']}));
-router.get('/login/facebook/callback',
-    passport.authenticate('facebook', {
+router.get('/login/facebook/callback', passport.authenticate('facebook', {
         successRedirect: '/allusers/newuser',
         failureRedirect: '/allusers/login?messagecode=9'
     })
@@ -352,9 +355,14 @@ router.get('/login/facebook/callback',
 router.get('/newuser', (req, res, next) => {
     if (!req.isAuthenticated()) return res.redirect('/allusers/login');
 
+    if (req.user.Role === 1) {
+        return res.redirect('/admin/category');
+    }
+
     if (req.user.Role !== 0) {
         return res.redirect('/');
     }
+
     res.render('page/userinfo/newuser', { layout: false });
 });
 router.post('/newuser', (req, res, next) => {
