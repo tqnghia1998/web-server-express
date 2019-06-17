@@ -19,9 +19,6 @@ app.get('/', function(req, res) {
 app.get('/admin', function(req, res) {
     res.render('page/admin/dashboard', {layout: 'admin'});
 })
-app.get('/admin/info', function(req, res) {
-    res.render('page/admin/info', {layout: 'admin'});
-})
 app.get('/admin/dashboard', function(req, res) {
     res.render('page/admin/dashboard', {layout: 'admin'});
 })
@@ -35,6 +32,7 @@ app.use('/admin/editor', require('./routes/admin/editor.route'));
 app.use('/admin/post', require('./routes/admin/post.route'));
 app.use('/admin/category', require('./routes/admin/category.route'));
 app.use('/admin/tag', require('./routes/admin/tag.route'));
+app.use('/admin/info', require('./routes/admin/admin.route'));
 app.use('/allusers', require('./routes/allusers/account.route'));
 app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 app.use('/writer', require('./routes/writer/writer.route'));

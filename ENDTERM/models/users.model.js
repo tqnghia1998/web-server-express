@@ -23,7 +23,7 @@ module.exports = {
         return db.load(`SELECT * FROM users WHERE userID = ${id}`);
     },
     singleAdmin: id => {
-        return db.load(`SELECT * FROM users WHERE userID = ${id} and Role = '1'`);
+        return db.load(`SELECT *, date_format(Birthday,"%d-%m-%Y") as formatBirthday FROM users WHERE userID = ${id} and Role = '1'`);
     },
     singleSubs: id => {
         return db.load(`SELECT * FROM subscribers WHERE userID = ${id}`);

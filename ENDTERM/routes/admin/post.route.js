@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
                 for (i = 0; i < rows.length; i++) {
                     var Day = rows[i].DayPublish;
                     Day.setMinutes(Day.getMinutes() - Day.getTimezoneOffset());
-                    if (Day.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10) || rows[i].Published) {
+                    if (Day.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) || rows[i].Published) {
                         rows[i].isPublished = true;
                     }
                     else rows[i].isPublished = false;

@@ -3,7 +3,53 @@
         <!-- Tiêu đề -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Thông tin tài khoản</h1>
+                <h1 class="page-header">Thông tin người quản lý</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <!-- Bảng quản lý độc giả -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <!-- /.panel-heading -->
+                    <div class="panel-heading">
+                        <div class="form-inline">
+                            <label for="txtuserID">ID </label>&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <input readonly type="text" class="form-control" value="{{this.users.userID}}"
+                                id="txtuserID"
+                                name="userID">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+                            <label for="txtuName">Họ và tên </label>&emsp;&emsp;&nbsp;  
+                            <input readonly type="text" class="form-control" value="{{this.users.uName}}"
+                                id="txtuName" name="uName">
+                        </div><br>
+                        <div class="form-inline">
+                            <label for="txtBirthday">Ngày sinh </label>&emsp;&nbsp;
+                            <input readonly type="text" class="form-control" value="{{this.users.formatBirthday}}"
+                                id="txtBirthday" name="Birthday">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <label for="txtEmail">Email </label>&emsp;&emsp;&emsp;&emsp;
+                            <input readonly type="text" class="form-control" value="{{this.users.Email}}"
+                                id="txtEmail" name="Email">
+                        </div>
+                        <br>
+                        <div class="form-inline">
+                            <label for="txtUsername">Username </label>&emsp;&nbsp;
+                            <input readonly type="text" class="form-control" value="{{this.users.Username}}"
+                                id="txtUsername" name="Username">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <label for="txtPassword">Password </label>&emsp;&emsp;
+                            <input readonly type="text" class="form-control" value="***********"
+                                id="txtPassword" name="Password">
+                        </div><br>
+                        <div>
+                            <a type="button" href="/userinfo/changepass" target="_blank"  class="btn btn-success">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                Đổi mật khẩu
+                            </a>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+                <!-- /.panel -->
             </div>
             <!-- /.col-lg-12 -->
         </div>
