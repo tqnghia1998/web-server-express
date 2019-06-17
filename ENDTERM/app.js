@@ -40,6 +40,7 @@ app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 app.use('/writer', require('./routes/writer/writer.route'));
 app.use('/', require('./routes/guest/guest.route'));
 app.use('/editor', require('./routes/editor/editor.route'));
+app.use('/post', require('./routes/post.route'));
 
 // Listen
 app.listen(3000, () => {

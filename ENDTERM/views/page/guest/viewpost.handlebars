@@ -1,0 +1,129 @@
+{{#section 'css'}}
+<style>
+    #divFivePost:hover {
+        cursor: pointer;
+        color: #6F9C26;
+        font-weight: bold;
+    }
+</style>
+{{/section}}
+
+<!-- Nội dung trang web -->
+<div id="content" class="container">
+
+
+    {{#if post.Premium}}
+    <div>
+        <img src="/images/favourites.png">
+    </div>
+    {{/if}}
+    <div style="display:flex">
+
+        <span style="width:70%; margin-right:2%">
+
+            <!-- Content Post -->
+            <div class="card" style="color: black; font-size: 18px; line-height: 25px;">
+
+                <h2 style="color: black; font-size: 28px;">{{post.Title}}</h2>
+                <p style="color: dimgray; font-size: 14px">{{post.DayWritten}}</p>
+                <p style="font-style: italic">{{post.Description}}</p>
+
+                <br>
+                <div style="font-size: 14px">
+                    {{{post.Content}}}
+                </div>
+
+
+                <p style="text-align:right;">
+                    <div style="font-size: 13px">Nhãn:
+                        {{#each tags}}
+                        <a>#{{tagName}}</a>&nbsp;
+                        {{/each}}
+                    </div>
+                </p>
+
+                <div style="display:flex; justify-content:flex-end">
+                    <strong>{{post.Pseudonym}}</strong>
+                </div>
+            </div>
+            <!-- Phần bình luận -->
+            <div style="color: black;">
+                <h3>BÌNH LUẬN</h3>
+
+                {{#if isLoggedIn}}
+                <div style="display: flex; margin-bottom:20px">
+                    <span style="width: 50px;">
+                        <img style="width: 40px; vertical-align: center; margin-right: 15px" src="../images/user.png" />
+                    </span>
+
+                    <span style="width: 100%">
+                        <form action="/post/comment/{{post.posID}}" method="post">
+                            <textarea id="comment" name="comment" placeholder="Nhập bình luận..." style="width: 100%"
+                                rows="2" onkeypress=""></textarea>
+                            </br>
+                            <button class="btn btn-success" type="submit" id="cf_send"
+                                style="padding: 0px; width: 80px; height:35px">Nhận
+                                xét</button>
+                        </form>
+                    </span>
+                </div>
+                {{else}}
+
+                <div style="display: flex; justify-content:center; margin-bottom:20px">
+                    <button class="btn btn-success" onclick="window.location='/allusers/login';">Hãy đăng nhập để tham
+                        gia bình luận</button>
+                </div>
+
+                {{/if}}
+                <div>
+                    <h4> {{numComment}} bình luận</h4>
+                </div>
+                {{#each comments}}
+                <div style="display: flex; margin-bottom:10px">
+                    <span style="width: 50px;">
+                        <img style="width: 40px; vertical-align: center; margin-right: 15px"
+                            src="../images/user1.png" />
+                    </span>
+
+                    <span style="width: 100%">
+                        <a>{{uName}}</a>
+                        <p>
+                            {{content}}
+                        </p>
+                        <p>
+                            <span>•&nbsp;{{datePost}}</span>
+                        </p>
+                    </span>
+                </div>
+                {{/each}}
+
+            </div>
+        </span>
+
+        <span style="width:28%">
+            <!-- 5 bài viết cùng chuyên mục -->
+            <div style="margin-bottom: 20px">
+                <hr style="border: 2px solid #6F9C26; background:#6F9C26;">
+                <p style="margin-top:-10px; color:#6F9C26; font-size:17px; font-weight:bold">BÀI VIẾT CÙNG CHUYÊN MỤC
+                </p>
+            </div>
+
+            {{#each fiveSameCate}}
+            <hr style="border: 1px solid rgb(178, 182, 171); background:#6F9C26; margin-top:5px">
+            <div onclick="window.location='/post/{{posID}}';" id="divFivePost"
+                style="display:flex; margin-top:5px; margin-bottom:10px">
+                <span style="width:38%">
+                    <img src="{{Url}}">
+                </span>
+                <span style="width:2%"></span>
+                <span style="width:60%; font-size:14px">
+                    {{Title}}
+                </span>
+            </div>
+            {{/each}}
+
+        </span>
+    </div>
+
+
+</div><!-- #content -->
