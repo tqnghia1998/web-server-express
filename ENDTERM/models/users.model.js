@@ -22,6 +22,9 @@ module.exports = {
     single: id => {
         return db.load(`SELECT * FROM users WHERE userID = ${id}`);
     },
+    singleAdmin: id => {
+        return db.load(`SELECT * FROM users WHERE userID = ${id} and Role = '1'`);
+    },
     singleSubs: id => {
         return db.load(`SELECT * FROM subscribers WHERE userID = ${id}`);
     },
