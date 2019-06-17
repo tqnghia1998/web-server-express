@@ -12,5 +12,4 @@ module.exports = {
     add: entity => {
         return db.add(`images`, entity);
     },
-
 }

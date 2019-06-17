@@ -74,6 +74,8 @@
                     </ul>
                 </div>
 
+                {{#if isNULL}}
+                {{else}}
                 <div id="tab-content" style="border: 0px; margin-top:0px">
 
                     <div id="tab" class="table-background" style="padding:10px; height:100%; display: block;">
@@ -125,7 +127,8 @@
                     </div>
 
 
-                </div>
+                </div>  
+                {{/if}}
 
 
             </div>

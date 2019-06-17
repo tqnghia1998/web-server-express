@@ -97,11 +97,14 @@
             
                 <div id="tab-content" style="border: 0px;">
 
+                    {{#if isNULL}}
+                    
+                    {{else}}
                     <div id="tab" class="table-background"
                         style="padding:10px;  height:100%; display: block;">
                         <h2 style="color: black; padding-top:10px; text-align:center">Danh sách bài đã được xuất bản</h2>
                         
-                    <section>
+                        <section>
                             <!--for demo wrap-->
 
                             <div class="tbl-header">
@@ -138,6 +141,7 @@
                         </section>
 
                     </div>
+                    {{/if}}
 
                 </div>
 

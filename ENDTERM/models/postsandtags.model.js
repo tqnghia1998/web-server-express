@@ -9,4 +9,8 @@ module.exports = {
     allByPost: id => {
         return db.load(`select * from postsandtags p join tags t on p.tagID = t.tagID where posID = ${id}`);
     },
+
+    deleteTagByPos: id => {
+        return db.delete('postsandtags', 'posID', id);
+    }
 }
