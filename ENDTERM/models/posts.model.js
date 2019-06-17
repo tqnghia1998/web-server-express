@@ -7,8 +7,13 @@ module.exports = {
     allbycate: () => {
         return db.load(`select *, date_format(DayPublish,"%d-%m-%Y") as datePublished from posts INNER JOIN categories ON posts.cateID = categories.cateID`);
     },
+
+    fiveByCate: cateID => {
+        return db.load(`SELECT * FROM baodientu16th.posts where cateID = ${cateID} LIMIT 0, 5`)
+    },
+
     single: id => {
-        return db.load(`select * from posts where posID = ${id}`);
+        return db.load(`select * from posts p join categories c on p.cateID = c.cateID join writers w on p.Writer = w.userID where posID = ${id}`);
     },
 
     add: entity => {

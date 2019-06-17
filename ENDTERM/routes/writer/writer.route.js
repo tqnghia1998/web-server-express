@@ -192,10 +192,10 @@ router.post('/post', upload.array('avatar', 1), (req, res, next) => {
         Additional: '',
         Published: 0,
         DayWritten: daywritten,
+        Url: fileinfo,
     }
 
     postModel.add(entity).then(idPost => {
-        imagesModel.add({posID: idPost, Url: fileinfo,}).then(rowsImage => {
             if (req.body.HiddenTag != "") {
                 var alltag = req.body.HiddenTag.split(';');
                 alltag.pop();
@@ -228,7 +228,6 @@ router.post('/post', upload.array('avatar', 1), (req, res, next) => {
                 }
             }
             res.redirect('/writer');
-        })
     }).catch(err => {
         console.log(err);
     })
