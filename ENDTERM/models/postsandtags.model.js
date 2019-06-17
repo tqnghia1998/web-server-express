@@ -12,5 +12,9 @@ module.exports = {
 
     deleteTagByPos: id => {
         return db.delete('postsandtags', 'posID', id);
+    },
+    
+    allByPostSync: id => {
+        return db.loadSync(`select * from postsandtags p join tags t on p.tagID = t.tagID where posID = ${id}`);
     }
 }

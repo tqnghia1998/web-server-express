@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Cập nhật thông tin</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="/css/metisMenu.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="/css/startmin.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	    <style>
+            .text-danger {
+                color: red;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <script type="text/javascript">
+            function checkData() {
+                var password = document.getElementById('password').value;
+                var repassword = document.getElementById('repassword').value;
+                if (password !== repassword) {
+                    alert("Mật khẩu không trùng nhau.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Đặt mật khẩu</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" action="newuser" method="POST" onsubmit="return checkData()">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Mật khẩu" name="password" id="password" type="password" autofocus required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Xác nhận mật khẩu" name="repassword" id="repassword" type="password" required>
+                                    </div>
+                                    <label>Chọn loại người dùng:</label>
+                                    <div class="checkbox" style="display: flex; justify-content: space-around">
+                                        <div><input type="radio" name="role" value="4" checked>&nbsp;&nbsp;Độc giả</div>
+                                        <div><input type="radio" name="role" value="3">&nbsp;&nbsp;Biên tập viên</div>
+                                        <div><input type="radio" name="role" value="2">&nbsp;&nbsp;Phóng viên</div>
+                                    </div>
+                                    <!-- TẠM THỜI CHUYỂN VỀ TRANG CHỦ -->
+                                    <input type="submit" class="btn btn-lg btn-success btn-block" value='Xác nhận'>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="../js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../js/metisMenu.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../js/startmin.js"></script>
+
+    </body>
+</html>

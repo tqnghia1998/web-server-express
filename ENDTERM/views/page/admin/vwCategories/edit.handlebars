@@ -1,0 +1,106 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    function validateForm() {
+        // Get form via form name:
+        var myForm = document.forms["myForm"];
+
+        var u = myForm["txtCateName"].value;
+
+        if (u == "") {
+            alert("Đừng để tên chuyên mục rỗng!");
+            myForm["txtCateName"].focus(); // Focus
+            return false;
+        }
+        return true;
+    }
+
+    $(document).ready(function () {
+        var usedNames = {};
+        $("select > option").each(function () {
+            if (usedNames[this.value]) {
+                $(this).remove();
+            } else {
+                usedNames[this.value] = this.text;
+            }
+        });
+    });
+</script>
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!-- Tiêu đề -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Chỉnh sửa chuyên mục</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        {{#if this.error}}
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Cảnh báo:</strong> Chuyên mục bạn nhập đã tồn tại!
+        </div>
+        <button type="button" onclick="location.href='/admin/category'" class="btn btn-primary">
+            <i class="fa fa-backward" aria-hidden="true"></i>
+            Trở lại
+        </button>
+        {{else}}
+        {{#if exist}}
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Cảnh báo:</strong> Tên chuyên mục bạn nhập đã tồn tại!
+        </div>
+        {{/if}}
+        <!-- Bảng quản lý -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <form name="myForm" method="POST" action="/admin/category/update"
+                            onsubmit="return validateForm()">
+                            <div>
+                                <label for="txtCateName">ID chuyên mục: </label>
+                                <input readonly type="text" class="form-control" value="{{this.categories.chilID}}"
+                                    id="txtCateID" name="cateID"><br>
+                                <label for="txtCateName">Tên chuyên mục: </label>
+                                <input type="text" class="form-control" value="{{this.categories.chilName}}"
+                                    id="txtCateName" autofocus name="cateName"><br>
+                                <label for="txtParentID">Chuyên mục mẹ: </label>
+                                <select class="form-control select1" id="txtparentID" name="parentID">
+                                    {{#if this.categories.parentID}}
+                                    <option value={{this.categories.parentID}}>{{this.categories.parentName}}</option>
+                                    {{/if}}
+                                    {{#each this.categoriesAdd}}
+                                    <option value="{{cateID}}">{{cateName}}</option>
+                                    {{/each}}
+                                    <option value={{null}}>-- Không --</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div>
+                                <button type="button" onclick="location.href='/admin/category'" class="btn btn-primary">
+                                    <i class="fa fa-backward" aria-hidden="true"></i>
+                                    Danh sách
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    Lưu
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    {{/if}}
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->

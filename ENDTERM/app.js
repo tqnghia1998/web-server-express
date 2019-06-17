@@ -1,4 +1,5 @@
 var express = require('express');
+// var morgan = require('morgan');
 var app = express();
 
 // Some initialization
@@ -13,9 +14,7 @@ app.use(require('./middlewares/locals.mdw'));
 
 // Some single route
 app.get('/', function(req, res) {
-    res.render('page/home', {
-        layout: 'main',
-    });
+    res.redirect('/index');
 })
 app.get('/admin', function(req, res) {
     res.render('page/admin/dashboard', {layout: 'admin'});
@@ -29,14 +28,6 @@ app.get('/admin/dashboard', function(req, res) {
 app.get('/admin/logout', function(req, res) {
     res.render('page/admin/logout', {layout: 'admin'});
 })
-
-app.get('/admin/tag', function(req, res) {
-    res.render('page/admin/tag', {layout: 'admin'});
-})
-app.get('/admin/category', function(req, res) {
-    res.render('page/admin/category', {layout: 'admin'});
-});
-
 // Some routes
 app.use('/admin/subscriber', require('./routes/admin/user.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
@@ -47,8 +38,10 @@ app.use('/admin/tag', require('./routes/admin/tag.route'));
 app.use('/allusers', require('./routes/allusers/account.route'));
 app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 app.use('/writer', require('./routes/writer/writer.route'));
+app.use('/', require('./routes/guest/guest.route'));
 app.use('/editor', require('./routes/editor/editor.route'));
+
 // Listen
-app.listen(3000, () =>{
-    console.log('server is running at http://localhost:3000/editor');
+app.listen(3000, () => {
+    console.log('server is running at http://localhost:3000/');
 })
