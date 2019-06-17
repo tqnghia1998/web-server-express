@@ -21,4 +21,8 @@ module.exports = {
     update: entity => {
         return db.update(`tags`, `tagID`, entity);
     },    
+
+    singleByName: tagName => {
+        return db.load(`select * from tags where tagName = '${tagName}'`);
+    }
 }

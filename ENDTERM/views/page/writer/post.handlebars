@@ -16,6 +16,17 @@
 <link rel="stylesheet" href="/css/writer-tag.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.0/css/fileinput.min.css" />
 
+<style>
+    #avatar:hover {
+        cursor: pointer;
+    }
+
+    #avatarthumbnail {
+        padding: 2px;
+        box-shadow: 4px;
+    }
+</style>
+
 {{/section}}
 
 {{#section 'js'}}
@@ -41,7 +52,7 @@
 <script type='text/javascript' src='/js/custom.js'></script>
 
 <script type="text/javascript" src="/js/index-writer.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
     tinymce.init({
         selector: '#Content',
@@ -52,19 +63,55 @@
         toolbar: [
             'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright',
             'forecolor backcolor',
-            'table link image media',
+            'table link image media | imageupload',
         ],
+        setup: function (editor) {
+            editor.ui.registry.addButton('imageupload', {
+                text: 'Insert Date',
+                tooltip: 'Insert Current Date',
+                onAction: function () {
+                    document.getElementById('uploadphoto').click();
+
+                    document.getElementById("uploadphoto").onchange = function (event) {
+                        var file_data = document.getElementById('uploadphoto').files[0];
+                        editor.insertContent('<img width="100%" class="content-img" src="/uploads/' + file_data.name + '"/>')
+                    }
+                }
+            });
+        }
     });
 </script>
+
+<script>
+
+    document.getElementById("avatar").onchange = function (event) {
+        // Where you will display your image
+
+        var preview = document.getElementById('avatarthumbnail');
+        // The button where the user chooses the local image to display
+        var file = document.getElementById('avatar').files[0];
+        // FileReader instance
+        var reader = new FileReader();
+
+        // When the image is loaded we will set it as source of
+        // our img tag
+        reader.onloadend = function () {
+            preview.src = this.result;
+        }
+        if (file) {
+            // Load image as a base64 encoded URI
+            reader.readAsDataURL(file);
+        }
+    }
+
+</script>
+
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 <script>
     var jQuery213 = jQuery.noConflict(true);
     jQuery213(document).ready(function () {
-
-
-
         // Đoạn code này dùng để add tag with close span
         jQuery213("#tag-typer").keypress(function (event) {
             var key = event.which;
@@ -109,19 +156,7 @@
 
 </script>
 
-<script>
-    window.addEventListener("load", function () {
-        document.getElementById("uploadphoto").onchange = function (event) {
-            var reader = new FileReader();
-            reader.readAsDataURL(event.srcElement.files[0]);
-            var me = this;
-            reader.onload = function () {
-                var fileContent = reader.result;
-                console.log(fileContent);
-            }
-        }
-    });
-</script>
+
 {{/section}}
 
 
@@ -159,27 +194,11 @@
 
                 <div id="tab" class="table-background" style="padding:10px; height:100%; display:block; ">
 
+                    <div style="margin-top:20px; display:none">
+                        <input accept="image/*" id="uploadphoto" name="uploadphoto" type="file">
+                    </div>
 
-                    <form method="POST" action="/writer/uploadimage" enctype="multipart/form-data" id="uploadImage">
-                        <div style="margin-top:20px; ">
-                            <label style="color:black;" for="uploadphoto">
-                                <p><b>Chọn ảnh tại đây...</b></p>
-                            </label>
-
-                            <input multiple accept="image/*" id="uploadphoto" name="uploadphoto"
-                                style="opacity: 0; position: absolute; z-index: -1;" type="file">
-                        </div>
-
-                        <div
-                            style="display:flex; justify-content: center; width: 100%; margin-top: 20px; height: 40px; ">
-                            <button type="submit" class="btn"
-                                style="width:100px; margin-left: 40px; text-align: center; padding: 0">Upload
-                                ảnh</button>
-                        </div>
-                    </form>
-
-
-                    <form method="POST" id="FormPost">
+                    <form method="POST" id="FormPost" enctype="multipart/form-data">
                         <div style="width: 100%">
                             <label style="color:black; padding-top: 55px" for="title">
                                 <p><b>Tiêu đề bài viết</b></p>
@@ -194,7 +213,7 @@
                         </div>
 
                         <div style="width: 100%">
-                            <label style="color:black; padding-top: 55px" for="Description">
+                            <label style="color:black; padding-top: 10px" for="Description">
                                 <p><b>Mô tả</b></p>
                             </label>
                             {{#if isUpdate}}
@@ -204,6 +223,21 @@
                             <input style="width: 60%" maxlength="250" id="Description" name="Description" type="text"
                                 placeholder="Nhập mô tả ngắn cho bài viết" />
                             {{/if}}
+                        </div>
+
+                        <div style="margin-top:20px">
+                            <label style="color:black;" for="avatar">
+                                <p><b>Chọn ảnh đại diện cho bài viết</b></p>
+                            </label>
+                            <div width="150px" height="150px">
+                                {{#if isUpdate}}
+                                <img id="avatarthumbnail" src="/images/thumbnail.png" alt="..." style="height:180px;">
+                                {{else}}
+                                <img id="avatarthumbnail" src="/images/thumbnail.png" alt="..." style="height:180px;">
+                                {{/if}}
+                                <input id="avatar" name="avatar" style="height:180px; width:180px; margin-left:-179px; opacity:0"
+                                    accept="image/*" type="file">
+                            </div>
                         </div>
 
                         <div id="standalone-container" style="margin-top:10px">
@@ -263,14 +297,14 @@
 
                             <button type="button" class="btn" style="width:100px; text-align: center;">Xoá nội
                                 dung</button>
-                                {{#if isUpdate}}
-                                <button onclick="window.location='writer/update/{{posID}}';" class="btn"
+                            {{#if isUpdate}}
+                            <button onclick="window.location='writer/update/{{posID}}';" class="btn"
                                 style="width:100px; margin-left: 40px; text-align: center; padding: 0">Cập nhật</button>
-                               
-                                {{else}}
+
+                            {{else}}
                             <button type="submit" class="btn"
                                 style="width:100px; margin-left: 40px; text-align: center; padding: 0">Đăng bài</button>
-                                {{/if}}
+                            {{/if}}
                         </div>
                     </form>
                 </div>

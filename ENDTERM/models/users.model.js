@@ -69,5 +69,10 @@ module.exports = {
     },
     updateEditor: entity => {
         return db.update(`editors`, 'userID', entity);
+    },
+
+    // Facebook
+    singleWithFacebook: facebookID => {
+        return db.load(`SELECT * FROM users WHERE FacebookID = '${facebookID}'`);
     }
 };

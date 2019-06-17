@@ -82,7 +82,8 @@
 
 			// Login & logout
 			area.innerHTML += "<li>{{#if isLoggedIn}}<a href='../allusers/logout'>Đăng xuất</a>{{else}}<a href='../allusers/login'>Đăng nhập</a>{{/if}}</li>"
-		});
+		
+			});
 	});
 	
 </script>
@@ -102,10 +103,10 @@
 			</div>
 		</div>
     	<nav class="navbar navbar-inverse clearfix nobot">
-			<a id="responsive-menu-button" href="index.html#swipe-menu">
+			<a id="responsive-menu-button" href="#swipe-menu">
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>		
+			  <span class="icon-bar"></span>
 			</a>
 
       		<div class="nav-collapse" id="swipe-menu-responsive">
@@ -125,9 +126,11 @@
 								</script>
 						</span>
 					</li>
+					
 					<li>
-						<a href="/"><img src="../images/home.png" alt="Magazine"></a>
+						<a href="/userinfo/general"><img src="../images/avatar.png" alt="Magazine"></a>
 					</li>
+
 				</ul>
 			</div><!--/.nav-collapse -->
 			

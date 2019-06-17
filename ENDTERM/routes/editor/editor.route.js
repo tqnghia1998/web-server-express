@@ -32,7 +32,7 @@ router.post('/approve', (req, res) => {
         var entity = rowsPost[0];
         entity.DayPublish = req.body.daypublish;
         entity.Approved = 1;
-        console.log(entity);
+        
         postsModel.update(entity).then(rowsPost => {
             res.redirect('/editor');
         })
@@ -44,11 +44,12 @@ router.post('/reject', (req, res) => {
     postsModel.single(req.body.posID2).then(rowsPost => {
         var entity = rowsPost[0];
         entity.Additional = req.body.Additional;
-        //console.log(entity);
         postsModel.update(entity).then(rowsPost => {
             res.redirect('/editor');
         })
     })
 })
+
+
 
 module.exports = router;

@@ -13,6 +13,10 @@ var bcrypt = require('bcrypt');
 router.get('/general', (req, res, next) => {
     if (!req.isAuthenticated()) return res.redirect('/allusers/login');
 
+    if (req.user.Role === 0) {
+        return res.redirect('/allusers/newuser');
+    }
+
     res.render('page/userinfo/general', {
         layout: 'main',
         user: req.user
@@ -140,6 +144,12 @@ router.get('/editor', (req, res, next) => {
             });
         }
         else {
+            if (req.user.Role === 3) {
+                return  res.render('page/userinfo/editor', {
+                    layout: 'main',
+                    listCate: []
+                });
+            }
             console.log("Error when open editor page: ", "User is not a editor");
             return res.redirect('/userinfo/general');
         }

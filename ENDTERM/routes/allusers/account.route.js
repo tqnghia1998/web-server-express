@@ -32,7 +32,7 @@ router.get('/register/is-available-lostpass', (req, res, next) => {
 });
 router.get('/register/is-pseudonym-available', (req, res, next) => {
 
-    userModel.singleByPseudonym(req.query.pseudonym).then(rows => {
+    userModel.singleByPseudonym(req.query.pseudonymEdit).then(rows => {
         if (rows.length > 0) {
             return res.json(false);
         }
@@ -150,6 +150,7 @@ router.get('/login', (req, res, next) => {
         case '6': message = "Đăng xuất thành công."; break;
         case '7': message = "Tài khoản của bạn đã bị vô hiệu hóa."; break;
         case '8': message = "Token đổi mật khẩu đã hết hạn."; break;
+        case '9': message = "Không thể kết nối với Facebook"; break;
     };
 
     res.render('page/allusers/login', {layout: 'main', message: message});
@@ -174,7 +175,11 @@ router.post('/login', (req, res, next) => {
                 req.logOut();
                 return res.redirect('/allusers/login?messagecode=7');
             }
-            return res.redirect('/userinfo/general');
+            
+            if (user.Role == 1) {
+                return res.redirect('/admin/category');
+            }
+            return res.redirect('/');
         })
     })(req, res, next);
 });
@@ -338,6 +343,77 @@ router.post('/restorepass', (req, res, next) => {
 router.get('/logout', (req, res, next) => {
     req.logOut();
     res.redirect('/allusers/login?messagecode=6');
+})
+
+// Facebook zone
+router.get('/login/facebook', passport.authenticate('facebook', {scope: ['email']}));
+router.get('/login/facebook/callback', passport.authenticate('facebook', {
+        successRedirect: '/allusers/newuser',
+        failureRedirect: '/allusers/login?messagecode=9'
+    })
+);
+router.get('/newuser', (req, res, next) => {
+    if (!req.isAuthenticated()) return res.redirect('/allusers/login');
+
+    if (req.user.Role === 1) {
+        return res.redirect('/admin/category');
+    }
+
+    if (req.user.Role !== 0) {
+        return res.redirect('/');
+    }
+
+    res.render('page/userinfo/newuser', { layout: false });
+});
+router.post('/newuser', (req, res, next) => {
+    if (!req.isAuthenticated()) return res.redirect('/allusers/login');
+
+    // Update user info
+    var saltRounds = 10;
+    var hash = bcrypt.hashSync(req.body.password, saltRounds);
+    var entity = {
+        userID: req.user.userID,
+        Password: hash,
+        Role: parseInt(req.body.role)
+    }
+    
+    userModel.update(entity).then(id => {
+        switch (entity.Role) {
+            case 1:
+                break;
+            case 2:
+                var writerEntity = {
+                    userID: req.user.userID,
+                    Pseudonym: req.user.Username
+                }
+                userModel.addWriter(writerEntity).then(id => {
+                    res.redirect('/userinfo/general');
+                }).catch(er => {
+                    console.log("Error when creating writer account: ", er);
+                    res.redirect('/userinfo/general');
+                });
+                break;
+            case 3:
+                res.redirect('/userinfo/general');
+                break;
+            case 4:
+                var subsEntity = {
+                    userID: req.user.userID,
+                    dateSubBegin: '2000-1-1',
+                    dateSubEnd: '2000-1-1'
+                }
+                userModel.addSubs(subsEntity).then(id => {
+                    res.redirect('/userinfo/general');
+                }).catch(er => {
+                    console.log("Error when creating subscriber account: ", er);
+                    res.redirect('/userinfo/general');
+                });
+                break;
+            }
+    }).catch(err => {
+        console.log("Error when updating information for new facebook user: ", err);
+        return res.redirect('/');
+    })
 })
 
 module.exports = router;
