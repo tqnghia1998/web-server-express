@@ -1,54 +1,69 @@
 var express = require('express');
 var Model = require('../../models/categories.model');
+var userModel = require('../../models/users.model');
 
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    var u = Model.cateForAdmin();
-    u.then(rows => {
-        res.render('page/admin/vwCategories/category', {
-            layout: 'admin',
-            categories: rows,
-            exist: false
-        });
-    }).catch(error => {
-        console.log(error);
-    });
-
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var u = Model.cateForAdmin();
+            u.then(rows => {
+                res.render('page/admin/vwCategories/category', {
+                    layout: 'admin',
+                    categories: rows,
+                    exist: false
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            res.end('PERMISSION DENIED');
+        }
+    } else {
+        res.end('PERMISSION DENIED');
+    }
 })
 
 
 router.get('/edit/:id', (req, res) => {
-    var id = req.params.id;
-    if (isNaN(id)) {
-        res.render('page/admin/vwCategories/edit', {
-            error: true
-        })
-    }
-    Model.viewOneCate(id).then(rows => {
-        if (rows.length > 0) {
-            var k = Model.cateLevel1(id);
-            k.then(parentRows => {
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var id = req.params.id;
+            if (isNaN(id)) {
                 res.render('page/admin/vwCategories/edit', {
-                    layout: 'admin',
-                    categories: rows[0],
-                    categoriesAdd: parentRows,
-                    error: false,
-                    exist: false
-                });
-            })
-        } else {
-            res.render('page/admin/vwCategories/edit', {
-                layout: 'admin',
-                error: true,
-                exist: false
+                    error: true
+                })
+            }
+            Model.viewOneCate(id).then(rows => {
+                if (rows.length > 0) {
+                    var k = Model.cateLevel1(id);
+                    k.then(parentRows => {
+                        res.render('page/admin/vwCategories/edit', {
+                            layout: 'admin',
+                            categories: rows[0],
+                            categoriesAdd: parentRows,
+                            error: false,
+                            exist: false
+                        });
+                    })
+                } else {
+                    res.render('page/admin/vwCategories/edit', {
+                        layout: 'admin',
+                        error: true,
+                        exist: false
+                    });
+                }
+            }).catch(error => {
+                console.log(error);
+                res.end('error in your id!');
             });
+        } else {
+            res.end('PERMISSION DENIED');
         }
-    }).catch(error => {
-        console.log(error);
-        res.end('error in your id!');
-    });
-
+    } else {
+        res.end('PERMISSION DENIED');
+    }
 })
 
 router.post('/update', (req, res) => {

@@ -4,26 +4,32 @@ var Model = require('../../models/posts.model');
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    var u = Model.allbycate();
-    u.then(rows => {
-        console.log(rows);
-        for (i = 0; i < rows.length; i++) {
-            var Day = rows[i].DayPublish;
-            Day.setMinutes(Day.getMinutes() - Day.getTimezoneOffset());
-            if (Day.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10) || rows[i].Published) {
-                rows[i].isPublished = true;
-            }
-            else rows[i].isPublished = false;
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var u = Model.allbycate();
+            u.then(rows => {
+                console.log(rows);
+                for (i = 0; i < rows.length; i++) {
+                    var Day = rows[i].DayPublish;
+                    Day.setMinutes(Day.getMinutes() - Day.getTimezoneOffset());
+                    if (Day.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10) || rows[i].Published) {
+                        rows[i].isPublished = true;
+                    }
+                    else rows[i].isPublished = false;
+                }
+                res.render('page/admin/vwposts/post', {
+                    layout: 'admin',
+                    posts: rows
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            res.end('PERMISSION DENIED');
         }
-        res.render('page/admin/vwposts/post', {
-            layout: 'admin',
-            posts: rows
-        });
-    }).catch(error => {
-        console.log(error);
-    });
-    //res.end('lafm bieesn quas')
-
+    } else {
+        res.end('PERMISSION DENIED');
+    }
 });
 
 router.post('/publish/:id', (req, res) => {

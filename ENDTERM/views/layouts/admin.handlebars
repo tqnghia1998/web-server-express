@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+        integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -68,15 +69,12 @@
             <ul class="nav navbar-right navbar-top-links">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> Trịnh Quang Nghĩa <b class="caret"></b>
+                        <i class="fa fa-user fa-fw"></i> ADMIN <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="/admin/info"><i class="fa fa-user fa-fw"></i> Thông tin tài khoản</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Cài đặt</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="/login"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                        <li><a href="/allusers/logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
                         </li>
                     </ul>
                 </li>
@@ -116,23 +114,23 @@
                                 <li>
                                     <a href="/admin/post">Quản lý bài viết</a>
                                 </li>
-                                <li>
-                                    <a href="#"><i class='fa fa-id-card fa-fw'></i> Quản lý người dùng<span
-                                         class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="/admin/subscriber">Người đăng kí</a>
-                                        </li>
-                                        <li>
-                                            <a href="/admin/writer">Phóng viên</a>
-                                        </li>
-                                        <li>
-                                            <a href="/admin/editor">Biên tập viên</a>
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class='fa fa-id-card fa-fw'></i> Quản lý người dùng<span
+                                    class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admin/subscriber">Người đăng kí</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/writer">Phóng viên</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/editor">Biên tập viên</a>
+                                </li>
+                            </ul>
                         </li>
                         <!-- Thông tin tài khoản -->
                         <li>
@@ -140,7 +138,7 @@
                         </li>
                         <!-- Đăng xuất -->
                         <li>
-                            <a href="/admin/logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                            <a href="/allusers/logout"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
                         </li>
                     </ul>
                 </div>

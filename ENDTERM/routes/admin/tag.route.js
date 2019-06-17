@@ -4,18 +4,26 @@ var Model = require('../../models/tags.model');
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    var u = Model.all();
-    u.then(rows => {
-        console.log(rows);
-        res.render('page/admin/vwtags/tag', {
-            layout: 'admin',
-            tags: rows,
-            alert: false,
-            exist: false
-        });
-    }).catch(error => {
-        console.log(error);
-    });
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var u = Model.all();
+            u.then(rows => {
+                console.log(rows);
+                res.render('page/admin/vwtags/tag', {
+                    layout: 'admin',
+                    tags: rows,
+                    alert: false,
+                    exist: false
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            res.end('PERMISSION DENIED');
+        }
+    } else {
+        res.end('PERMISSION DENIED');
+    }
 })
 router.post('/add', (req, res) => {
     var name = null;
