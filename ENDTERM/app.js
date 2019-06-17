@@ -29,7 +29,7 @@ app.get('/admin/logout', function(req, res) {
     res.render('page/admin/logout', {layout: 'admin'});
 })
 // Some routes
-app.use('/admin/subscriber', require('./routes/admin/user.route'));
+app.use('/admin/subscriber', require('./routes/admin/subscriber.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
 app.use('/admin/editor', require('./routes/admin/editor.route'));
 app.use('/admin/post', require('./routes/admin/post.route'));

@@ -1,0 +1,71 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!-- Tiêu đề -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Chi tiết độc giả</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <!-- Bảng quản lý độc giả -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <!-- /.panel-heading -->
+                    <div class="panel-heading">
+                        <form name="myForm" method="POST" action="/admin/subscriber/renew">
+                            <div class="form-inline">
+                                <label for="txtuserID">ID độc giả </label>&emsp;&emsp;&emsp;
+                                <input readonly type="text" class="form-control" value="{{this.subscribers.userID}}"
+                                    id="txtuserID"
+                                    name="userID">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+                                <label for="txtuName">Tên độc giả </label>&emsp;&emsp;&nbsp;
+                                <input readonly type="text" class="form-control" value="{{this.subscribers.uName}}"
+                                    id="txtuName" name="uName">
+                            </div><br>
+                            <div class="form-inline">
+                                <label for="txtBirthday">Ngày sinh </label>&emsp;&emsp;&emsp;
+                                <input readonly type="text" class="form-control"
+                                    value="{{this.subscribers.formatBirthday}}" id="txtBirthday"
+                                    name="Birthday">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                <label for="txtEmail">Email </label>&emsp;&emsp;&emsp;&emsp;&emsp;
+                                <input readonly type="text" class="form-control" value="{{this.subscribers.Email}}"
+                                    id="txtEmail" name="Email">
+                            </div><br>
+                            <div class="form-inline">
+                                <label for="txtDayBegin">Ngày đăng kí </label>&emsp;&nbsp;&nbsp;
+                                <input readonly type="text" class="form-control" value="{{this.subscribers.dateBegin}}"
+                                    id="txtDayBegin" name="DayBegin">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                <label for="txtDayEnd">Ngày hết hạn </label>&emsp;&nbsp;
+                                <input readonly type="text" class="form-control" value="{{this.subscribers.dateEnd}}"
+                                    id="txtDayEnd" name="DayEnd">&emsp;
+                                <select class="form-control" id="txtRenewed" name="Renewed">
+                                    <option value="7">1 Tuần</option>
+                                    <option value="14">2 Tuần</option>
+                                    <option value="21">3 Tuần</option>
+                                    <option value="28">4 Tuần</option>
+                                </select>
+                                <button type="submit" class="btn btn-success">
+                                    Gia hạn
+                                </button>
+                            </div>
+                        </form>
+                        <br>
+                        <div>
+                            <button type="button" onclick="location.href='/admin/subscriber'" class="btn btn-primary">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                Danh sách
+                            </button>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->

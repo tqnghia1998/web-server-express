@@ -3,16 +3,14 @@
         <!-- Tiêu đề -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Quản lý người dùng</h1>
+                <h1 class="page-header">Quản lý phóng viên</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
-
-        <!-- Bảng quản lý độc giả -->
+        <!-- Bảng quản lý phóng viên -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Danh sách độc giả</div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -21,9 +19,9 @@
                                     <tr>
                                         <th width='5%'>STT</th>
                                         <th width='20%'>Họ tên</th>
+                                        <th width='14%'>Bút danh</th>
+                                        <th width='13%'>Ngày sinh</th>
                                         <th width='13%'>Email</th>
-                                        <th width='13%'>Ngày đăng kí</th>
-                                        <th width='13%'>Ngày hết hạn</th>
                                         <th width='15%'>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -32,16 +30,25 @@
                                     <tr>
                                         <td>{{@key}}</td>
                                         <td>{{uName}}</td>
+                                        <td>{{Pseudonym}}</td>
+                                        <td>{{formatBirthday}}</td>
                                         <td>{{Email}}</td>
-                                        <td>{{dateBegin}}</td>
-                                        <td>{{dateEnd}}</td>
                                         <td>
-                                            <button class="fa fa-eye fa-fw thaotacButton" title="Xem chi tiết"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-plus-square-o fa-fw thaotacButton" title="Gia hạn thêm"
-                                                data-toggle="tooltip"></button>
-                                            <button class="fa fa-toggle-off fa-fw thaotacButton" title="Vô hiệu hóa"
-                                                data-toggle="tooltip"></button>
+                                            <form method="POST">
+                                                <button type="button" class="fa fa-eye fa-fw thaotacButton"
+                                                    title="Xem chi tiết"
+                                                    onclick="location.href='/admin/writer/detail/{{userID}}'"
+                                                    data-toggle="tooltip"></button>
+                                                {{#if Actived}}
+                                                <button type="submit" class="fa fa-toggle-on fa-fw thaotacButton"
+                                                    formaction="/admin/writer/disable/{{userID}}"
+                                                    title="Đang kích hoạt" data-toggle="tooltip"></button>
+                                                {{else}}
+                                                <button type="submit" class="fa fa-toggle-off fa-fw thaotacButton"
+                                                    title="Bị hiệu hóa" formaction="/admin/writer/enable/{{userID}}"
+                                                    data-toggle="tooltip"></button>
+                                                {{/if}}
+                                            </form>
                                         </td>
                                     </tr>
                                     {{/each}}
