@@ -25,6 +25,11 @@
 								</br><br><span style="color: rgb(82, 82, 82)">
 									<b> Chuyên mục:</b> {{cateName}}</br>
 									<b> Ngày đăng:</b> {{datePublished}}</br>
+									{{#if Premium}}
+									<div>
+										<img src="/images/favourites.png">
+									</div>
+									{{/if}}
 									{{!-- <b> Nhãn:</b>
 									{{#each tags}}
 									<i><a href="../tag/{{tagName}}">{{tagName}}</a></i>&nbsp;
