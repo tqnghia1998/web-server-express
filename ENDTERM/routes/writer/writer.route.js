@@ -18,11 +18,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-router.post('/uploadimage', upload.array('avatar'), (req, res, next) => {
-    var fileinfo = req.body.files;
-    console.log(fileinfo);
-})
-
 //Đã duyệt - chờ xuất bản
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
@@ -123,7 +118,7 @@ router.get('/waiting', (req, res) => {
 // Bị từ chối
 router.get('/rejected', (req, res) => {
     if (req.isAuthenticated()) {
-        var p = userModel.singleEditor(req.user.userID);
+        var p = userModel.singleWriter(req.user.userID);
         p.then(rows => {
             if (rows.length === 0) {
                 res.redirect('/');
@@ -272,8 +267,8 @@ router.get('/update/:id', (req, res) => {
 })
 
 // Sửa bài
-router.post('/update/:id', (req, res, next) => {
-
+router.post('/update/:id', upload.array('avatar', 1),  (req, res, next) => {
+    var fileinfo = '/uploads/' + req.files[0].filename;
     var posID = req.params.id;
 
     var premium = false;
@@ -293,7 +288,7 @@ router.post('/update/:id', (req, res, next) => {
         rowsPost[0].Writer = req.user.userID;
         rowsPost[0].Premium = premium;
         rowsPost[0].DayWritten = daywritten;
-
+        rowsPost[0].Url = fileinfo;
         postModel.update(rowsPost[0]).then(rowsChage => {
             postsandtagsModel.deleteTagByPos(posID).then(() => {
                 if (req.body.HiddenTag != "") {

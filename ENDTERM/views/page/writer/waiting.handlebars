@@ -104,17 +104,14 @@
                                     <tbody>
                                         {{#each this.posts}}
                                         <tr>
-                                            <td onclick="window.location='/views/{{posID}}';"  style="width:3%">#</td>
-                                            <td onclick="window.location='/views/{{posID}}';" style="width:25%">{{Title}}</td>
-                                            <td onclick="window.location='/views/{{posID}}';"  style="width:16%">Ảnh</td>
-                                            <td onclick="window.location='/views/{{posID}}';"  style="width:30%">{{Description}}</td>
-                                            <td onclick="window.location='/views/{{posID}}';"  style="width:9%">{{cateName}}</td>
-                                            <td onclick="window.location='/views/{{posID}}';"  style="width:8%">{{DayWrittenFormat}}</td>
+                                            <td onclick="window.location='/post/{{posID}}';"  style="width:3%">#</td>
+                                            <td onclick="window.location='/post/{{posID}}';" style="width:25%">{{Title}}</td>
+                                            <td onclick="window.location='/post/{{posID}}';"  style="width:16%"><img src="{{Url}}" style="height: 80px"></td>
+                                            <td onclick="window.location='/post/{{posID}}';"  style="width:30%">{{Description}}</td>
+                                            <td onclick="window.location='/post/{{posID}}';"  style="width:9%">{{cateName}}</td>
+                                            <td onclick="window.location='/post/{{posID}}';"  style="width:8%">{{DayWrittenFormat}}</td>
                                             <td style="width:9%">
                                                 <button onclick="window.location='/writer/update/{{posID}}';" class="thaotacButton" title="Chỉnh sửa bài viết"
-                                                    data-toggle="tooltip"><img
-                                                        src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
-                                                <button class="thaotacButton" title="Xoá bài viết"
                                                     data-toggle="tooltip"><img
                                                         src="https://img.icons8.com/nolan/19/000000/edit.png"></button>
                                             </td>
