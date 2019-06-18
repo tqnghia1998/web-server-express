@@ -70,6 +70,18 @@ module.exports = {
             + `ON postsandtags.tagID = tags.tagID AND tags.tagName = '${tagName}'`
         return db.load(sqlQuery);
     },
+
+    countPostByKey: (keyWord)=>{
+        var sqlQuery = `select count(*) as numbers from posts where match(Title, Description, Content) against ('${keyWord}')`
+        return db.load(sqlQuery);
+    },
+
+    getPostByKey: (keyWord)=>{
+        var sqlQuery = `select *, date_format(DayPublish,"%d-%m-%Y") as datePublished from posts
+        INNER JOIN categories ON posts.cateID = categories.cateID
+        where match(Title, Description, Content) against ('${keyWord}')`
+        return db.load(sqlQuery);
+    },
     postsByCate: (cateID, limit, offset) => {
         var sqlQuery = `SELECT posID, Title, DayPublish, Description, child.cateName as child, parent.cateName as parent `
             + `FROM posts INNER JOIN categories as child ON posts.cateID IN ( `

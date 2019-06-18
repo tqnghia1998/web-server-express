@@ -12,7 +12,7 @@ router.get('/index', (req, res, next) => {
     var mostViewed;
     var mostRecent;
     var topCategories;
-    
+
     // Get monday
     var prevMonday = new Date();
     prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
@@ -112,9 +112,9 @@ router.get('/category/:cateid', (req, res, next) => {
                     return res.render('page/guest/category', {
                         layout: 'main',
                         cateName: cate[0].cateName.toUpperCase()
-                    }); 
+                    });
                 }
-        
+
                 // Get tags of each post
                 for (var i = 0; i < length; i++) {
                     rows[i].cateName = (rows[i].parent == null ? "" : rows[i].parent + " / ") + rows[i].child;
@@ -136,7 +136,7 @@ router.get('/category/:cateid', (req, res, next) => {
                                 pages: pages,
                                 previousPage: previousPage,
                                 nextPage: nextPage
-                            }); 
+                            });
                         }
                     })
                 }
@@ -191,9 +191,9 @@ router.get('/tag/:tagname', (req, res, next) => {
                 return res.render('page/guest/tag', {
                     layout: 'main',
                     tagName: tagName
-                }); 
+                });
             }
-    
+
             // Get tags of each post
             for (var i = 0; i < length; i++) {
                 rows[i].cateName = (rows[i].parent == null ? "" : rows[i].parent + " / ") + rows[i].child;
@@ -215,7 +215,7 @@ router.get('/tag/:tagname', (req, res, next) => {
                             pages: pages,
                             previousPage: previousPage,
                             nextPage: nextPage
-                        }); 
+                        });
                     }
                 })
             }
@@ -225,6 +225,29 @@ router.get('/tag/:tagname', (req, res, next) => {
         })
     }).catch(err => {
         console.log("Error when getting tag: ", err);
+    })
+})
+router.post('/search', (req, res) => {
+    var keyWord = req.body.keyWord;
+    console.log(keyWord);
+    if (keyWord == null) {
+        return res.redirect('/');
+    }
+    postsModel.countPostByKey(keyWord).then(n => {
+        var number = n[0].numbers;
+        console.log(number);
+        postsModel.getPostByKey(keyWord).then(rows => {
+                console.log(rows);
+                res.render('page/guest/viewResultSearch', {
+                    layout: 'main',
+                    key: keyWord,
+                    data: rows,
+                    numbers: number
+                })
+        })
+    }).catch(error => {
+        console.log(error);
+        res.redirect('/');
     })
 });
 

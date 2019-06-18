@@ -151,9 +151,8 @@
 		
 			<div class="search span3">
 				<div class="offset1">
-					<form method="get" id="searchform" action="viewResultSearch.html#">
-						<p><input href="viewResultSearch.html" type="text" value="Tìm kiếm tin..." onfocus="if ( this.value == 'Tìm kiếm tin...' ) { this.value = ''; }" onblur="if ( this.value == '' ) { this.value = 'Tìm kiếm tin...'; }" name="s" id="s" />
-						<!-- <input href="viewResultSearch.html" type="submit" id="searchsubmit" value="Search" /></p> -->
+					<form method="POST" action="/search">
+						<p><input type="text" value="Tìm kiếm tin..." onfocus="if ( this.value == 'Tìm kiếm tin...' ) { this.value = ''; }" onblur="if ( this.value == '' ) { this.value = 'Tìm kiếm tin...'; }" name="keyWord" id="txtkeyWord" />
 					</form>
 				</div>
 			</div>
