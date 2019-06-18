@@ -72,10 +72,13 @@ module.exports = {
     },
 
     countPostByKey: (keyWord) => {
-        var sqlQuery = `select count(*) as numbers from posts where match(Title, Description, Content) against ('${keyWord}')
-        or Title like '%${keyWord}%'
-        or Description like '%${keyWord}%'
-        or Content like '%${keyWord}%'`
+        var sqlQuery = `select count(*) as numbers from posts 
+        where
+        (match(Title, Description, Content) against ('${keyWord}')
+            or Title like '%${keyWord}%'
+            or Description like '%${keyWord}%'
+            or Content like '%${keyWord}%')
+        and Approved = '1'`
         return db.load(sqlQuery);
     },
 
