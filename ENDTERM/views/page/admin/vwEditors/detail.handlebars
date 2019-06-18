@@ -1,0 +1,78 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!-- Tiêu đề -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Chi tiết biên tập viên</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <!-- Bảng quản lý độc giả -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <!-- /.panel-heading -->
+                    <div class="panel-heading">
+                        <form name="myForm" method="POST" action="/admin/editor/assign">
+                            <div class="form-inline">
+                                <label for="txtuserID">ID độc giả: </label>&emsp;&emsp;&emsp;
+                                <input readonly type="text" class="form-control" value="{{this.Editors.userID}}"
+                                    id="txtuserID"
+                                    name="userID">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+                                <label for="txtuName">Tên độc giả: </label>&emsp;&emsp;&nbsp;
+                                <input readonly type="text" class="form-control" value="{{this.Editors.uName}}"
+                                    id="txtuName" name="uName">
+                            </div><br>
+                            <div class="form-inline">
+                                <label for="txtBirthday">Ngày sinh: </label>&emsp;&emsp;&emsp;
+                                <input readonly type="text" class="form-control" value="{{this.Editors.formatBirthday}}"
+                                    id="txtBirthday" name="Birthday">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                <label for="txtEmail">Email: </label>&emsp;&emsp;&emsp;&emsp;&emsp;
+                                <input readonly type="text" class="form-control" value="{{this.Editors.Email}}"
+                                    id="txtEmail" name="Email">
+                            </div><br>
+                            <div>
+                                <label>Chuyên mục quản lý: </label><br>
+                                <ul class="list-group">
+                                    {{#each this.CateOfEditor}}
+                                    <li class="list-group-item">
+                                        <button class="fa fa-remove fa-fw thaotacButton"
+                                            onclick="return confirm('Bạn thực sự muốn xóa chuyên mục này?')" title="Xóa"
+                                            formaction="/admin/editor/delete/{{cateID}}" type="sumit"
+                                            data-toggle="tooltip"></button>
+                                        {{cateName}}
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </div><br>
+                            <div class="form-inline">
+                                <label>Phân công thêm: </label>&emsp;&nbsp;
+                                <select class="form-control" id="txtAssigned" name="Assigned">
+                                    {{#each this.CateForEditor}}
+                                    <option value="{{cateID}}">{{cateName}}</option>
+                                    {{/each}}
+                                </select>
+                                <button type="submit" class="btn btn-success">
+                                    Phân công
+                                </button>
+                            </div>
+                        </form>
+                        <br>
+                        <div>
+                            <button type="button" onclick="location.href='/admin/editor'" class="btn btn-primary">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                Danh sách
+                            </button>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->

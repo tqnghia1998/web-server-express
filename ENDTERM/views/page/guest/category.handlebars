@@ -5,6 +5,9 @@
 		<!-- Content Post -->
 		<h3 style="background-color: #3D4C54"><span>
 				<font color="white">&nbsp;&nbsp;&nbsp;&nbsp;{{cateName}}</font>
+				<font style="float: right; padding-right: 30px" color="white">
+					{{total}} bài viết
+				</font>
 			</span></h3>
 		<ul style="list-style: none;">
 			{{#each data}}
@@ -12,18 +15,21 @@
 				<table style="width: 100%; margin-top: 20px">
 					<tr>
 						<td style="width: 30%; padding: 10px">
-							<a class="image_thumb_zoom" href="#"><img class="ImageListNew"
-									src="../images/PhotoOfNews/MainNew1.jpg" /></a>
+							<a class="image_thumb_zoom" href="/post/{{posID}}"><img class="ImageListNew"
+									src="{{Url}}" /></a>
 						</td>
 						<td style="vertical-align: text-top;">
-							<h4 class="post-title"><a style="font-size: 20px" href="#l">{{Title}}</a></h4>
+							<h4 class="post-title"><a style="font-size: 20px" href="/post/{{posID}}">{{Title}}</a>
+							{{#if Premium}}
+								<img src="/images/favourites.png" style="width: 80px; margin-bottom: 8px">
+							{{/if}}</h4>
 							<p><span style="font-size: 15px">{{Description}}</span>
 								</br><br><span style="color: rgb(82, 82, 82)">
-									<b> Chuyên mục:</b> {{cateName}}</br>
+									<b> Chuyên mục:</b><a href="/category/{{cateID}}"> {{cateName}}</a></br>
 									<b> Ngày đăng:</b> {{DayPublish}}</br>
                                     <b> Nhãn:</b>
 									{{#each tags}}
-									<i><a href="../tag/{{tagName}}">{{tagName}}</a></i>&nbsp;
+									<a href="../tag/{{tagName}}">#{{tagName}}</a>&nbsp;
 									{{/each}}</span>
 							</p>
 						</td>

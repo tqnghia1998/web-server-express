@@ -4,9 +4,10 @@
 		<div class="clearfix"></div>
 		<!-- Content Post -->
 		<h3 style="background-color: #3D4C54"><span>
-				<font color="white">&nbsp;&nbsp;&nbsp;&nbsp;<normal>Danh sách bài viết chứ nhãn: <i>'{{tagName}}'</i></font>
+				<font color="white">&nbsp;&nbsp;&nbsp;&nbsp;Tìm kiếm với từ khóa: "{{key}}"
+				</font>
 				<font style="float: right; padding-right: 30px" color="white">
-					{{total}} bài viết
+					{{numbers}} kết quả
 				</font>
 			</span></h3>
 		<ul style="list-style: none;">
@@ -22,12 +23,17 @@
 							<h4 class="post-title"><a style="font-size: 20px" href="/post/{{posID}}">{{Title}} </a></h4>
 							<p><span style="font-size: 15px">{{Description}}</span>
 								</br><br><span style="color: rgb(82, 82, 82)">
-									<b> Chuyên mục:</b><a href="/category/{{cateID}}"> {{cateName}}</a></br>
-									<b> Ngày đăng:</b> {{DayPublish}}</br>
-                                    <b> Nhãn:</b>
+									<b> Chuyên mục:</b> {{cateName}}</br>
+									<b> Ngày đăng:</b> {{datePublished}}</br>
+									{{#if Premium}}
+									<div>
+										<img src="/images/favourites.png">
+									</div>
+									{{/if}}
+									{{!-- <b> Nhãn:</b>
 									{{#each tags}}
-									<a href="../tag/{{tagName}}">#{{tagName}}</a>&nbsp;
-									{{/each}}</span>
+									<i><a href="../tag/{{tagName}}">{{tagName}}</a></i>&nbsp;
+									{{/each}}</span> --}}
 							</p>
 						</td>
 					</tr>
@@ -35,19 +41,5 @@
 			</li>
 			{{/each}}
 		</ul>
-		<center>
-			<div class="pagination" style="font-size: 18px">
-				<a href="?page={{previousPage}}">&laquo;</a>
-				{{#each this.pages}}
-				{{#if active}}
-				<a href="?page={{value}}" class="active" style="color: green"><b><u>{{value}}</u></b></a>
-				{{else}}
-				<a href="?page={{value}}">{{value}}</a>
-				{{/if}}
-				{{/each}}
-				<a href="?page={{nextPage}}">&raquo;</a>
-			</div>
-		</center>
-		<!-- Content Post -->
 	</div><!-- #main -->
 </div><!-- #content -->

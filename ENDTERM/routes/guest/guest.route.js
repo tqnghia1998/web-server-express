@@ -12,7 +12,7 @@ router.get('/index', (req, res, next) => {
     var mostViewed;
     var mostRecent;
     var topCategories;
-    
+
     // Get monday
     var prevMonday = new Date();
     prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
@@ -105,16 +105,20 @@ router.get('/category/:cateid', (req, res, next) => {
             }
 
             // Get post of that cate
-            postsModel.postsByCate(cateID, limit, offset).then(rows => {
+            var userRole = 0;
+            if (req.user != null) {
+                userRole = req.user.Role;
+            }
+            postsModel.postsByCate(cateID, limit, offset, userRole == 4).then(rows => {
                 var countTime = 0;
                 var length = rows.length;
                 if (length === 0) {
                     return res.render('page/guest/category', {
                         layout: 'main',
                         cateName: cate[0].cateName.toUpperCase()
-                    }); 
+                    });
                 }
-        
+
                 // Get tags of each post
                 for (var i = 0; i < length; i++) {
                     rows[i].cateName = (rows[i].parent == null ? "" : rows[i].parent + " / ") + rows[i].child;
@@ -135,8 +139,9 @@ router.get('/category/:cateid', (req, res, next) => {
                                 cateName: cate[0].cateName.toUpperCase(),
                                 pages: pages,
                                 previousPage: previousPage,
-                                nextPage: nextPage
-                            }); 
+                                nextPage: nextPage,
+                                total: total
+                            });
                         }
                     })
                 }
@@ -184,16 +189,20 @@ router.get('/tag/:tagname', (req, res, next) => {
         }
 
         // Get post contains that tag
-        postsModel.postsByTag(tagName, limit, offset).then(rows => {
+        var userRole = 0;
+        if (req.user != null) {
+            userRole = req.user.Role;
+        }
+        postsModel.postsByTag(tagName, limit, offset, userRole == 4).then(rows => {
             var countTime = 0;
             var length = rows.length;
             if (length === 0) {
                 return res.render('page/guest/tag', {
                     layout: 'main',
                     tagName: tagName
-                }); 
+                });
             }
-    
+
             // Get tags of each post
             for (var i = 0; i < length; i++) {
                 rows[i].cateName = (rows[i].parent == null ? "" : rows[i].parent + " / ") + rows[i].child;
@@ -214,8 +223,9 @@ router.get('/tag/:tagname', (req, res, next) => {
                             tagName: tagName,
                             pages: pages,
                             previousPage: previousPage,
-                            nextPage: nextPage
-                        }); 
+                            nextPage: nextPage,
+                            total: total
+                        });
                     }
                 })
             }
@@ -225,6 +235,35 @@ router.get('/tag/:tagname', (req, res, next) => {
         })
     }).catch(err => {
         console.log("Error when getting tag: ", err);
+    })
+})
+router.post('/search', (req, res) => {
+    var keyWord = req.body.keyWord;
+    console.log(keyWord);
+    if (keyWord == null) {
+        return res.redirect('/');
+    }
+    postsModel.countPostByKey(keyWord).then(n => {
+        var number = n[0].numbers;
+        var  isSubs = false;
+        console.log(number);
+        if (req.isAuthenticated()) {
+            if (req.user.Role == 4) {
+                isSubs= true;
+            }
+        }
+        postsModel.getPostByKey(keyWord, isSubs).then(rows => {
+                console.log(rows);
+                res.render('page/guest/viewResultSearch', {
+                    layout: 'main',
+                    key: keyWord,
+                    data: rows,
+                    numbers: number
+                })
+        })
+    }).catch(error => {
+        console.log(error);
+        res.redirect('/');
     })
 });
 

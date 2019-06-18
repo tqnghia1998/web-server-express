@@ -2,17 +2,18 @@ var express = require('express');
 var Model = require('../../models/users.model');
 
 var router = express.Router();
-
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
         if (req.user.Role == 1) {
-            var u = Model.allSubs();
-            u.then(rows => {
-                console.log(rows);
-                res.render('page/admin/subscriber', {
-                    layout: 'admin',
-                    users: rows
-                });
+            console.log(req.user);
+            Model.singleAdmin(req.user.userID).then(rows=>{
+                if(rows.length>0){
+                    console.log(rows);
+                    res.render('page/admin/info', {
+                        layout: 'admin',
+                        users: rows[0]
+                    });
+                }
             }).catch(error => {
                 console.log(error);
             });
@@ -22,6 +23,5 @@ router.get('/', (req, res) => {
     } else {
         res.end('PERMISSION DENIED');
     }
-
 })
 module.exports = router;

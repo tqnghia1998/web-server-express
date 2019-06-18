@@ -19,9 +19,6 @@ app.get('/', function(req, res) {
 app.get('/admin', function(req, res) {
     res.render('page/admin/dashboard', {layout: 'admin'});
 })
-app.get('/admin/info', function(req, res) {
-    res.render('page/admin/info', {layout: 'admin'});
-})
 app.get('/admin/dashboard', function(req, res) {
     res.render('page/admin/dashboard', {layout: 'admin'});
 })
@@ -29,18 +26,35 @@ app.get('/admin/logout', function(req, res) {
     res.render('page/admin/logout', {layout: 'admin'});
 })
 // Some routes
-app.use('/admin/subscriber', require('./routes/admin/user.route'));
+app.use('/admin/subscriber', require('./routes/admin/subscriber.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
 app.use('/admin/editor', require('./routes/admin/editor.route'));
 app.use('/admin/post', require('./routes/admin/post.route'));
 app.use('/admin/category', require('./routes/admin/category.route'));
 app.use('/admin/tag', require('./routes/admin/tag.route'));
+app.use('/admin/info', require('./routes/admin/admin.route'));
 app.use('/allusers', require('./routes/allusers/account.route'));
 app.use('/userinfo', require('./routes/allusers/userinfo.route'));
 app.use('/writer', require('./routes/writer/writer.route'));
 app.use('/', require('./routes/guest/guest.route'));
 app.use('/editor', require('./routes/editor/editor.route'));
 app.use('/post', require('./routes/post.route'));
+
+// Error handler
+app.use((req, res, next) => {
+    res.render('page/allusers/error', {
+        layout: 'main',
+        message: "Trang này không tồn tại",
+        detail: "Bạn đã đi lạc rồi, hãy về trang chủ hoặc đăng nhập!"
+    });
+});
+app.use((error, req, res, next) => {
+    res.render('page/allusers/error', {
+        layout: 'main',
+        message: "Đã xảy ra lỗi " + error.message,
+        detail: error.stack
+    });
+})
 
 // Listen
 app.listen(3000, () => {
