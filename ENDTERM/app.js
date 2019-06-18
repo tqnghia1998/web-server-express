@@ -40,6 +40,22 @@ app.use('/', require('./routes/guest/guest.route'));
 app.use('/editor', require('./routes/editor/editor.route'));
 app.use('/post', require('./routes/post.route'));
 
+// Error handler
+app.use((req, res, next) => {
+    res.render('page/allusers/error', {
+        layout: 'main',
+        message: "Trang này không tồn tại",
+        detail: "Bạn đã đi lạc rồi, hãy về trang chủ hoặc đăng nhập!"
+    });
+});
+app.use((error, req, res, next) => {
+    res.render('page/allusers/error', {
+        layout: 'main',
+        message: "Đã xảy ra lỗi " + error.message,
+        detail: error.stack
+    });
+})
+
 // Listen
 app.listen(3000, () => {
     console.log('server is running at http://localhost:3000/');
