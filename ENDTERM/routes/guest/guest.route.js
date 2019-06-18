@@ -235,8 +235,14 @@ router.post('/search', (req, res) => {
     }
     postsModel.countPostByKey(keyWord).then(n => {
         var number = n[0].numbers;
+        var  isSubs = false;
         console.log(number);
-        postsModel.getPostByKey(keyWord).then(rows => {
+        if (req.isAuthenticated()) {
+            if (req.user.Role == 4) {
+                isSubs= true;
+            }
+        }
+        postsModel.getPostByKey(keyWord, isSubs).then(rows => {
                 console.log(rows);
                 res.render('page/guest/viewResultSearch', {
                     layout: 'main',

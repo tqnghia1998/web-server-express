@@ -71,15 +71,25 @@ module.exports = {
         return db.load(sqlQuery);
     },
 
-    countPostByKey: (keyWord)=>{
-        var sqlQuery = `select count(*) as numbers from posts where match(Title, Description, Content) against ('${keyWord}')`
+    countPostByKey: (keyWord) => {
+        var sqlQuery = `select count(*) as numbers from posts where match(Title, Description, Content) against ('${keyWord}')
+        or Title like '%${keyWord}%'
+        or Description like '%${keyWord}%'
+        or Content like '%${keyWord}%'`
         return db.load(sqlQuery);
     },
 
-    getPostByKey: (keyWord)=>{
+    getPostByKey: (keyWord, isSubs) => {
         var sqlQuery = `select *, date_format(DayPublish,"%d-%m-%Y") as datePublished from posts
         INNER JOIN categories ON posts.cateID = categories.cateID
-        where match(Title, Description, Content) against ('${keyWord}')`
+        where
+            (match(Title, Description, Content) against ('${keyWord}')
+                or Title like '%${keyWord}%'
+                or Description like '%${keyWord}%'
+                or Content like '%${keyWord}%')
+            and Approved = '1'`
+        if(isSubs) 
+            sqlQuery += `order by Premium desc`;
         return db.load(sqlQuery);
     },
     postsByCate: (cateID, limit, offset) => {
