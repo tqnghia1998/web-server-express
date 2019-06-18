@@ -105,7 +105,11 @@ router.get('/category/:cateid', (req, res, next) => {
             }
 
             // Get post of that cate
-            postsModel.postsByCate(cateID, limit, offset).then(rows => {
+            var userRole = 0;
+            if (req.user != null) {
+                userRole = req.user.Role;
+            }
+            postsModel.postsByCate(cateID, limit, offset, userRole == 4).then(rows => {
                 var countTime = 0;
                 var length = rows.length;
                 if (length === 0) {
@@ -135,7 +139,8 @@ router.get('/category/:cateid', (req, res, next) => {
                                 cateName: cate[0].cateName.toUpperCase(),
                                 pages: pages,
                                 previousPage: previousPage,
-                                nextPage: nextPage
+                                nextPage: nextPage,
+                                total: total
                             });
                         }
                     })
@@ -184,7 +189,11 @@ router.get('/tag/:tagname', (req, res, next) => {
         }
 
         // Get post contains that tag
-        postsModel.postsByTag(tagName, limit, offset).then(rows => {
+        var userRole = 0;
+        if (req.user != null) {
+            userRole = req.user.Role;
+        }
+        postsModel.postsByTag(tagName, limit, offset, userRole == 4).then(rows => {
             var countTime = 0;
             var length = rows.length;
             if (length === 0) {
@@ -214,7 +223,8 @@ router.get('/tag/:tagname', (req, res, next) => {
                             tagName: tagName,
                             pages: pages,
                             previousPage: previousPage,
-                            nextPage: nextPage
+                            nextPage: nextPage,
+                            total: total
                         });
                     }
                 })
