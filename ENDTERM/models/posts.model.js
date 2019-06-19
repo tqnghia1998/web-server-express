@@ -62,12 +62,16 @@ module.exports = {
         return db.load(sqlQuery);
     },
     countPostByCate: (cateID) => {
-        return db.load(`SELECT COUNT(*) AS total FROM posts WHERE posts.cateID = ${cateID} AND Approved = 1`);
+        return db.load(`SELECT COUNT(*) AS total FROM posts WHERE posts.cateID IN ( `
+        + `SELECT cateID `
+        + `FROM categories c `
+        + `WHERE c.parentID = ${cateID} OR c.cateID = ${cateID}) `
+        + `AND Approved = 1`);
     },
     countPostByTag: (tagName) => {
         var sqlQuery = `SELECT COUNT(*) AS total FROM posts INNER JOIN postsandtags `
             + `ON posts.posID = postsandtags.posID INNER JOIN tags `
-            + `ON postsandtags.tagID = tags.tagID AND tags.tagName = '${tagName}' WHERE AND Approved = 1`
+            + `ON postsandtags.tagID = tags.tagID AND tags.tagName = '${tagName}' WHERE Approved = 1`
         return db.load(sqlQuery);
     },
 
