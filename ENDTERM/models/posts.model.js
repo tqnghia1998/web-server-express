@@ -43,13 +43,15 @@ module.exports = {
     mostViewed: () => {
         var sqlQuery = "SELECT Premium, Url, posID, Title, Views, Description, child.cateID, child.cateName as child, parent.cateName as parent "
             + "FROM posts INNER JOIN categories as child ON posts.cateID = child.cateID "
-            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 10";
+            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID "
+            + "WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 10";
         return db.load(sqlQuery);
     },
     mostRecent: () => {
         var sqlQuery = "SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent "
             + "FROM posts INNER JOIN categories as child ON posts.cateID = child.cateID "
-            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY DayPublish DESC LIMIT 10"
+            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID "
+            + "WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY DayPublish DESC LIMIT 10"
         return db.load(sqlQuery);
     },
     topCategories: () => {
