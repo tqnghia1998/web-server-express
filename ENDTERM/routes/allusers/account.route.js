@@ -177,7 +177,7 @@ router.post('/login', (req, res, next) => {
             }
             
             if (user.Role == 1) {
-                return res.redirect('/admin/category');
+                return res.redirect('/admin');
             }
             return res.redirect('/');
         })
