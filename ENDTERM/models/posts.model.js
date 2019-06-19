@@ -82,7 +82,7 @@ module.exports = {
             or Title like '%${keyWord}%'
             or Description like '%${keyWord}%'
             or Content like '%${keyWord}%')
-        and Approved = '1'`
+        and ((DayPublish < Date(now()) and Approved = 1) or Published = 1)`
         return db.load(sqlQuery);
     },
 
@@ -94,7 +94,7 @@ module.exports = {
                 or Title like '%${keyWord}%'
                 or Description like '%${keyWord}%'
                 or Content like '%${keyWord}%')
-            and Approved = '1'`
+            and ((DayPublish < Date(now()) and Approved = 1) or Published = 1)`
         if(isSubs) 
             sqlQuery += `order by Premium desc`;
         return db.load(sqlQuery);
