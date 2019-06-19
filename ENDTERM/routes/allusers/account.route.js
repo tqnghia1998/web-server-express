@@ -179,7 +179,7 @@ router.post('/login', (req, res, next) => {
             if (user.Role == 1) {
                 return res.redirect('/admin/category');
             }
-            return res.redirect('/');
+            res.redirect(req.get('referer'));
         })
     })(req, res, next);
 });

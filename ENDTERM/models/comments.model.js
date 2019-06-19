@@ -6,7 +6,7 @@ module.exports = {
     },
 
     allByPost: id => {
-        return db.load(`SELECT * FROM comments c join users u on c.userID = u.userID where posID = ${id}`);
+        return db.load(`SELECT *, date_format(datePost,"%d-%m-%Y %H:%m:%s") as DatePost FROM comments c join users u on c.userID = u.userID where posID = ${id}`);
     },
 
     single: id => {

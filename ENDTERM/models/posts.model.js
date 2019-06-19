@@ -13,7 +13,7 @@ module.exports = {
     },
 
     single: id => {
-        return db.load(`select * from posts p join categories c on p.cateID = c.cateID join writers w on p.Writer = w.userID where posID = ${id}`);
+        return db.load(`select *, date_format(DayWritten,"%d-%m-%Y %H:%m:%s") as dayWritten from posts p join categories c on p.cateID = c.cateID join writers w on p.Writer = w.userID where posID = ${id}`);
     },
 
     add: entity => {
