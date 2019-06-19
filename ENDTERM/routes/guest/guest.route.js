@@ -239,14 +239,12 @@ router.get('/tag/:tagname', (req, res, next) => {
 })
 router.post('/search', (req, res) => {
     var keyWord = req.body.keyWord;
-    console.log(keyWord);
     if (keyWord == null) {
         return res.redirect('/');
     }
     postsModel.countPostByKey(keyWord).then(n => {
         var number = n[0].numbers;
         var  isSubs = false;
-        console.log(number);
         if (req.isAuthenticated()) {
             if (req.user.Role == 4) {
                 isSubs= true;

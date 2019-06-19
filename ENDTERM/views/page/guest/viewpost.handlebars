@@ -8,27 +8,60 @@
 </style>
 {{/section}}
 
+{{#section 'js'}}
+<script>
+    var isfixed = false;
+    window.addEventListener('scroll', function (e) {
+        var elementSame = document.getElementById("same");
+        var rectSame = elementSame.getBoundingClientRect();
+
+        if (rectSame.top < 5) {
+            elementSame.style.position = "fixed";
+            elementSame.style.top = "5px";
+            elementSame.style.right = "5%";
+            elementSame.style.width = "25%";
+        }
+
+        var elementContent = document.getElementById("content");
+        var rectContent = elementContent.getBoundingClientRect();
+        if (rectContent.top > rectSame.top) {
+            elementSame.style.position = "initial"
+            elementSame.style.top = "initial";
+            elementSame.style.right = "initial";
+            elementSame.style.width = "28%";
+        }
+    });
+</script>
+{{/section}}
+
 <!-- Nội dung trang web -->
 <div id="content" class="container">
-
 
     {{#if post.Premium}}
     <div>
         <img src="/images/favourites.png">
     </div>
     {{/if}}
-    <div style="display:flex">
-
+    <div style="display:flex;">
         <span style="width:70%; margin-right:2%">
 
             <!-- Content Post -->
-            <div class="card" style="color: black; font-size: 18px; line-height: 25px;">
+            <div id="content" class="card" style="color: black; font-size: 18px; line-height: 25px; padding-top:0px">
 
-                <h2 style="color: black; font-size: 28px;">{{post.Title}}</h2>
-                <p style="color: dimgray; font-size: 14px">{{post.DayWritten}}</p>
-                <p style="font-style: italic">{{post.Description}}</p>
+                <h2 style="color: black; font-size: 25px;">{{post.Title}}</h2>
+
+                <div style="display:flex">
+                    <p style="color: dimgray; font-size: 14px">{{post.dayWritten}}&nbsp;&nbsp;</p>
+                    <img src="/images/boy.png" alt="" style="width: 15px; height:15px; padding-top:4px">
+                    <p style="font-style: italic; font-size: 15px">&nbsp;{{post.Views}}</p>
+                </div>
+
+                <div style="border: #6F9C26 solid 1px;  padding: 10px; padding-top:15px; border-radius:20px">
+                    <p style="font-style: italic">{{post.Description}}</p>
+                </div>
 
                 <br>
+
                 <div style="font-size: 14px">
                     {{{post.Content}}}
                 </div>
@@ -91,7 +124,7 @@
                             {{content}}
                         </p>
                         <p>
-                            <span>•&nbsp;{{datePost}}</span>
+                            <span>•&nbsp;{{DatePost}} - Giờ Việt Nam</span>
                         </p>
                     </span>
                 </div>
@@ -100,14 +133,14 @@
             </div>
         </span>
 
-        <span style="width:28%">
+        <span id="same" style="width:28%;">
             <!-- 5 bài viết cùng chuyên mục -->
             <div style="margin-bottom: 20px">
                 <hr style="border: 2px solid #6F9C26; background:#6F9C26;">
-                <p style="margin-top:-10px; color:#6F9C26; font-size:17px; font-weight:bold">BÀI VIẾT CÙNG CHUYÊN MỤC
+                <p style="margin-top:-10px; color:#6F9C26; font-size:17px; font-weight:bold">BÀI VIẾT CÙNG
+                    CHUYÊN MỤC
                 </p>
             </div>
-
             {{#each fiveSameCate}}
             <hr style="border: 1px solid rgb(178, 182, 171); background:#6F9C26; margin-top:5px">
             <div onclick="window.location='/post/{{posID}}';" id="divFivePost"
@@ -121,6 +154,7 @@
                 </span>
             </div>
             {{/each}}
+
 
         </span>
     </div>

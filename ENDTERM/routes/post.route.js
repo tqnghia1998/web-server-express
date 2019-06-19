@@ -10,13 +10,20 @@ router.get('/:id', (req, res) => {
         postsandtagsModel.allByPost(req.params.id).then(rowsPT => {
             commentsModel.allByPost(req.params.id).then(rowsComment => {
                 postsModel.fiveByCate(rowsPost[0].cateID).then(rowsFivePost => {
-                    res.render('page/guest/viewpost.handlebars', {
-                        post: rowsPost[0],
-                        tags: rowsPT,
-                        comments: rowsComment,
-                        fiveSameCate: rowsFivePost,
-                        numComment: rowsComment.length,
-                    });
+                    var entity = {
+                        posID: rowsPost[0].posID,
+                        Views: rowsPost[0].Views + 1, 
+                    }
+                    rowsPost[0].Views++;
+                    postsModel.update(entity).then(rowsPostChange => {
+                        res.render('page/guest/viewpost.handlebars', {
+                            post: rowsPost[0],
+                            tags: rowsPT,
+                            comments: rowsComment,
+                            fiveSameCate: rowsFivePost,
+                            numComment: rowsComment.length,
+                        });
+                    })
                 })
             })
         })

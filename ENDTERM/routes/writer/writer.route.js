@@ -18,11 +18,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-router.post('/uploadimage', upload.array('avatar'), (req, res, next) => {
-    var fileinfo = req.body.files;
-    console.log(fileinfo);
-})
-
 //Đã duyệt - chờ xuất bản
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
@@ -123,7 +118,7 @@ router.get('/waiting', (req, res) => {
 // Bị từ chối
 router.get('/rejected', (req, res) => {
     if (req.isAuthenticated()) {
-        var p = userModel.singleEditor(req.user.userID);
+        var p = userModel.singleWriter(req.user.userID);
         p.then(rows => {
             if (rows.length === 0) {
                 res.redirect('/');
@@ -153,7 +148,6 @@ router.get('/post', (req, res) => {
     if (req.isAuthenticated()) {
         var p = userModel.singleWriter(req.user.userID);
         p.then(rows => {
-            console.log(rows.length);
             if (rows.length === 0) {
                 res.redirect('/');
             }
@@ -196,38 +190,40 @@ router.post('/post', upload.array('avatar', 1), (req, res, next) => {
     }
 
     postModel.add(entity).then(idPost => {
-            if (req.body.HiddenTag != "") {
-                var alltag = req.body.HiddenTag.split(';');
-                alltag.pop();
-                for (var tag of alltag) {
+        if (req.body.HiddenTag != "") {
+            var alltag = req.body.HiddenTag.split(';');
 
-                    tagModel.singleByName(tag).then(rowsTag => {
-                        if (rowsTag.length === 0) {
-                            tagModel.add({ tagName: tag }).then(idTag => {
-                                postsandtagsModel.add({
-                                    posID: idPost,
-                                    tagID: idTag,
-                                })
-                            })
-                        }
-                        else {
+            alltag.pop();
+            for (const tag of alltag) {
+
+                tagModel.singleByName(tag).then(rowsTag => {
+                    
+                    if (rowsTag.length === 0) {
+                        tagModel.add({ tagName: tag }).then(idTag => {
                             postsandtagsModel.add({
                                 posID: idPost,
-                                tagID: rowsTag[0].tagID,
+                                tagID: idTag,
                             })
-                        }
-                    })
-                    // tagModel.add({ tagName: tag }).then(idTag => {
-                    //     postsandtagsModel.add({
-                    //         posID: idPost,
-                    //         tagID: idTag,
-                    //     }).then(a => {
-                    //         res.redirect('/writer');
-                    //     })
-                    // })
-                }
+                        })
+                    }
+                    else {
+                        postsandtagsModel.add({
+                            posID: idPost,
+                            tagID: rowsTag[0].tagID,
+                        })
+                    }
+                })
+                // tagModel.add({ tagName: tag }).then(idTag => {
+                //     postsandtagsModel.add({
+                //         posID: idPost,
+                //         tagID: idTag,
+                //     }).then(a => {
+                //         res.redirect('/writer');
+                //     })
+                // })
             }
-            res.redirect('/writer');
+        }
+        res.redirect('/writer');
     }).catch(err => {
         console.log(err);
     })
@@ -239,7 +235,6 @@ router.get('/update/:id', (req, res) => {
         var idPos = req.params.id;
         var p = userModel.singleWriter(req.user.userID);
         p.then(rowsUser => {
-            console.log(rowsUser.length);
             if (rowsUser.length === 0) {
                 res.redirect('/');
             }
@@ -247,12 +242,12 @@ router.get('/update/:id', (req, res) => {
                 postModel.single(idPos).then(rowsPost => {
                     postsandtagsModel.allByPost(idPos).then(rowsPostsAndTags => {
                         var hiddenTag = '';
-                        var i;
-                        for (i = 0; i < rowsPostsAndTags.length; i++) {
-                            hiddenTag += rowsPostsAndTags[i].tagName + ';';
+                        for (const i of rowsPostsAndTags) {
+                            hiddenTag += i.tagName + ';';
                         }
+                        
+                        
                         var isUpdate = true;
-                        console.log(rowsPostsAndTags);
                         res.render('page/writer/post.handlebars', {
                             isUpdate: isUpdate,
                             post: rowsPost[0],
@@ -272,9 +267,8 @@ router.get('/update/:id', (req, res) => {
 })
 
 // Sửa bài
-router.post('/update/:id', (req, res, next) => {
-
-    var posID = req.params.id;
+router.post('/update/:id', upload.array('avatar', 1), (req, res, next) => {
+    var fileinfo = '/uploads/' + req.files[0].filename;
 
     var premium = false;
     if (req.body.IsPremium === 'on') {
@@ -285,37 +279,59 @@ router.post('/update/:id', (req, res, next) => {
     var month = now.getMonth() + 1;
     var daywritten = now.getFullYear() + '/' + month + '/' + now.getDate();
 
-    postModel.single(posID).then(rowsPost => {
-        rowsPost[0].cateID = req.body.Category;
-        rowsPost[0].Title = req.body.Title;
-        rowsPost[0].Description = req.body.Description;
-        rowsPost[0].Content = req.body.Content;
-        rowsPost[0].Writer = req.user.userID;
-        rowsPost[0].Premium = premium;
-        rowsPost[0].DayWritten = daywritten;
+    var entity = {
+        posID: req.params.id,
+        cateID: req.body.Category,
+        Title: req.body.Title,
+        Description: req.body.Description,
+        Content: req.body.Content,
+        Writer: req.user.userID,
+        Premium: premium,
+        DayWritten: daywritten,
+        Url: fileinfo,
+    }
 
-        postModel.update(rowsPost[0]).then(rowsChage => {
-            postsandtagsModel.deleteTagByPos(posID).then(() => {
-                if (req.body.HiddenTag != "") {
-                    var alltag = req.body.HiddenTag.split(';');
-                    alltag.pop();
-                    for (var tag of alltag) {
-                        tagModel.add({ tagName: tag }).then(idTag => {
+    postModel.update(entity).then(rowsChage => {
+        postsandtagsModel.deleteTagByPos(req.params.id).then(() => {
+            if (req.body.HiddenTag != "") {
+                var alltag = req.body.HiddenTag.split(';');
+                alltag.pop();
+                for (var tag of alltag) {
+
+                    tagModel.singleByName(tag).then(rowsTag => {
+                        
+                        if (rowsTag.length === 0) {
+                            tagModel.add({ tagName: tag }).then(idTag => {
+                                postsandtagsModel.add({
+                                    posID: idPost,
+                                    tagID: idTag,
+                                })
+                            })
+                        }
+                        else {
                             postsandtagsModel.add({
                                 posID: idPost,
-                                tagID: idTag,
-                            }).then(a => {
-                                res.redirect('/writer');
+                                tagID: rowsTag[0].tagID,
                             })
-                        })
-                    }
+                        }
+                    })
+
+                    // tagModel.add({ tagName: tag }).then(idTag => {
+                    //     postsandtagsModel.add({
+                    //         posID: req.params.id,
+                    //         tagID: idTag,
+                    //     }).then(a => {
+                    //         res.redirect('/writer');
+                    //     })
+                    // })
                 }
-                else {
-                    res.redirect('/writer');
-                }
-            })
+            }
+            else {
+                res.redirect('/writer');
+            }
         })
     })
+
 
     // var entity = {
     //     cateID: req.body.Category,
