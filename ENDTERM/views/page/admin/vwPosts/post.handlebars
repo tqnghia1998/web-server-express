@@ -34,12 +34,12 @@
                                         <td>{{@key}}</td>
                                         <td>{{Title}}</td>
                                         <td>{{cateName}}</td>
-                                        {{!-- {{#if isPublished}}
-                                        <td>{{Views}}</td>
-                                        {{else}}
-                                        <td>---</td>
-                                        {{/if}} --}}
+                                        {{#if Approved}}
                                         <td>{{datePublished}}</td>
+                                        {{else}}
+                                        <td>Chưa duyệt</td>
+                                        {{/if}}
+
                                         {{#if isPublished}}
                                         <td>Đã xuất bản</td>
                                         {{else}}
