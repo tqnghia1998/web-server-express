@@ -29,9 +29,11 @@ router.get('/', (req, res) => {
 
 router.post('/approve', (req, res) => {
     postsModel.single(req.body.posID1).then(rowsPost => {
-        var entity = rowsPost[0];
-        entity.DayPublish = req.body.daypublish;
-        entity.Approved = 1;
+        var entity = {
+            posID: req.body.posID1,
+            DayPublish: req.body.daypublish,
+            Approved: 1,
+        }
         
         postsModel.update(entity).then(rowsPost => {
             res.redirect('/editor');
@@ -42,8 +44,10 @@ router.post('/approve', (req, res) => {
 router.post('/reject', (req, res) => {
     console.log(req.body.posID2);
     postsModel.single(req.body.posID2).then(rowsPost => {
-        var entity = rowsPost[0];
-        entity.Additional = req.body.Additional;
+        var entity = {
+            posID: req.body.posID2,
+            Additional: req.body.Additional,
+        }
         postsModel.update(entity).then(rowsPost => {
             res.redirect('/editor');
         })

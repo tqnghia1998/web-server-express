@@ -289,6 +289,7 @@ router.post('/update/:id', upload.array('avatar', 1), (req, res, next) => {
         Premium: premium,
         DayWritten: daywritten,
         Url: fileinfo,
+        Additional: '',
     }
 
     postModel.update(entity).then(rowsChage => {
@@ -303,14 +304,14 @@ router.post('/update/:id', upload.array('avatar', 1), (req, res, next) => {
                         if (rowsTag.length === 0) {
                             tagModel.add({ tagName: tag }).then(idTag => {
                                 postsandtagsModel.add({
-                                    posID: idPost,
+                                    posID: req.params.id,
                                     tagID: idTag,
                                 })
                             })
                         }
                         else {
                             postsandtagsModel.add({
-                                posID: idPost,
+                                posID: req.params.id,
                                 tagID: rowsTag[0].tagID,
                             })
                         }
@@ -326,9 +327,9 @@ router.post('/update/:id', upload.array('avatar', 1), (req, res, next) => {
                     // })
                 }
             }
-            else {
-                res.redirect('/writer');
-            }
+            
+            res.redirect('/writer');
+            
         })
     })
 

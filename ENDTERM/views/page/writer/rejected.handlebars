@@ -131,9 +131,9 @@
                                                 <th style="width:3%">STT</th>
                                                 <th style="width:25%">Tiêu đề bài viết</th>
                                                 <th style="width:15%">Ảnh</th>
-                                                <th style="width:9%">Chuyên mục</th>
-                                                <th style="width:9%">Ngày đăng</th>
-                                                <th style="width:30%">Lý do bị từ chối</th>
+                                                <th style="width:8%">Chuyên mục</th>
+                                                <th style="width:10%">Ngày đăng</th>
+                                                <th style="width:31%">Lý do bị từ chối</th>
                                                 <th style="width:9%">Thao tác</th>
                                             </tr>
                                         </thead>
@@ -144,12 +144,12 @@
                                         <tbody>
                                             {{#each this.posts}}
                                             <tr>
-                                                <td  onclick="window.location='/post/{{posID}}';"  style="width:3%">#</td>
-                                                <td  onclick="window.location='/post/{{posID}}';" style="width:25%">{{Title}}</td>
-                                                <td  onclick="window.location='/post/{{posID}}';" style="width:15%"><img src="{{Url}}" style="height: 80px"></td>
-                                                <td  onclick="window.location='/post/{{posID}}';" style="width:9%">{{cateName}}</td>
-                                                <td  onclick="window.location='/post/{{posID}}';" style="width:9%">{{DayWrittenFormat}}</td>
-                                                <td  onclick="window.location='/post/{{posID}}';" style="width:30%">{{Additional}}</td>
+                                                <td onclick="window.location='/post/{{posID}}';"  style="width:3%">#</td>
+                                                <td onclick="window.location='/post/{{posID}}';" style="width:25%">{{Title}}</td>
+                                                <td onclick="window.location='/post/{{posID}}';" style="width:15%"><img src="{{Url}}" style="height: 80px"></td>
+                                                <td onclick="window.location='/post/{{posID}}';" style="width:9%">{{cateName}}</td>
+                                                <td onclick="window.location='/post/{{posID}}';" style="width:9%">{{DayWrittenFormat}}</td>
+                                                <td onclick="window.location='/post/{{posID}}';" style="width:30%">{{Additional}}</td>
                                                 <td style="width:9%">
                                                     <a href="/writer/update/{{posID}}" class="thaotacButton" title="Chỉnh sửa bài viết"
                                                         data-toggle="tooltip"><img

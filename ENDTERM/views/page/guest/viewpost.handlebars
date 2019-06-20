@@ -15,21 +15,22 @@
         var elementSame = document.getElementById("same");
         var rectSame = elementSame.getBoundingClientRect();
 
-        if (rectSame.top < 5) {
+        if (rectSame.top < 2) {
             elementSame.style.position = "fixed";
-            elementSame.style.top = "5px";
+            elementSame.style.top = "-10px";
             elementSame.style.right = "5%";
             elementSame.style.width = "25%";
         }
 
         var elementContent = document.getElementById("content");
         var rectContent = elementContent.getBoundingClientRect();
-        if (rectContent.top > rectSame.top) {
+        if (rectContent.top > rectSame.top - 25) {
             elementSame.style.position = "initial"
             elementSame.style.top = "initial";
             elementSame.style.right = "initial";
             elementSame.style.width = "28%";
         }
+
     });
 </script>
 {{/section}}
@@ -46,7 +47,7 @@
         <span style="width:70%; margin-right:2%">
 
             <!-- Content Post -->
-            <div id="content" class="card" style="color: black; font-size: 18px; line-height: 25px; padding-top:0px">
+            <div id="content" class="card" style="padding-left: 0px; color: black; font-size: 18px; line-height: 25px; padding-top:0px">
 
                 <h2 style="color: black; font-size: 25px;">{{post.Title}}</h2>
 
@@ -70,7 +71,7 @@
                 <p style="text-align:right;">
                     <div style="font-size: 13px">Nhãn:
                         {{#each tags}}
-                        <a>#{{tagName}}</a>&nbsp;
+                        <a href="/tag/{{tagName}}">#{{tagName}}</a>&nbsp;
                         {{/each}}
                     </div>
                 </p>

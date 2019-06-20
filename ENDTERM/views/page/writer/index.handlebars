@@ -50,7 +50,7 @@
                 alert('Row # ' + (row_index) + ' Column # ' + (col_index));
 
             });
-            //scrollTo("content");
+            scrollTo("content");
         })
 
         // This is a functions that scrolls to #id
@@ -110,11 +110,11 @@
                                     <thead>
                                         <tr>
                                             <th style="width:5%">#</th>
-                                            <th style="width:20%">Tiêu đề bài viết</th>
-                                            <th style="width:20%"></th>
-                                            <th style="width:20%">Mô tả</th>
-                                            <th style="width:20%">Chuyên mục</th>
-                                            <th style="width:20%">Ngày đăng</th>
+                                            <th style="width:25%">Tiêu đề bài viết</th>
+                                            <th style="width:15%"></th>
+                                            <th style="width:35%">Mô tả</th>
+                                            <th style="width:10%">Chuyên mục</th>
+                                            <th style="width:10%">Ngày đăng</th>
 
                                         </tr>
                                     </thead>
@@ -127,11 +127,11 @@
                                         {{#each this.posts}}
                                         <tr>
                                             <td onclick="window.location='/post/{{posID}}';"  style="width:5%">#</td>
-                                            <td  onclick="window.location='/post/{{posID}}';" style="width:20%">{{Title}}</td>
-                                            <td  onclick="window.location='/post/{{posID}}';" style="width:20%"><img src="{{Url}}" style="height: 80px"></td>
-                                            <td  onclick="window.location='/post/{{posID}}';" style="width:20%">{{Description}}</td>
-                                            <td onclick="window.location='/post/{{posID}}';"  style="width:20%">{{cateName}}</td>
-                                            <td onclick="window.location='/post/{{posID}}';"  style="width:20%"></td>
+                                            <td  onclick="window.location='/post/{{posID}}';" style="width:25%">{{Title}}</td>
+                                            <td  onclick="window.location='/post/{{posID}}';" style="width:15%"><img src="{{Url}}" style="height: 80px"></td>
+                                            <td  onclick="window.location='/post/{{posID}}';" style="width:35%">{{Description}}</td>
+                                            <td onclick="window.location='/post/{{posID}}';"  style="width:10%; padding-left:25px">{{cateName}}</td>
+                                            <td onclick="window.location='/post/{{posID}}';"  style="width:10%; padding-left:25px">{{DayWrittenFormat}}</td>
                                         </tr>
                                         {{/each}}
                                     </tbody>

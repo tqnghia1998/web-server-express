@@ -33,7 +33,7 @@ module.exports = {
     },
 
     allPublish: idWriter => {
-        return db.load(`select * from posts where (DayPublish < Date(now()) or Published = 1) and Writer = ${idWriter}`)
+        return db.load(`select *, date_format(DayWritten,"%d-%m-%Y") as DayWrittenFormat from posts p join categories c on p.cateID = c.cateID where (DayPublish < Date(now()) or Published = 1) and Writer = ${idWriter}`)
     },
 
     // NghiaTQ
@@ -43,13 +43,13 @@ module.exports = {
     mostViewed: () => {
         var sqlQuery = "SELECT Premium, Url, posID, Title, Views, Description, child.cateID, child.cateName as child, parent.cateName as parent "
             + "FROM posts INNER JOIN categories as child ON posts.cateID = child.cateID "
-            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 10";
+            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 10";
         return db.load(sqlQuery);
     },
     mostRecent: () => {
         var sqlQuery = "SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent "
             + "FROM posts INNER JOIN categories as child ON posts.cateID = child.cateID "
-            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY DayPublish DESC LIMIT 10"
+            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY DayPublish DESC LIMIT 10"
         return db.load(sqlQuery);
     },
     topCategories: () => {
@@ -122,7 +122,7 @@ module.exports = {
     },
 
     allApproved: idWriter => {
-        return db.load(`select * from posts where (DayPublish > Date(now()) and Published = 0) and Writer = ${idWriter}`);
+        return db.load(`select *, date_format(DayWritten,"%d-%m-%Y") as DayWrittenFormat from posts p join categories c on p.cateID = c.cateID  where (DayPublish > Date(now()) and Published = 0) and Writer = ${idWriter}`);
     },
 
     allWaiting: idWriter => {
@@ -130,6 +130,6 @@ module.exports = {
     },
 
     allReject: idWriter => {
-        return db.load(`select * from posts where Approved = 0 and Additional <> '' and Writer = ${idWriter}`);
+        return db.load(`select *, date_format(DayWritten,"%d-%m-%Y") as DayWrittenFormat from posts p join categories c on p.cateID = c.cateID where Approved = 0 and Additional <> '' and Writer = ${idWriter}`);
     },
 }
