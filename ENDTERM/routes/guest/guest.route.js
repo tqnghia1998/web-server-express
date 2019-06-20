@@ -253,8 +253,6 @@ router.post('/search', (req, res) => {
             }
         }
         postsModel.getPostByKey(keyWord, isSubs).then(rows => {
-            console.log(rows);
-
             // NghiaTQ added here
             var countTime = 0;
             var length = rows.length;

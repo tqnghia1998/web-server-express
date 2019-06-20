@@ -17,19 +17,18 @@
 					<tr>
 						<td style="width: 30%; padding: 10px">
 							<a class="image_thumb_zoom" href="/post/{{posID}}"><img class="ImageListNew"
-									src="{{Url}}"/></a>
+									src="{{Url}}" /></a>
 						</td>
 						<td style="vertical-align: text-top;">
-							<h4 class="post-title"><a style="font-size: 20px" href="/post/{{posID}}">{{Title}} </a></h4>
+							<h4 class="post-title"><a style="font-size: 20px" href="/post/{{posID}}">{{Title}}&nbsp;
+									{{#if Premium}}
+									<img style="height: 25px; padding-bottom:8px" src="/images/favourites.png">
+									{{/if}}
+								</a></h4>
 							<p><span style="font-size: 15px">{{Description}}</span>
-								</br><br><span style="color: rgb(82, 82, 82)">
+								</br><span style="color: rgb(82, 82, 82)">
 									<b> Chuyên mục: </b><a href="/category/{{cateID}}">{{cateName}}</a></br>
 									<b> Ngày đăng: </b>{{datePublished}}</br>
-									{{#if Premium}}
-									<div>
-										<img src="/images/favourites.png">
-									</div>
-									{{/if}}
 									<b> Nhãn: </b>
 									{{#each tags}}
 									<a href="../tag/{{tagName}}">#{{tagName}}</a>&nbsp;

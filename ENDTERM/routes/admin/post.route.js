@@ -11,11 +11,16 @@ router.get('/', (req, res) => {
                 console.log(rows);
                 for (i = 0; i < rows.length; i++) {
                     var Day = rows[i].DayPublish;
-                    Day.setMinutes(Day.getMinutes() - Day.getTimezoneOffset());
-                    if ((Day.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) && rows[i].Approved == true) || rows[i].Published) {
-                        rows[i].isPublished = true;
+                    rows[i].formatTitle = rows[i].Title.substring(0, 50);
+                    if(Day==null){
+                        rows[i].isPublished = false
+                    }else{
+                        Day.setMinutes(Day.getMinutes() - Day.getTimezoneOffset());
+                        if (!(Day.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) || rows[i].Published) {
+                            rows[i].isPublished = true;
+                        }
+                        else rows[i].isPublished = false;
                     }
-                    else rows[i].isPublished = false;
                 }
                 res.render('page/admin/vwposts/post', {
                     layout: 'admin',
@@ -40,6 +45,7 @@ router.post('/publish/:id', (req, res) => {
             var post = rows[0];
             var entity = {
                 posID: post.posID,
+                DayPublish: new Date(),
                 Published: 1,
             }
         }
