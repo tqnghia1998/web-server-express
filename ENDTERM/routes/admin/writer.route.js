@@ -41,37 +41,65 @@ router.get('/detail/:id', (req, res) => {
                 console.log(error);
             });
         } else {
-            res.end('PERMISSION DENIED');
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
         }
     } else {
-        res.end('PERMISSION DENIED');
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
 })
 
-router.post('/enable/:id', (req, res)=>{
-    var id = req.params.id;
-    var entity={
-        userID: id,
-        Actived: 1
+router.post('/enable/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var id = req.params.id;
+            var entity = {
+                userID: id,
+                Actived: 1
+            }
+            Model.update(entity).then(n => {
+                res.redirect('/admin/writer');
+            }).catch(error => {
+                res.redirect('/admin/writer');
+                console.log(error);
+            });
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
-    Model.update(entity).then(n=>{
-        res.redirect('/admin/writer');
-    }).catch(error => {
-        res.redirect('/admin/writer');
-        console.log(error);
-    });
 })
-router.post('/disable/:id', (req, res)=>{
-    var id = req.params.id;
-    var entity={
+router.post('/disable/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var id = req.params.id;
+    var entity = {
         userID: id,
         Actived: 0
     }
-    Model.update(entity).then(n=>{
+    Model.update(entity).then(n => {
         res.redirect('/admin/writer');
     }).catch(error => {
         res.redirect('/admin/writer');
         console.log(error);
     });
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
+    }
 })
 module.exports = router;

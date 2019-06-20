@@ -18,10 +18,14 @@ router.get('/', (req, res) => {
                 console.log(error);
             });
         } else {
-            res.end('PERMISSION DENIED');
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
         }
     } else {
-        res.end('PERMISSION DENIED');
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
 })
 
@@ -59,86 +63,126 @@ router.get('/edit/:id', (req, res) => {
                 res.end('error in your id!');
             });
         } else {
-            res.end('PERMISSION DENIED');
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
         }
     } else {
-        res.end('PERMISSION DENIED');
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
 })
 
 router.post('/update', (req, res) => {
-    var id = req.body.cateID;
-    var name = req.body.cateName;
-    var parent = req.body.parentID;
-    if (parent == "" || parent == null)
-        parent = null;
-    var entity = {
-        cateID: id,
-        cateName: name,
-        parentID: parent
-    }
-    console.log(entity);
-    Model.update(entity).then(
-        id => {
-            res.redirect('/admin/category');
-        }).catch(error => {
-            var u = Model.cateForAdmin();
-            u.then(rows => {
-                res.render('page/admin/vwCategories/category', {
-                    layout: 'admin',
-                    categories: rows,
-                    exist: true
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var id = req.body.cateID;
+            var name = req.body.cateName;
+            var parent = req.body.parentID;
+            if (parent == "" || parent == null)
+                parent = null;
+            var entity = {
+                cateID: id,
+                cateName: name,
+                parentID: parent
+            }
+            console.log(entity);
+            Model.update(entity).then(
+                id => {
+                    res.redirect('/admin/category');
+                }).catch(error => {
+                    var u = Model.cateForAdmin();
+                    u.then(rows => {
+                        res.render('page/admin/vwCategories/category', {
+                            layout: 'admin',
+                            categories: rows,
+                            exist: true
+                        });
+                    }).catch(error => {
+                        console.log(error);
+                    });
                 });
-            }).catch(error => {
-                console.log(error);
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
             });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
         });
+    }
 })
 
 router.post('/delete/:id', (req, res) => {
-    var CateID = req.params.id;
-    Model.delete(CateID).then(
-        n => {
-            res.redirect('/admin/category');
-        }).catch(error => {
-            var u = Model.all();
-            u.then(rows => {
-                res.render('page/admin/vwCategories/category', {
-                    layout: 'admin',
-                    categories: rows,
-                    alert: true,
-                    exist: false
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var CateID = req.params.id;
+            Model.delete(CateID).then(
+                n => {
+                    res.redirect('/admin/category');
+                }).catch(error => {
+                    var u = Model.all();
+                    u.then(rows => {
+                        res.render('page/admin/vwCategories/category', {
+                            layout: 'admin',
+                            categories: rows,
+                            alert: true,
+                            exist: false
+                        });
+                    })
                 });
-            })
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
         });
+    }
 })
 
 router.post('/add', (req, res) => {
-    var name = null;
-    var pID = null;
-    name = req.body.CateName;
-    pID = req.body.ParentID;
-    if (pID == "" || pID == null)
-        pID = null;
-    var entity = {
-        cateName: name,
-        parentID: pID
-    }
-    Model.add(entity).then(
-        id => {
-            res.redirect('/admin/category');
-        }).catch(error => {
-            var u = Model.cateForAdmin();
-            u.then(rows => {
-                res.render('page/admin/vwCategories/category', {
-                    layout: 'admin',
-                    categories: rows,
-                    exist: true
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var name = null;
+            var pID = null;
+            name = req.body.CateName;
+            pID = req.body.ParentID;
+            if (pID == "" || pID == null)
+                pID = null;
+            var entity = {
+                cateName: name,
+                parentID: pID
+            }
+            Model.add(entity).then(
+                id => {
+                    res.redirect('/admin/category');
+                }).catch(error => {
+                    var u = Model.cateForAdmin();
+                    u.then(rows => {
+                        res.render('page/admin/vwCategories/category', {
+                            layout: 'admin',
+                            categories: rows,
+                            exist: true
+                        });
+                    }).catch(error => {
+                        console.log(error);
+                    });
                 });
-            }).catch(error => {
-                console.log(error);
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
             });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
         });
+    }
 })
 
 module.exports = router;

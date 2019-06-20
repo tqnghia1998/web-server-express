@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
             console.log(req.user);
             Model.singleAdmin(req.user.userID).then(rows=>{
                 if(rows.length>0){
-                    console.log(rows);
                     res.render('page/admin/info', {
                         layout: 'admin',
                         users: rows[0]
@@ -18,10 +17,14 @@ router.get('/', (req, res) => {
                 console.log(error);
             });
         } else {
-            res.end('PERMISSION DENIED');
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
         }
     } else {
-        res.end('PERMISSION DENIED');
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
 })
 module.exports = router;

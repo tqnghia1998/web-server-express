@@ -12,9 +12,9 @@ router.get('/', (req, res) => {
                 for (i = 0; i < rows.length; i++) {
                     var Day = rows[i].DayPublish;
                     rows[i].formatTitle = rows[i].Title.substring(0, 50);
-                    if(Day==null){
+                    if (Day == null) {
                         rows[i].isPublished = false
-                    }else{
+                    } else {
                         Day.setMinutes(Day.getMinutes() - Day.getTimezoneOffset());
                         if (!(Day.toISOString().slice(0, 10) > new Date().toISOString().slice(0, 10)) || rows[i].Published) {
                             rows[i].isPublished = true;
@@ -30,39 +30,67 @@ router.get('/', (req, res) => {
                 console.log(error);
             });
         } else {
-            res.end('PERMISSION DENIED');
+            reres.render('page/admin/error', {
+                layout: 'main',
+            });
         }
     } else {
-        res.end('PERMISSION DENIED');
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
 });
 
 router.post('/publish/:id', (req, res) => {
-    var id = req.params.id;
-    var p = Model.single(id);
-    p.then(rows => {
-        if (rows.length > 0) {
-            var post = rows[0];
-            var entity = {
-                posID: post.posID,
-                DayPublish: new Date(),
-                Published: 1,
-            }
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var id = req.params.id;
+            var p = Model.single(id);
+            p.then(rows => {
+                if (rows.length > 0) {
+                    var post = rows[0];
+                    var entity = {
+                        posID: post.posID,
+                        DayPublish: new Date(),
+                        Published: 1,
+                    }
+                }
+                Model.update(entity).then(n => {
+                    res.redirect('/admin/post')
+                })
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
         }
-        Model.update(entity).then(n => {
-            res.redirect('/admin/post')
-        })
-    }).catch(error => {
-        console.log(error);
-    });
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
+    }
 })
 
 router.post('/delete/:id', (req, res) => {
-    var id = req.params.id;
-    Model.delete(id).then(n => {
-        res.redirect('/admin/post');
-    }).catch(error => {
-        console.log(error);
-    });
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var id = req.params.id;
+            Model.delete(id).then(n => {
+                res.redirect('/admin/post');
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
+    }
 })
 module.exports = router;

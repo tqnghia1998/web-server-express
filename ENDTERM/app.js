@@ -16,16 +16,11 @@ app.use(require('./middlewares/locals.mdw'));
 app.get('/', function(req, res) {
     res.redirect('/index');
 })
-app.get('/admin', function(req, res) {
-    res.render('page/admin/dashboard', {layout: 'admin'});
-})
-app.get('/admin/dashboard', function(req, res) {
-    res.render('page/admin/dashboard', {layout: 'admin'});
-})
 app.get('/admin/logout', function(req, res) {
     res.render('page/admin/logout', {layout: 'admin'});
 })
 // Some routes
+app.use('/admin', require('./routes/admin/dashboard.route'));
 app.use('/admin/subscriber', require('./routes/admin/subscriber.route'));
 app.use('/admin/writer', require('./routes/admin/writer.route'));
 app.use('/admin/editor', require('./routes/admin/editor.route'));
