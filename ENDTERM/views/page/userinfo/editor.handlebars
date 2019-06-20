@@ -13,14 +13,15 @@
 
 			<!-- Các mục thông tin -->
 			<div id="content" class="container" style="margin: -40px; margin-top:-30px;">
-				<div id="tabwidget" style="display:flex; height: 600px; justify-content: space-between">
+				<div id="tabwidget" style="display:flex; height: 400px; justify-content: space-between">
 						<span style="margin-left:0px; padding-left:0px; width: 20%; height: 100%; background: #3D4C54">
 							<ul id="tabnav"> 
 									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="general">Thông tin cá nhân&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
 									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="changepass">Đổi mật khẩu&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
-									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="subscriber">Gia hạn tài khoản&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
-									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="writer">Bút danh&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3></li>
-									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="#tab5" class="selected">Chuyên mục phụ trách&emsp;&emsp;&emsp;&emsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="subscriber">Khu vực độc giả&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="writer">Khu vực phóng viên&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&nbsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="#tab5" class="selected">Khu vực biên tập viên&emsp;&emsp;&emsp;&emsp;&nbsp;</a></h3></li>
+									<li style="width: 100%; text-align: left; float:none;" ><h3><a href="/admin">Khu vực quản trị viên&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</a></h3></li>
 							</ul> 
 						</span>
 
@@ -47,7 +48,8 @@
                                     </tbody>
 								</table>
 								<p style="margin-left: 10px; color: green">(i) <b>Quản trị viên sẽ phân công mục này</b></p>
-							</div><!-- /#tab5 -->
+							</div><!-- /#tab5 --><br>
+							<input type="button" value="Phê duyệt bài viết" id="cf_send" onclick="location.href='/editor'" style="background: rgb(46, 155, 243)"/>
 
 					    </div><!-- /#tab-content -->
 					

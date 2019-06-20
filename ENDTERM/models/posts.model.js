@@ -38,27 +38,29 @@ module.exports = {
 
     // NghiaTQ
     mostViewedInWeek: (monday) => {
-        return db.load(`SELECT Premium, Url, posID, Title, Description, Views FROM posts WHERE DATE(DayPublish) >= '${monday}' AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 4`);
+        return db.load(`SELECT Premium, Url, posID, Title, Description, Views, date_format(DayPublish,'%d-%m-%Y') as datePublished FROM posts WHERE DATE(DayPublish) >= '${monday}' AND ((DayPublish <= Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 4`);
     },
     mostViewed: () => {
-        var sqlQuery = "SELECT Premium, Url, posID, Title, Views, Description, child.cateID, child.cateName as child, parent.cateName as parent "
+        var sqlQuery = "SELECT Premium, Url, posID, Title, Views, Description, child.cateID, child.cateName as child, parent.cateName as parent, date_format(DayPublish,'%d-%m-%Y') as datePublished "
             + "FROM posts INNER JOIN categories as child ON posts.cateID = child.cateID "
-            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 10";
+            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID "
+            + "WHERE ((DayPublish <= Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 10";
         return db.load(sqlQuery);
     },
     mostRecent: () => {
-        var sqlQuery = "SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent "
+        var sqlQuery = "SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent, date_format(DayPublish,'%d-%m-%Y') as datePublished "
             + "FROM posts INNER JOIN categories as child ON posts.cateID = child.cateID "
-            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY DayPublish DESC LIMIT 10"
+            + "LEFT JOIN categories as parent ON child.parentID = parent.cateID "
+            + "WHERE ((DayPublish <= Date(now()) AND Approved = 1) OR Published = 1) ORDER BY DayPublish DESC LIMIT 10"
         return db.load(sqlQuery);
     },
     topCategories: () => {
-        var sqlQuery = "SELECT Premium, Url, child.cateID, child.cateName as child, parent.cateName as parent, posts.DayPublish, posts.Title, posts.posID "
+        var sqlQuery = "SELECT Premium, Url, child.cateID, child.cateName as child, parent.cateName as parent, posts.DayPublish, posts.Title, posts.posID, date_format(DayPublish,'%d-%m-%Y') as datePublished "
             + "FROM categories as child LEFT JOIN categories as parent ON child.parentID = parent.cateID "
             + "LEFT JOIN posts ON posts.cateID = child.cateID WHERE DayPublish = ("
             + "SELECT MAX(DayPublish) "
             + "FROM posts "
-            + "WHERE posts.cateID = child.cateID AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1)) LIMIT 10";
+            + "WHERE posts.cateID = child.cateID AND ((DayPublish <= Date(now()) AND Approved = 1) OR Published = 1)) LIMIT 10";
         return db.load(sqlQuery);
     },
     countPostByCate: (cateID) => {
@@ -66,12 +68,12 @@ module.exports = {
         + `SELECT cateID `
         + `FROM categories c `
         + `WHERE c.parentID = ${cateID} OR c.cateID = ${cateID}) `
-        + `AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1)`);
+        + `AND ((DayPublish <= Date(now()) AND Approved = 1) OR Published = 1)`);
     },
     countPostByTag: (tagName) => {
         var sqlQuery = `SELECT COUNT(*) AS total FROM posts INNER JOIN postsandtags `
             + `ON posts.posID = postsandtags.posID INNER JOIN tags `
-            + `ON postsandtags.tagID = tags.tagID AND tags.tagName = '${tagName}' WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1)`
+            + `ON postsandtags.tagID = tags.tagID AND tags.tagName = '${tagName}' WHERE ((DayPublish <= Date(now()) AND Approved = 1) OR Published = 1)`
         return db.load(sqlQuery);
     },
 
@@ -82,7 +84,7 @@ module.exports = {
             or Title like '%${keyWord}%'
             or Description like '%${keyWord}%'
             or Content like '%${keyWord}%')
-        and ((DayPublish < Date(now()) and Approved = 1) or Published = 1)`
+        and ((DayPublish <= Date(now()) and Approved = 1) or Published = 1)`
         return db.load(sqlQuery);
     },
 
@@ -94,29 +96,29 @@ module.exports = {
                 or Title like '%${keyWord}%'
                 or Description like '%${keyWord}%'
                 or Content like '%${keyWord}%')
-            and ((DayPublish < Date(now()) and Approved = 1) or Published = 1)`
+            and ((DayPublish <= Date(now()) and Approved = 1) or Published = 1)`
         if(isSubs) 
             sqlQuery += `order by Premium desc`;
         return db.load(sqlQuery);
     },
     postsByCate: (cateID, limit, offset, isPremium) => {
-        var sqlQuery = `SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent `
+        var sqlQuery = `SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent, date_format(DayPublish,'%d-%m-%Y') as datePublished `
             + `FROM posts INNER JOIN categories as child ON posts.cateID IN ( `
             + `SELECT cateID `
             + `FROM categories c `
             + `WHERE c.parentID = ${cateID} OR c.cateID = ${cateID})`
-            + `AND posts.cateID = child.cateID AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) `
+            + `AND posts.cateID = child.cateID AND ((DayPublish <= Date(now()) AND Approved = 1) OR Published = 1) `
             + `LEFT JOIN categories as parent ON child.parentID = parent.cateID ` + (isPremium ? ` ORDER BY Premium DESC ` : ` `)
             + `LIMIT ${limit} OFFSET ${offset}`;
         return db.load(sqlQuery);
     },
     postsByTag: (tagName, limit, offset, isPremium) => {
-        var sqlQuery = `SELECT Premium, Url, posts.posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent `
+        var sqlQuery = `SELECT Premium, Url, posts.posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent, date_format(DayPublish,'%d-%m-%Y') as datePublished `
             + `FROM posts INNER JOIN postsandtags `
             + `ON posts.posID = postsandtags.posID INNER JOIN tags ON postsandtags.tagID = tags.tagID AND tags.tagName = '${tagName}' `
             + `LEFT JOIN categories as child ON posts.cateID = child.cateID `
             + `LEFT JOIN categories as parent ON child.parentID = parent.cateID `
-            + `WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1)` + (isPremium ? ` ORDER BY Premium DESC ` : ` `)
+            + `WHERE ((DayPublish <= Date(now()) AND Approved = 1) OR Published = 1)` + (isPremium ? ` ORDER BY Premium DESC ` : ` `)
             + `LIMIT ${limit} OFFSET ${offset}`;
         return db.load(sqlQuery);
     },

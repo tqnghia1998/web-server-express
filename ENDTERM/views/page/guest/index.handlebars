@@ -7,14 +7,14 @@
 				<div id="slide-left" class="flexslider span8">
 					<ul class="slides">
 						{{#each this.mostViewedInWeek}}
-						<li data-thumb="{{Url}}">
+						<li data-thumb="{{Url}}" style="height: 380px">
 							<a class="image_thumb_zoom" href="/post/{{posID}}">
-								<img src="{{Url}}" />
+								<img style="object-fit: cover; height: 380px" src="{{Url}}" />
 							</a>
-							<div class="entry" style="height: 75px;">
-								<div style="font-size: 14px; color: white"><a href="/post/{{posID}}" style="color: white; font-size: 14px">{{Title}}</a></div>
-								<p style="margin-top: 2px">{{Description}}<br><a 
-										style="float: right; margin-top: -5px; padding-right: 20px; color: rgb(73, 245, 21)">{{views}}</a>
+							<div class="entry">
+								<div><a href="/post/{{posID}}"  style="font-size: 14px; color: white">{{Title}}</a></div>
+								<p style="margin-top: 2px">{{Description}}<br><a style="float: right; margin-top: -5px; padding-right: 20px; color: rgb(73, 245, 21)">
+										{{datePublished}}, {{views}}</a>
 								</p>
 							</div>
 						</li>
@@ -26,11 +26,11 @@
 					<div style="width:265%" id="tabwidget" class="widget tab-container">
 						<ul id="tabnav" class="clearfix">
 							<li style="width: 50%">
-								<h3><a href="index.html#tab1" class="selected"><img src="../images/time.png"
+								<h3><a href="#tab1" class="selected"><img src="../images/time.png"
 											alt="Bài viết mới nhất">Bài viết mới nhất</a></h3>
 							</li>
 							<li style="width: 50%">
-								<h3><a href="index.html#tab2"><img src="../images/komen.png" alt="Xem nhiều nhất">Xem
+								<h3><a href="#tab2"><img src="../images/komen.png" alt="Xem nhiều nhất">Xem
 										nhiều nhất</a></h3>
 							</li>
 						</ul>
@@ -38,7 +38,7 @@
 
 							<!-- Tab bài viết mới nhất -->
 							<div id="tab1" style="display: block;">
-								<ul style="height:422px; width:100%; overflow:hidden; overflow-y:scroll">
+								<ul style="height: 422px; width: 100%; overflow:hidden; overflow-y:scroll">
 									{{#each this.mostRecent}}
 									<li>
 										<table style="width:100%; margin: 10px">
@@ -54,7 +54,7 @@
 															href="/post/{{posID}}">{{Title}}</a></h4>
 													<p>{{Description}}<br>
 														</br>Ngày đăng:
-														<a>{{DayPublish}}</a>
+														<a>{{datePublished}}</a>
 														<br>Chuyên mục:
 														<a href="/category/{{cateID}}">{{cateName}}</a>
 													</p>
@@ -117,12 +117,12 @@
 				<td style="width: 30%; padding: 10px">
 					<h4 class="title"><span style="width: 100%; padding: 5px"><a href="/category/{{cateID}} " style="color: rgb(75, 74, 74); font-size: 14px">{{cateName}}</a></span></h4>
 					<div class="container1">
-						<a class="image_thumb_zoom" href="/post/{{posID}}">
-							<img src="{{Url}}" />
+						<a class="image_thumb_zoom" href="/post/{{posID}}"><center>
+							<img class="ImageListNew" src="{{Url}}" /></center>
 						</a>
 						<div class="text-block1">
 							<h4 style=""><a style="color: white; font-size: 14px" href="/post/{{posID}}">{{Title}}</a></br>
-								<a style="float: right; padding-bottom: 5px; color: rgb(69, 219, 24)">{{DayPublish}}</a>
+								<a style="float: right; padding-bottom: 5px; color: rgb(69, 219, 24)">{{datePublished}}</a>
 							</h4>
 						</div>
 					</div>
