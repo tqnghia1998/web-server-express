@@ -86,7 +86,7 @@ router.get('/category/:cateid', (req, res, next) => {
             if (page < 1) {
                 return res.redirect('/guest/category/1?page=1');
             }
-            var limit = 2;
+            var limit = 10;
             var offset = (page - 1) * limit;
             var pages = [];
             var total = countPost[0].total;
@@ -170,7 +170,7 @@ router.get('/tag/:tagname', (req, res, next) => {
         if (page < 1) {
             return res.redirect('/');
         }
-        var limit = 2;
+        var limit = 10;
         var offset = (page - 1) * limit;
         var pages = [];
         var total = countPost[0].total;
@@ -236,7 +236,9 @@ router.get('/tag/:tagname', (req, res, next) => {
     }).catch(err => {
         console.log("Error when getting tag: ", err);
     })
-})
+});
+
+// List news by searching
 router.post('/search', (req, res) => {
     var keyWord = req.body.keyWord;
     if (keyWord == null) {
@@ -251,13 +253,41 @@ router.post('/search', (req, res) => {
             }
         }
         postsModel.getPostByKey(keyWord, isSubs).then(rows => {
-                console.log(rows);
-                res.render('page/guest/viewResultSearch', {
+            console.log(rows);
+
+            // NghiaTQ added here
+            var countTime = 0;
+            var length = rows.length;
+            if (length === 0) {
+                return res.render('page/guest/viewResultSearch', {
                     layout: 'main',
                     key: keyWord,
                     data: rows,
                     numbers: number
+                });
+            }
+
+            // Get tags of each post
+            for (var i = 0; i < length; i++) {
+                postsTagsModel.allByPost(rows[i].posID).then(tags => {
+                    if (tags.length > 0) {
+                        for (var j = 0; j < length; j++) {
+                            if (rows[j].posID == tags[0].posID) {
+                                rows[j].tags = tags;
+                            }
+                        }
+                    }
+                    countTime += 1;
+                    if (countTime == length) {
+                        res.render('page/guest/viewResultSearch', {
+                            layout: 'main',
+                            key: keyWord,
+                            data: rows,
+                            numbers: number
+                        });
+                    }
                 })
+            }
         })
     }).catch(error => {
         console.log(error);

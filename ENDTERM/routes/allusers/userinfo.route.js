@@ -17,9 +17,18 @@ router.get('/general', (req, res, next) => {
         return res.redirect('/allusers/newuser');
     }
 
+    var userType;
+    switch (req.user.Role) {
+        case 1: userType = "Quản trị viên"; break;
+        case 2: userType = "Phóng viên"; break;
+        case 3: userType = "Biên tập viên"; break;
+        case 4: userType = "Độc giả"; break;
+    }
+
     res.render('page/userinfo/general', {
         layout: 'main',
-        user: req.user
+        user: req.user,
+        userType: userType
     })
 });
 router.post('/general', (req, res, next) => {

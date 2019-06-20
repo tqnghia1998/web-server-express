@@ -38,24 +38,24 @@ module.exports = {
 
     // NghiaTQ
     mostViewedInWeek: (monday) => {
-        return db.load(`SELECT Premium, Url, posID, Title, Description, Views FROM posts WHERE DATE(DayPublish) >= '${monday}' AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 4`);
+        return db.load(`SELECT Premium, Url, posID, Title, Description, Views, date_format(DayPublish,'%d-%m-%Y') as datePublished FROM posts WHERE DATE(DayPublish) >= '${monday}' AND ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 4`);
     },
     mostViewed: () => {
-        var sqlQuery = "SELECT Premium, Url, posID, Title, Views, Description, child.cateID, child.cateName as child, parent.cateName as parent "
+        var sqlQuery = "SELECT Premium, Url, posID, Title, Views, Description, child.cateID, child.cateName as child, parent.cateName as parent, date_format(DayPublish,'%d-%m-%Y') as datePublished "
             + "FROM posts INNER JOIN categories as child ON posts.cateID = child.cateID "
             + "LEFT JOIN categories as parent ON child.parentID = parent.cateID "
             + "WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY Views DESC LIMIT 10";
         return db.load(sqlQuery);
     },
     mostRecent: () => {
-        var sqlQuery = "SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent "
+        var sqlQuery = "SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent, date_format(DayPublish,'%d-%m-%Y') as datePublished "
             + "FROM posts INNER JOIN categories as child ON posts.cateID = child.cateID "
             + "LEFT JOIN categories as parent ON child.parentID = parent.cateID "
             + "WHERE ((DayPublish < Date(now()) AND Approved = 1) OR Published = 1) ORDER BY DayPublish DESC LIMIT 10"
         return db.load(sqlQuery);
     },
     topCategories: () => {
-        var sqlQuery = "SELECT Premium, Url, child.cateID, child.cateName as child, parent.cateName as parent, posts.DayPublish, posts.Title, posts.posID "
+        var sqlQuery = "SELECT Premium, Url, child.cateID, child.cateName as child, parent.cateName as parent, posts.DayPublish, posts.Title, posts.posID, date_format(DayPublish,'%d-%m-%Y') as datePublished "
             + "FROM categories as child LEFT JOIN categories as parent ON child.parentID = parent.cateID "
             + "LEFT JOIN posts ON posts.cateID = child.cateID WHERE DayPublish = ("
             + "SELECT MAX(DayPublish) "
@@ -102,7 +102,7 @@ module.exports = {
         return db.load(sqlQuery);
     },
     postsByCate: (cateID, limit, offset, isPremium) => {
-        var sqlQuery = `SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent `
+        var sqlQuery = `SELECT Premium, Url, posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent, date_format(DayPublish,'%d-%m-%Y') as datePublished `
             + `FROM posts INNER JOIN categories as child ON posts.cateID IN ( `
             + `SELECT cateID `
             + `FROM categories c `
@@ -113,7 +113,7 @@ module.exports = {
         return db.load(sqlQuery);
     },
     postsByTag: (tagName, limit, offset, isPremium) => {
-        var sqlQuery = `SELECT Premium, Url, posts.posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent `
+        var sqlQuery = `SELECT Premium, Url, posts.posID, Title, DayPublish, Description, child.cateID, child.cateName as child, parent.cateName as parent, date_format(DayPublish,'%d-%m-%Y') as datePublished `
             + `FROM posts INNER JOIN postsandtags `
             + `ON posts.posID = postsandtags.posID INNER JOIN tags ON postsandtags.tagID = tags.tagID AND tags.tagName = '${tagName}' `
             + `LEFT JOIN categories as child ON posts.cateID = child.cateID `

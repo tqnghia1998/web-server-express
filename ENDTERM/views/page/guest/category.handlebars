@@ -25,9 +25,9 @@
 							{{/if}}</h4>
 							<p><span style="font-size: 15px">{{Description}}</span>
 								</br><br><span style="color: rgb(82, 82, 82)">
-									<b> Chuyên mục:</b><a href="/category/{{cateID}}"> {{cateName}}</a></br>
-									<b> Ngày đăng:</b> {{DayPublish}}</br>
-                                    <b> Nhãn:</b>
+									<b> Chuyên mục: </b><a href="/category/{{cateID}}">{{cateName}}</a></br>
+									<b> Ngày đăng: </b>{{datePublished}}</br>
+                                    <b> Nhãn: </b>
 									{{#each tags}}
 									<a href="../tag/{{tagName}}">#{{tagName}}</a>&nbsp;
 									{{/each}}</span>
