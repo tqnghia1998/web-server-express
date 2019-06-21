@@ -17,10 +17,14 @@ router.get('/', (req, res) => {
                 console.log(error);
             });
         } else {
-            res.end('PERMISSION DENIED');
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
         }
     } else {
-        res.end('PERMISSION DENIED');
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
 })
 router.get('/detail/:id', (req, res) => {
@@ -47,56 +51,109 @@ router.get('/detail/:id', (req, res) => {
                 console.log(error);
             });
         } else {
-            res.end('PERMISSION DENIED');
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
         }
     } else {
-        res.end('PERMISSION DENIED');
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
 })
 router.post('/assign', (req, res) => {
-    var entity = {
-        userID: req.body.userID,
-        cateID: req.body.Assigned
-    };
-    Model.addEditor(entity).then(n => {
-        res.redirect('/admin/editor/detail/' + req.body.userID);
-    }).catch(error => {
-        console.log(error);
-    });
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var entity = {
+                userID: req.body.userID,
+                cateID: req.body.Assigned
+            };
+            Model.addEditor(entity).then(n => {
+                res.redirect('/admin/editor/detail/' + req.body.userID);
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
+    }
 })
 router.post('/delete/:id', (req, res) => {
-    var cateID = req.params.id;
-    var userID = req.body.userID;
-    Model.deletespecial(userID, cateID).then(n => {
-        res.redirect('/admin/editor/detail/' + userID);
-    }).catch(error => {
-        console.log(error);
-    });
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var cateID = req.params.id;
+            var userID = req.body.userID;
+            Model.deletespecial(userID, cateID).then(n => {
+                res.redirect('/admin/editor/detail/' + userID);
+            }).catch(error => {
+                console.log(error);
+            });
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
+    }
 })
 router.post('/enable/:id', (req, res) => {
-    var id = req.params.id;
-    var entity = {
-        userID: id,
-        Actived: 1
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var id = req.params.id;
+            var entity = {
+                userID: id,
+                Actived: 1
+            }
+            Model.update(entity).then(n => {
+                res.redirect('/admin/editor');
+            }).catch(error => {
+                res.redirect('/admin/editor');
+                console.log(error);
+            });
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
-    Model.update(entity).then(n => {
-        res.redirect('/admin/editor');
-    }).catch(error => {
-        res.redirect('/admin/editor');
-        console.log(error);
-    });
+
 })
 router.post('/disable/:id', (req, res) => {
-    var id = req.params.id;
-    var entity = {
-        userID: id,
-        Actived: 0
+    if (req.isAuthenticated()) {
+        if (req.user.Role == 1) {
+            var id = req.params.id;
+            var entity = {
+                userID: id,
+                Actived: 0
+            }
+            Model.update(entity).then(n => {
+                res.redirect('/admin/editor');
+            }).catch(error => {
+                res.redirect('/admin/editor');
+                console.log(error);
+            });
+        } else {
+            res.render('page/admin/error', {
+                layout: 'main',
+            });
+        }
+    } else {
+        res.render('page/admin/error', {
+            layout: 'main',
+        });
     }
-    Model.update(entity).then(n => {
-        res.redirect('/admin/editor');
-    }).catch(error => {
-        res.redirect('/admin/editor');
-        console.log(error);
-    });
 })
 module.exports = router;
