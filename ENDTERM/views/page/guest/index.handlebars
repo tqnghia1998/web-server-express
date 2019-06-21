@@ -51,7 +51,10 @@
 												</td>
 												<td style="vertical-align: text-top;">
 													<h4 class="post-title" style="margin-"><a style="font-size: 15px;"
-															href="/post/{{posID}}">{{Title}}</a></h4>
+															href="/post/{{posID}}">{{Title}}</a>
+															{{#if Premium}}
+																<img src="/images/favourites.png" style="width: 80px; margin-bottom: 8px">
+															{{/if}}</h4>
 													<p>{{Description}}<br>
 														</br>Ngày đăng:
 														<a>{{datePublished}}</a>
@@ -85,7 +88,10 @@
 												</td>
 												<td style="vertical-align: text-top;">
 													<h4 class="post-title" style="margin-"><a style="font-size: 15px;"
-															href="/post/{{posID}}">{{Title}}</a></h4>
+															href="/post/{{posID}}">{{Title}}</a>
+															{{#if Premium}}
+																<img src="/images/favourites.png" style="width: 80px; margin-bottom: 8px">
+															{{/if}}</h4>
 													<p>{{Description}}<br>
 														</br>Lượt xem:
 														<a>{{Views}}</a>
