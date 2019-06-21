@@ -86,7 +86,7 @@ router.get('/category/:cateid', (req, res, next) => {
             if (page < 1) {
                 return res.redirect('/guest/category/1?page=1');
             }
-            var limit = 10;
+            var limit = 5;
             var offset = (page - 1) * limit;
             var pages = [];
             var total = countPost[0].total;
@@ -170,7 +170,7 @@ router.get('/tag/:tagname', (req, res, next) => {
         if (page < 1) {
             return res.redirect('/');
         }
-        var limit = 10;
+        var limit = 5;
         var offset = (page - 1) * limit;
         var pages = [];
         var total = countPost[0].total;
