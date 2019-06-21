@@ -4,181 +4,192 @@
 <html lang="en-US">
 
 <head>
-<title>Báo Điện Tử TH16-News</title>
-<meta charset="UTF-8" />
-<link rel="shortcut icon" href="/images/favicon.png" title="Favicon"/>
-<meta name="viewport" content="width=device-width" />
+	<title>Báo Điện Tử TH16-News</title>
+	<meta charset="UTF-8" />
+	<link rel="shortcut icon" href="/images/favicon.png" title="Favicon" />
+	<meta name="viewport" content="width=device-width" />
 
-<link rel='stylesheet' id='magz-style-css'  href='/css/style.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='magz-style-css' href='/css/style.css' type='text/css' media='all' />
 
-<link rel='stylesheet' id='magz-style-css'  href='/css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' id='swipemenu-css'  href='/css/swipemenu.css' type='text/css' media='all' />
-<link rel='stylesheet' id='flexslider-css'  href='/css/flexslider.css' type='text/css' media='all' />
-<link rel='stylesheet' id='bootstrap-css'  href='/css/bootstrap.css' type='text/css' media='all' />
-<link rel='stylesheet' id='bootstrap-responsive-css'  href='/css/bootstrap-responsive.css' type='text/css' media='all' />
-<link rel='stylesheet' id='simplyscroll-css'  href='/css/jquery.simplyscroll.css' type='text/css' media='all' />
-<link rel='stylesheet' id='jPages-css'  href='/css/jPages.css' type='text/css' media='all' />
-<link rel='stylesheet' id='rating-css'  href='/css/jquery.rating.css' type='text/css' media='all' />
-<link rel='stylesheet' id='ie-styles-css'  href='/css/ie.css' type='text/css' media='all' />
-<link rel='stylesheet' id='Roboto-css'  href='/fonts.googleapis.com/css.css' type='text/css' media='all' />
-{{{_sections.css}}}
+	<link rel='stylesheet' id='magz-style-css' href='/css/style.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='swipemenu-css' href='/css/swipemenu.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='flexslider-css' href='/css/flexslider.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='bootstrap-css' href='/css/bootstrap.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='bootstrap-responsive-css' href='/css/bootstrap-responsive.css' type='text/css'
+		media='all' />
+	<link rel='stylesheet' id='simplyscroll-css' href='/css/jquery.simplyscroll.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='jPages-css' href='/css/jPages.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='rating-css' href='/css/jquery.rating.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='ie-styles-css' href='/css/ie.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='Roboto-css' href='/fonts.googleapis.com/css.css' type='text/css' media='all' />
 
-<script type='text/javascript' src="/js/jquery-1.10.2.min.js"></script>
-<script type='text/javascript' src='/js/html5.js'></script>
-<script type='text/javascript' src='/js/bootstrap.min.js'></script>
-<script type='text/javascript' src='/js/jquery.flexslider.js'></script>
-<script type='text/javascript' src='/js/jquery.flexslider.init.js'></script>
-<script type='text/javascript' src='/js/jquery.bxslider.js'></script>
-<script type='text/javascript' src='/js/jquery.bxslider.init.js'></script>
-<script type='text/javascript' src='/js/jquery.rating.js'></script>
-<script type='text/javascript' src='/js/jquery.idTabs.min.js'></script>
-<script type='text/javascript' src='/js/jquery.simplyscroll.js'></script>
-<script type='text/javascript' src='/js/fluidvids.min.js'></script>
-<script type='text/javascript' src='/js/jPages.js'></script>
-<script type='text/javascript' src='/js/jquery.sidr.min.js'></script>
-<script type='text/javascript' src='/js/jquery.touchSwipe.min.js'></script>
-<script type='text/javascript' src='/js/custom.js'></script>
-<script>
-	jQuery.noConflict()(function ($) {
-
-
-		// Get list of categories and display on menu
-		var listCate = [];
-		$(document).ready(function() {
-
-			// Get data
-			{{#each lcCategories}}
-			var category = {
-				cateID: {{cateID}},
-				cateName: '{{cateName}}',
-				parentID: '{{parentID}}'
-			}
-			listCate.push(category);
-			{{/each}}
-
-			// Bring them onto menu
-			var append = "";
-			var area = document.getElementById('listCate');
-			for (var i = 0; i < listCate.length; i++) {
-				if (listCate[i].parentID.length === 0) {
-					append += "<li class='dropdown'><a href='/category/" + listCate[i].cateID + "'>" + listCate[i].cateName + "</a>";
-					var flag = false;
-					for (var j = 0; j < listCate.length; j++) {
-						if (listCate[j].parentID == listCate[i].cateID) {
-							if (!flag) {
-								flag = true;
-								append += "<ul class='sub-menu dropdown-menu'>";
-							}
-							append += "<li><a href='/category/" + listCate[j].cateID + "'>" + listCate[j].cateName + "</a></li>"
-						}
-					}
-					if (flag) {
-						append += "</ul>";
-					}
-					append += "</li>"
-				}
-			}
-			area.innerHTML += append;
-
-			// Login & logout
-			area.innerHTML += "<li>{{#if isLoggedIn}}<a href='../allusers/logout'>Đăng xuất</a>{{else}}<a href='../allusers/login'>Đăng nhập</a>{{/if}}</li>"
-		
-			});
-	});
 	
-</script>
-{{{_sections.js}}}
+
+	{{{_sections.css}}}
+
+	<script type='text/javascript' src="/js/jquery-1.10.2.min.js"></script>
+	<script type='text/javascript' src='/js/html5.js'></script>
+	<script type='text/javascript' src='/js/bootstrap.min.js'></script>
+	<script type='text/javascript' src='/js/jquery.flexslider.js'></script>
+	<script type='text/javascript' src='/js/jquery.flexslider.init.js'></script>
+	<script type='text/javascript' src='/js/jquery.bxslider.js'></script>
+	<script type='text/javascript' src='/js/jquery.bxslider.init.js'></script>
+	<script type='text/javascript' src='/js/jquery.rating.js'></script>
+	<script type='text/javascript' src='/js/jquery.idTabs.min.js'></script>
+	<script type='text/javascript' src='/js/jquery.simplyscroll.js'></script>
+	<script type='text/javascript' src='/js/fluidvids.min.js'></script>
+	<script type='text/javascript' src='/js/jPages.js'></script>
+	<script type='text/javascript' src='/js/jquery.sidr.min.js'></script>
+	<script type='text/javascript' src='/js/jquery.touchSwipe.min.js'></script>
+	<script type='text/javascript' src='/js/custom.js'></script>
+	<script>
+		jQuery.noConflict()(function ($) {
+
+
+			// Get list of categories and display on menu
+			var listCate = [];
+			$(document).ready(function () {
+
+				// Get data
+				{{#each lcCategories}}
+				var category = {
+					cateID: {{cateID}},
+				cateName: '{{cateName}}',
+				parentID: '{{parentID}}'}
+			listCate.push(category);
+		{{/each}}
+
+				// Bring them onto menu
+				var append = "";
+				var area = document.getElementById('listCate');
+				for (var i = 0; i < listCate.length; i++) {
+					if (listCate[i].parentID.length === 0) {
+						append += "<li class='dropdown'><a href='/category/" + listCate[i].cateID + "'>" + listCate[i].cateName + "</a>";
+						var flag = false;
+						for (var j = 0; j < listCate.length; j++) {
+							if (listCate[j].parentID == listCate[i].cateID) {
+								if (!flag) {
+									flag = true;
+									append += "<ul class='sub-menu dropdown-menu'>";
+								}
+								append += "<li><a href='/category/" + listCate[j].cateID + "'>" + listCate[j].cateName + "</a></li>"
+							}
+						}
+						if (flag) {
+							append += "</ul>";
+						}
+						append += "</li>"
+					}
+				}
+				area.innerHTML += append;
+
+				// Login & logout
+				area.innerHTML += "<li>{{#if isLoggedIn}}<a href='../allusers/logout'>Đăng xuất</a>{{else}}<a href='../allusers/login'>Đăng nhập</a>{{/if}}</li>"
+
+			});
+		});
+
+	</script>
+	{{{_sections.js}}}
 
 </head>
+
 <body style="margin-top: 90px" id="toppage">
 
-<div id="page">
+	<div id="page">
 
-	<!-- Các menu chuyên mục -->
-	<header id="header" class="container navbar-fixed-top" style="z-index: 100">
-		<div id="mast-head">
-			<div id="logo">
-				<a href="/" title="Magazine" rel="home"><img src="/images/study.png" alt="Magazine" /></a>
+
+		<!-- Các menu chuyên mục -->
+		<header id="header" class="container navbar-fixed-top" style="z-index: 100">
+			<div id="mast-head">
+				<div id="logo">
+					<a href="/" title="Magazine" rel="home"><img src="/images/study.png" alt="Magazine" /></a>
+				</div>
 			</div>
-		</div>
-    	<nav class="navbar navbar-inverse clearfix nobot">
-			<a id="responsive-menu-button" href="#swipe-menu">
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			</a>
+			<nav class="navbar navbar-inverse clearfix nobot">
+				<a id="responsive-menu-button" href="#swipe-menu">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
 
-      		<div class="nav-collapse" id="swipe-menu-responsive">
-				<ul class="nav" id="listCate">
-					<li>
-						<span id="close-menu">
-							<a class="close-this-menu">Đóng</a>
+				<div class="nav-collapse" id="swipe-menu-responsive">
+					<ul class="nav" id="listCate">
+						<li>
+							<span id="close-menu">
+								<a class="close-this-menu">Đóng</a>
 								<script type="text/javascript">
-									jQuery('a.sidr-class-close-this-menu').click(function(){
+									jQuery('a.sidr-class-close-this-menu').click(function () {
 										jQuery('div.sidr').css({
 											'right': '-476px'
 										});
 										jQuery('body').css({
-										'right': '0'
-										});							
+											'right': '0'
+										});
 									});
 								</script>
-						</span>
-					</li>
-					
-					<li>
-						<a href="/userinfo/general"><img src="/images/avatar.png" alt="Magazine"></a>
-					</li>
+							</span>
+						</li>
 
-				</ul>
-			</div><!--/.nav-collapse -->
-			
-    </nav>
-			
-	</header><!-- #masthead -->
+						<li>
+							<a href="/userinfo/general"><img src="/images/avatar.png" alt="Magazine"></a>
+						</li>
 
-	<!-- Đoạn Intro -->
-	<div id="intr" class="container navbar-fixed-top" style="z-index: 99; margin-top: 50px; top: -1; box-shadow: 1px 2px 10px rgb(110, 110, 110);">
-		<div class="row-fluid">
-			<div class="brnews span9">
-				<ul id="scroller" style="font-size: 12px; color: black">
-					<li style="float: left; width: 200px">Trịnh Quang Nghĩa</li>
-					<li style="float: left; width: 200px">Trần Bá Ngọc</li>
-					<li style="float: left; width: 200px">Nguyễn Xuân Nghiêm</li>
-				</ul>
-			</div>
-		
-			<div class="search span3">
-				<div class="offset1">
-					<form method="POST" action="/search">
-						<p><input type="text" value="Tìm kiếm tin..." onfocus="if ( this.value == 'Tìm kiếm tin...' ) { this.value = ''; }" onblur="if ( this.value == '' ) { this.value = 'Tìm kiếm tin...'; }" name="keyWord" id="txtkeyWord" />
-					</form>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+
+			</nav>
+
+		</header><!-- #masthead -->
+
+		<!-- Đoạn Intro -->
+		<div id="intr" class="container navbar-fixed-top"
+			style="z-index: 99; margin-top: 50px; top: -1; box-shadow: 1px 2px 10px rgb(110, 110, 110);">
+			<div class="row-fluid">
+				<div class="brnews span9">
+					<ul id="scroller" style="font-size: 12px; color: black">
+						<li style="float: left; width: 200px">Trịnh Quang Nghĩa</li>
+						<li style="float: left; width: 200px">Trần Bá Ngọc</li>
+						<li style="float: left; width: 200px">Nguyễn Xuân Nghiêm</li>
+					</ul>
+				</div>
+
+				<div class="search span3">
+					<div class="offset1">
+						<form method="POST" action="/search">
+							<p><input type="text" value="Tìm kiếm tin..."
+									onfocus="if ( this.value == 'Tìm kiếm tin...' ) { this.value = ''; }"
+									onblur="if ( this.value == '' ) { this.value = 'Tìm kiếm tin...'; }" name="keyWord"
+									id="txtkeyWord" />
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
-    {{{body}}}
- 
+		{{{body}}}
 
-	<!-- Footer -->
-	<footer id="footer" class="row-fluid">
-		<div id="site-info" class="container">
-			<div id="footer-nav" class="fr">
-				<ul class="menu">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</div>
-			<div id="credit" class="fl">
-				<p>All Right Reserved by 3NG Team</p>
-			</div>
-		</div><!-- .site-info -->
-	</footer>	
-	{{{_sections.js}}}
-</div><!-- #wrapper -->
+
+		<!-- Footer -->
+		<footer id="footer" class="row-fluid">
+			<div id="site-info" class="container">
+				<div id="footer-nav" class="fr">
+					<ul class="menu">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Blog</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</div>
+				<div id="credit" class="fl">
+					<p>All Right Reserved by 3NG Team</p>
+				</div>
+			</div><!-- .site-info -->
+		</footer>
+		{{{_sections.js}}}
+	</div><!-- #wrapper -->
 </body>
+
 </html>

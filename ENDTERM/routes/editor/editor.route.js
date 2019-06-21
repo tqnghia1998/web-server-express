@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/rejected', (req, res) => {
-    if (req.isAuthenticated() && req.user.Role == 2) {
+    if (req.isAuthenticated() && req.user.Role == 3) {
         postsModel.allRejectedByEditor(req.user.userID).then(rowsPost => {
             res.render('page/editor/rejected.handlebars', {
                 posts: rowsPost,
@@ -40,7 +40,7 @@ router.get('/rejected', (req, res) => {
 })
 
 router.get('/approved', (req, res) => {
-    if (req.isAuthenticated() && req.user.Role == 2) {
+    if (req.isAuthenticated() && req.user.Role == 3) {
         postsModel.allApprovedByEditor(req.user.userID).then(rowsPost => {
 
             res.render('page/editor/approved.handlebars', {

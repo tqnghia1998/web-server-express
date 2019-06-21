@@ -60,12 +60,17 @@ router.get('/:id', (req, res) => {
                     })
                 } else if (req.user.Role == 4) { // subs
                     usersModel.singleSubs(req.user.userID).then(rs => {
-                        if (rs[0].dateSubEnd > Date.now()) {
-                            console.log('Là subscriber còn hạn premium');
-                            canViewPost = true;
+                        if (rs.length > 0)
+                        {
+                            if (rs[0].dateSubEnd > Date.now()) {
+                                console.log('Là subscriber còn hạn premium');
+                                canViewPost = true;
+                            } else {
+                                console.log('Là subscriber hết hạn premium');
+                                canViewPost = false;
+                            }
                         } else {
-                            console.log('Là subscriber hết hạn premium');
-                            canViewPost = false;
+                            canViewPost == false;
                         }
 
                         if (canViewPost == true) {
