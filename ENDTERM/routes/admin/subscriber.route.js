@@ -67,6 +67,9 @@ router.post('/renew', (req, res) => {
             s.then(rows => {
                 if (rows.length > 0) {
                     var expired = new Date(rows[0].dateSubEnd);
+                    if (expired.toISOString().slice(0, 10) <= new Date().toISOString().slice(0, 10)){
+                        expired = new Date();
+                    }
                     if (days == 7)
                         expired.setDate(expired.getDate() + 7);
                     if (days == 14)

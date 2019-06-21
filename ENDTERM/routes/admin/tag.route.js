@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
         if (req.user.Role == 1) {
             var u = Model.all();
             u.then(rows => {
-                console.log(rows);
                 res.render('page/admin/vwtags/tag', {
                     layout: 'admin',
                     tags: rows,
@@ -39,7 +38,6 @@ router.post('/add', (req, res) => {
             }
             Model.add(entity).then(
                 id => {
-                    console.log(id);
                     res.redirect('/admin/tag');
                 }).catch(error => {
                     var u = Model.all();
@@ -82,7 +80,6 @@ router.post('/update/:id', (req, res) => {
                 }).catch(error => {
                     var u = Model.all();
                     u.then(rows => {
-                        console.log(rows);
                         res.render('page/admin/vwtags/tag', {
                             layout: 'admin',
                             tags: rows,
