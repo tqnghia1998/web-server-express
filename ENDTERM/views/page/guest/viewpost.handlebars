@@ -15,16 +15,16 @@
         var elementSame = document.getElementById("same");
         var rectSame = elementSame.getBoundingClientRect();
 
-        if (rectSame.top < 2) {
+        if (rectSame.top < 90) {
             elementSame.style.position = "fixed";
-            elementSame.style.top = "-10px";
+            elementSame.style.top = "70px";
             elementSame.style.right = "5%";
             elementSame.style.width = "25%";
         }
 
         var elementContent = document.getElementById("content");
         var rectContent = elementContent.getBoundingClientRect();
-        if (rectContent.top > rectSame.top - 25) {
+        if (rectContent.top > rectSame.top - 20) {
             elementSame.style.position = "initial"
             elementSame.style.top = "initial";
             elementSame.style.right = "initial";
@@ -33,11 +33,19 @@
 
     });
 </script>
+
+<script>
+    document.getElementById('backtotop').addEventListener("click", function(){
+        //Nếu button được click thì nhảy về đầu trang
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+</script>
 {{/section}}
 
 <!-- Nội dung trang web -->
-<div id="content" class="container">
-
+<div id="content" class="container" style="padding-top:20px">
+    
     {{#if post.Premium}}
     <div>
         <img src="/images/favourites.png">
@@ -80,6 +88,9 @@
                     <strong>{{post.Pseudonym}}</strong>
                 </div>
             </div>
+
+            <a title="Back to top" style="position:fixed; bottom:20px; right:31%; font-size:14px; color:black; cursor:pointer" id="backtotop"><img style="width:45px" src="/images/backtotop.png"></a>
+
             <!-- Phần bình luận -->
             <div style="color: black;">
                 <h3>BÌNH LUẬN</h3>
@@ -136,17 +147,17 @@
 
         <span id="same" style="width:28%;">
             <!-- 5 bài viết cùng chuyên mục -->
-            <div style="margin-bottom: 20px">
+            <div style="margin-bottom: 0px">
                 <hr style="border: 2px solid #6F9C26; background:#6F9C26;">
                 <p style="margin-top:-10px; color:#6F9C26; font-size:17px; font-weight:bold">BÀI VIẾT CÙNG
                     CHUYÊN MỤC
                 </p>
             </div>
             {{#each fiveSameCate}}
-            <hr style="border: 1px solid rgb(178, 182, 171); background:#6F9C26; margin-top:5px">
-            <div onclick="window.location='/post/{{posID}}';" id="divFivePost"
-                style="display:flex; margin-top:5px; margin-bottom:10px">
-                <span style="width:38%">
+            <hr style="border: 1px solid rgb(178, 182, 171); background:#6F9C26; margin-top:3px">
+
+            <div onclick="window.location='/post/{{posID}}';" id="divFivePost" style="display:flex; margin-top:-3px; margin-bottom:0px">
+                <span style="width:38%; margin-top:4px">
                     <img src="{{Url}}">
                 </span>
                 <span style="width:2%"></span>
@@ -159,6 +170,5 @@
 
         </span>
     </div>
-
 
 </div><!-- #content -->

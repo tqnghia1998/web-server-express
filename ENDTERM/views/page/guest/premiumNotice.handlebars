@@ -1,0 +1,20 @@
+<!-- Nội dung trang web -->
+<div id="content" class="container" style="padding-top:20px">
+    <div style="display:flex;">
+        <span>
+            <img src="/images/premium.png" alt="">
+        </span>
+
+        <span style="color: black; margin-top:50px">
+            <h2 style="color: black">Xin lỗi, tài khoản chưa được phép truy cập bài viết Premium</h2>
+            {{#if isLoggedIn}}
+            <p>- Tài khoản đã hết hạn Premium <button class="btn btn-primary">Gia hạn tài khoản tại đây</button> </p>
+            {{else}}
+            <p>- Bạn chưa đăng ký tài khoản và đăng ký Premium <button class="btn btn-primary">Đăng ký tài khoản tại
+                    đây</button> </p>
+            {{/if}}
+        </span>
+    </div>
+
+
+</div><!-- #content -->

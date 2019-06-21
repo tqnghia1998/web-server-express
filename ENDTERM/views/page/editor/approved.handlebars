@@ -130,14 +130,14 @@
 
         <ul id="tabnav">
           <li style="width: 33%; text-align: left; float:left; ">
-            <h3><a href="/editor" class="selected"><img src="/images/view-bg.png" alt="Popular">Bài viết chờ duyệt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;</a></h3>
+            <h3><a href="/editor"><img src="/images/view-bg.png" alt="Popular">Bài viết chờ duyệt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;</a></h3>
           </li>
           <li style="width: 33%; text-align: left; float:left;">
-            <h3><a href="/editor/rejected"><img src="/images/time.png" alt="Comments">Bài đã từ
+            <h3><a href="/editor/rejected" ><img src="/images/time.png" alt="Comments">Bài đã từ
                 chối&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;</a></h3>
           </li>
           <li style="width: 33%; text-align: left; float:left;">
-            <h3><a href="/editor/approved"><img src="/images/time.png" alt="Comments">Bài đã duyệt&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3>
+            <h3><a href="/editor/approved"  class="selected"><img src="/images/time.png" alt="Comments">Bài đã duyệt&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a></h3>
           </li>
         </ul>
       </div>
@@ -154,41 +154,33 @@
               <table cellpadding="0" cellspacing="0" border="0" style="color:black;" class="table table-bordered">
                 <thead>
                   <tr>
-
                     <th style="width:3%; ">STT</th>
                     <th style="width:25%; ">Tiêu đề bài viết</th>
                     <th style="width:15%; ">Ảnh</th>
                     <th style="width:30%; ">Mô tả</th>
                     <th style="width:9%; ">Chuyên mục</th>
                     <th style="width:9%; ">Ngày đăng</th>
-                    <th style="width:9%; ">Thao tác</th>
+                    <th style="width:10%; ">Ngày xuất bản</th>
 
                   </tr>
                 </thead>
               </table>
             </div>
-            <div class="tbl-content" style="margin-top:-16px" >
+            <div class="tbl-content"  style="margin-top:-16px" >
               <table id="myTable" cellpadding="0" border="0" cellspacing="0" class="table table-bordered">
                 <tbody>
                   {{#each this.posts}}
 
                   <tr>
-                    <td style="width:0px; font-size:0px; display:none">{{posID}}</td>
                     <td onclick="window.location='/post/{{posID}}';" style="width:3%">#</td>
                     <td onclick="window.location='/post/{{posID}}';" style="width:25%">{{Title}}</td>
                     <td onclick="window.location='/post/{{posID}}';" style="width:15%"><img src="{{Url}}" /></td>
-                    <td onclick="window.location='/post/{{posID}}';" style="width:30%">{{Description}}</td>
+                    <td onclick="window.location='/post/{{posID}}';" style="width:30%; padding-left:10px">{{Description}}</td>
                     <td onclick="window.location='/post/{{posID}}';" style="width:9%">{{cateName}}</td>
-                    <td onclick="window.location='/post/{{posID}}';" style="width:9%; padding-left: 10px">
+                    <td onclick="window.location='/post/{{posID}}';" style="width:10%; padding-left: 20px">
                       {{DayWrittenFormat}}</td>
-                    <td style="width:9%">
-                      <button class="thaotacButton" title="Duyệt bài" data-toggle="tooltip"><img
-                          src="https://img.icons8.com/nolan/19/000000/checkmark.png"></button>
-                      <button class="thaotacButton" title="Từ chối" data-toggle="tooltip"><img
-                          src="https://img.icons8.com/nolan/19/000000/multiply.png"></button>
-                    </td>
+                    <td style="width:10%">{{DayPublishFormat}}</td>
                   </tr>
-
                   {{/each}}
                 </tbody>
               </table>
@@ -198,42 +190,5 @@
       </div>
     </div>
   </div><!-- #content -->
-  <!-- The Modal -->
-  <div id="myModal-moderate" class="modal-container">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="exit">&times;</span>
-      <h2 style="color: black; text-align: center">Duyệt bài viết</h2>
-      <form id="moderaterForm" method="post" action="/editor/approve">
-        <input id="posID1" name="posID1" type="hidden">
-
-        <label for="daypublish">Ngày xuất bản: </label>
-        <input id="daypublish" name="daypublish" type="date">
-
-        <div style="float:right;">
-          <input type="button" style="margin-right: 10px" type="submit" class="btn btn-large" value="Xác nhận"
-            onclick="moderate()"></input>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div id="myModal-reject" class="modal-container">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="exit">&times;</span>
-      <h2 style="color: black; text-align: center">Lý do từ chối bài viết</h2>
-      <form id="rejectForm" method="POST" action="/editor/reject">
-        <input id="posID2" name="posID2" type="hidden">
-        <textarea placeholder="Lý do từ chối bài viết ....." style="width:100%; height: 100%; resize:vertical"
-          name="Additional"></textarea>
-        <div style="float:right;">
-          <input type="button" style="margin-right: -13px" class="btn btn-large" value="Xác nhận" onclick="reject()">
-        </div>
-      </form>
-    </div>
-
-  </div>
 </div>

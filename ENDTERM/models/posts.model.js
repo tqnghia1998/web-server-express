@@ -8,8 +8,8 @@ module.exports = {
         return db.load(`select *, date_format(DayPublish,"%d-%m-%Y") as datePublished from posts INNER JOIN categories ON posts.cateID = categories.cateID`);
     },
 
-    fiveByCate: cateID => {
-        return db.load(`SELECT * FROM baodientu16th.posts where cateID = ${cateID} LIMIT 0, 5`)
+    fiveByCate: (cateID, posID) => {
+        return db.load(`SELECT * FROM baodientu16th.posts where cateID = ${cateID} and posID != ${posID} LIMIT 0, 5`)
     },
 
     single: id => {
@@ -134,4 +134,14 @@ module.exports = {
     allReject: idWriter => {
         return db.load(`select *, date_format(DayWritten,"%d-%m-%Y") as DayWrittenFormat from posts p join categories c on p.cateID = c.cateID where Approved = 0 and Additional <> '' and Writer = ${idWriter}`);
     },
+
+    // TBN
+    allApprovedByEditor: idEditor => {
+        return db.load(`select *, date_format(DayWritten,"%d-%m-%Y") as DayWrittenFormat, date_format(DayPublish,"%d-%m-%Y") as DayPublishFormat from posts p join categories c on p.cateID = c.cateID  where Approved = 1 and Editor = ${idEditor}`);
+    },
+
+    allRejectedByEditor: idEditor => {
+        return db.load(`select *, date_format(DayWritten,"%d-%m-%Y") as DayWrittenFormat from posts p join categories c on p.cateID = c.cateID where Approved = 0 and Additional <> '' and Editor = ${idEditor}`);
+    },
+    //
 }

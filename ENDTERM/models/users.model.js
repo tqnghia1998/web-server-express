@@ -103,5 +103,12 @@ module.exports = {
     // Facebook
     singleWithFacebook: facebookID => {
         return db.load(`SELECT * FROM users WHERE FacebookID = '${facebookID}'`);
-    }
+    },
+
+    // TBN
+    checkEditorToPremium: (idWriter, cateID) => {
+        return db.load(`SELECT * FROM editors e where userID = ${idWriter} and cateID = ${cateID}`);
+    },
+
+    
 };
