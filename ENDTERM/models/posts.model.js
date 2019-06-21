@@ -25,7 +25,7 @@ module.exports = {
     },
 
     delete: id => {
-        return db.delete(`posts`, 'posID', id);
+        return db.load(`posts`, 'posID', id);
     },
 
     allWaitingEditor: idEditor => {

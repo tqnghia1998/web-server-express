@@ -1,5 +1,7 @@
 var express = require('express');
 var Model = require('../../models/posts.model');
+var Model1 = require('../../models/postsandtags.model');
+var Model2 = require('../../models/comments.model');
 
 var router = express.Router();
 
@@ -77,8 +79,16 @@ router.post('/delete/:id', (req, res) => {
     if (req.isAuthenticated()) {
         if (req.user.Role == 1) {
             var id = req.params.id;
-            Model.delete(id).then(n => {
-                res.redirect('/admin/post');
+            Model2.deleteCommentsByPos(id).then(n2 => {
+                Model1.deleteTagByPos(id).then(n1 => {
+                    Model.delete(id).then(n => {
+                        res.redirect('/admin/post');
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                }).catch(error => {
+                    console.log(error);
+                });
             }).catch(error => {
                 console.log(error);
             });

@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
                 res.render('page/admin/vwCategories/category', {
                     layout: 'admin',
                     categories: rows,
+                    alert: false,
                     exist: false
                 });
             }).catch(error => {
@@ -123,7 +124,7 @@ router.post('/delete/:id', (req, res) => {
                 n => {
                     res.redirect('/admin/category');
                 }).catch(error => {
-                    var u = Model.all();
+                    var u = Model.cateForAdmin();
                     u.then(rows => {
                         res.render('page/admin/vwCategories/category', {
                             layout: 'admin',
@@ -131,7 +132,9 @@ router.post('/delete/:id', (req, res) => {
                             alert: true,
                             exist: false
                         });
-                    })
+                    }).catch(error => {
+                        console.log(error);
+                    });
                 });
         } else {
             res.render('page/admin/error', {

@@ -19,5 +19,9 @@ module.exports = {
 
     update: entity => {
         return db.update(`comments`, commentId, entity);
-    }
+    },
+
+    deleteCommentsByPos: id => {
+        return db.delete('comments', 'posID', id);
+    },
 }

@@ -1,5 +1,6 @@
 var express = require('express');
 var Model = require('../../models/users.model');
+var Model1 = require('../../models/posts.model');
 
 var router = express.Router();
 
