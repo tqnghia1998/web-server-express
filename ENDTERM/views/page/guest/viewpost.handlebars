@@ -15,16 +15,16 @@
         var elementSame = document.getElementById("same");
         var rectSame = elementSame.getBoundingClientRect();
 
-        if (rectSame.top < 90) {
+        if (rectSame.top < 0) {
             elementSame.style.position = "fixed";
             elementSame.style.top = "70px";
-            elementSame.style.right = "5%";
-            elementSame.style.width = "25%";
+            elementSame.style.right = "10%";
+            elementSame.style.width = "22%";
         }
 
         var elementContent = document.getElementById("content");
         var rectContent = elementContent.getBoundingClientRect();
-        if (rectContent.top > rectSame.top - 20) {
+        if (rectContent.top > rectSame.top - 19) {
             elementSame.style.position = "initial"
             elementSame.style.top = "initial";
             elementSame.style.right = "initial";
